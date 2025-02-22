@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -22,20 +22,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf()
+                .disable()
                 .authorizeRequests()
+                //Доступ только для не зарегистрированных пользователей
                 .antMatchers("/registration").not().fullyAuthenticated()
+                //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/schedule/**").authenticated() // Только аутентифицированные пользователи могут получать доступ
-                .anyRequest().permitAll()
+                //Доступ разрешен всем пользователей
+                .antMatchers("/", "/**").permitAll()
+                //Все остальные страницы требуют аутентификации
+                .anyRequest().authenticated()
                 .and()
+                //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/schedule")
+                //Перенарпавление на главную страницу после успешного входа
+                .defaultSuccessUrl("/courses")
                 .permitAll()
                 .and()
-                .logout().permitAll()
+                .logout()
+                .permitAll()
                 .logoutSuccessUrl("/");
     }
 

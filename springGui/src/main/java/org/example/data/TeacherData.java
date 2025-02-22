@@ -16,13 +16,12 @@ public class TeacherData {
     private int teacherId;
     @Column(name = "name")
     private String name;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "place_id")
+    private int placeId;
     @Column(name = "max_number_of_lessons")
-    private Integer maxNumberOfLessons;
-    @Column(name = "degree")
-    private String degree;
+    private int maxNumberOfLessons;
+    @Column(name = "timeslot_id")
+    private int timeslotId;
+
 
 }

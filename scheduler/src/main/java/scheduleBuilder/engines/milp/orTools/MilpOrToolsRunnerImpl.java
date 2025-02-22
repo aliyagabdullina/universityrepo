@@ -32,12 +32,12 @@ public class MilpOrToolsRunnerImpl implements  MilpOrToolsRunner {
     private MPSolver initializeMpSolverSettings(MilpOrToolsSettings settings) {
         MPSolver.OptimizationProblemType solverType = settings.getSolverType();
         _timeLimitInMs = settings.getTimeLimitMs();
-        //MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.GUROBI_MIXED_INTEGER_PROGRAMMING);
+        MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.GUROBI_MIXED_INTEGER_PROGRAMMING);
         //MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.SCIP_MIXED_INTEGER_PROGRAMMING);
         //MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.XPRESS_MIXED_INTEGER_PROGRAMMING);
         //MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.BOP_INTEGER_PROGRAMMING);
         //MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.GLPK_MIXED_INTEGER_PROGRAMMING);
-        MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.CBC_MIXED_INTEGER_PROGRAMMING);
+        //MPSolver mpSolver = new MPSolver("solver", MPSolver.OptimizationProblemType.CBC_MIXED_INTEGER_PROGRAMMING);
         return mpSolver;
     }
 

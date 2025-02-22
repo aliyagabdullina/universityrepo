@@ -6,31 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
-        <link rel="stylesheet" href="/styles/FloatingButton.css">
-
     </head>
     <body>
         <selection>
             <div class="container">
                 <div class="menu">
                     <h1>Scheduling</h1>
-                    <p class="university">UNIVERSITY</p>
                     <div class="menu-buttons-container">
                         <button class="menu-button icon" onclick="window.location.href='/account'">
                             <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Аккаунт</h4>
                         </button>
+                        <button class="menu-button icon" onclick="window.location.href='/timeslot'">
+                            <img src="/images/time.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Тайм слоты</h4>
+                        </button>
+                        <button class="menu-button icon highlight" onclick="window.location.href='/places'">
+                            <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Редактирование данных</h4>
+                        </button>
                         <button class="menu-button icon" onclick="window.location.href='/schedule'">
                             <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Расписание</h4>
-                        </button>
-                        <button class="menu-button icon highlight" onclick="window.location.href='/data'">
-                            <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Данные</h4>
-                        </button>
-                        <button class="menu-button icon" onclick="window.location.href='/timeslot'">
-                            <img src="/images/time.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Сетка пар</h4>
                         </button>
                     </div>
                     <div class="menu-buttons-container-bottom">
@@ -43,27 +40,26 @@
                 <div></div>
                 <div class="frame">
                     <div class="header">
-                    <h2>Данные о группах</h2>
-                    <div class="spacer"></div>
-                    <div class="custom-select">
-                        <select onchange="if(this.value === '1') window.location.href='/places';
-                                        else if(this.value === '2') window.location.href='/courses';
-                                        else if(this.value === '3') window.location.href='/teachers';
-                                        else if(this.value === '4') window.location.href='/students';
-                                        else if(this.value === '5') window.location.href='/groups';
-                                        else if(this.value === '6') window.location.href='/programs';
-                                        else if(this.value === '7') window.location.href='/plan'">
-                            <option value="" disabled selected class="placeholder">Раздел</option>
-                            <option value="1">Аудитории</option>
-                            <option value="2">Предметы</option>
-                            <option value="3">Преподаватели</option>
-                            <option value="4">Студенты</option>
-                            <option value="5">Группы</option>
-                            <option value="6">Программы</option>
-                            <option value="7">Индивидуальный план</option>
-                        </select>
+                        <h2>Редактирование данных</h2>
+                        <div class="spacer"></div>
+                        <div class="buttons-container">
+                            <button onclick="window.location.href='/places'">
+                                <h4>Кабинеты</h4>
+                            </button>
+                            <button onclick="window.location.href='/courses'">
+                                <h4>Курсы</h4>
+                            </button>
+                            <button onclick="window.location.href='/teachers'">
+                                <h4>Учителя</h4>
+                            </button>
+                            <button onclick="window.location.href='/groups'">
+                                <h4>Группы</h4>
+                            </button>
+                            <button onclick="window.location.href='/programs'">
+                                <h4>Программы</h4>
+                            </button>
+                        </div>
                     </div>
-                </div>
                     <div class="main">
                         <div class="sorting">
                             <button id="sortButton" class="menu-button icon sorter-button">
@@ -81,22 +77,24 @@
                         <div class="table-style">
                             <table>
                                 <tr>
-                                    <th>Название группы</th>
-                                    <th>Cтуденты</th>
-                                    <th>Макс. пар в день</th>
-                                    <th>Преподаватели</th>
+                                    <th>Группа</th>
+                                    <th>Кол-во студентов</th>
+                                    <th>Кабинеты</th>
+                                    <th>Макс уроков</th>
+                                    <th>Учителя</th>
                                     <th>Временной слот</th>
                                 </tr>
                                 <#list groups as group>
                                     <tr>
                                         <td>${group.name}</td>
                                         <td>${group.numOfStudents}</td>
+                                        <td>${group.placeId}</td>
+                                        <td>${group.maxNumberOfLessons}</td>
                                         <td><#list teachers as teacher>
                                                   ${teacher.name},
                                             </#list>
                                         </td>
-                                        <td>${group.maxNumberOfLessons}</td>
-                                        <td><#if group.timeslotId??>${group.timeslotId}</#if></td>
+                                        <td>${group.timeslotId}</td>
                                     </tr>
                                 </#list>
                             </table>
@@ -114,7 +112,7 @@
                                 <h4>Удалить</h4>
                             </button>
                             <form id="importForm" action="/group/import" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" id="fileInput" accept=".csv">
+                                  <input type="file" name="file" id="fileInput" accept=".csv">
                             </form>
 
                             <label for="fileInput" class="footer-button">
@@ -125,9 +123,5 @@
                 </div>
             </div>
         </selection>
-
-                <!-- Подключаем чат-бот через внешний файл -->
-                <#include "chatbot.html">
-                <script src="/scripts/chatbot.js"></script>
     </body>
 </html>

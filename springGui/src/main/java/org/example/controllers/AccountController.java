@@ -21,14 +21,4 @@ public class AccountController {
     public String accountPage(Model model) {
         return "account";
     }
-
-    @GetMapping("/ai")
-    public String aiPage(Model model) {
-        return "ai";
-    }
-
-    @GetMapping("/data")
-    public String dataPage(Model model) {
-        return "data-general";
-    }
 }

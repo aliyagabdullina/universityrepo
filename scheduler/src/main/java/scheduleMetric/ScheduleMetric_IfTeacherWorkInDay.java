@@ -18,7 +18,7 @@ public class ScheduleMetric_IfTeacherWorkInDay implements ScheduleMetric {
     @Override
     public int measure(Stream<Lesson> schedule) {
         return (int)schedule
-                .filter(lesson -> lesson.getTeachers().anyMatch(t -> t.equals(_teacher)))
+                .filter(lesson -> lesson.getTeachers().equals(_teacher))
                 .filter(lesson -> lesson.getTimeSlot().getDayOfWeek().equals(_dayOfWeek))
                 .count();
     }

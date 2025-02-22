@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class DataBaseInteractorImpl implements DataBaseInteractor {
 
-    private static final String DB_URL = "jdbc:postgresql://82.97.244.207:5432/school";
-    private static final String USER = "userschool";
-    private static final String PASSWORD = "passwordschool";
+    private static final String DB_URL = "jdbc:postgresql://82.97.244.207:5432/university";
+    private static final String USER = "useruniversity";
+    private static final String PASSWORD = "passworduniversity";
 
     public DataBaseInteractorImpl() {
         Connection conn = null;
@@ -18,10 +18,10 @@ public class DataBaseInteractorImpl implements DataBaseInteractor {
             // createSequence2(conn);
 
             // Создание таблицы для хранения информации об учителях
-            //createLessonsTimeTable(conn);
-            //createTimeslotTable(conn);
+            createLessonsTimeTable(conn);
+            createTimeslotTable(conn);
 
-            /*createPlacesTable(conn);
+            createPlacesTable(conn);
             createTeachersTable(conn);
             createCourseTable(conn);
             createGroupsTable(conn);
@@ -33,7 +33,7 @@ public class DataBaseInteractorImpl implements DataBaseInteractor {
             createTeacherPlaceTable(conn);
             createGroupPlaceTable(conn);
 
-            createGroupCourseProgramTable(conn);*/
+            createGroupCourseProgramTable(conn);
 
 /*
             String sql = "CREATE TABLE Roles (" +

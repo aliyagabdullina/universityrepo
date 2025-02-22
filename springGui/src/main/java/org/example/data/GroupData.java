@@ -18,6 +18,10 @@ public class GroupData {
     private String name;
     @Column(name = "num_of_students")
     private int numOfStudents;
+    @Column(name = "place_id")
+    private int placeId;
     @Column(name = "max_number_of_lessons")
     private int maxNumberOfLessons;
+    @Column(name = "timeslot_id")
+    private int timeslotId;
 }

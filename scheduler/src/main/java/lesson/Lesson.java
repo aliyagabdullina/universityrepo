@@ -15,6 +15,4 @@ public interface Lesson {
     Place getPlace();
     Stream<Teacher> getTeachers();
     Course getCourse();
-
-    boolean conflictsWith(Lesson lesson2);
 }

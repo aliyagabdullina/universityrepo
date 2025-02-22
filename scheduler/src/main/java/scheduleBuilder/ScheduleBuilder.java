@@ -19,5 +19,4 @@ public interface ScheduleBuilder {
     void setSettings(DtoScheduleBuilderSettings settings);
 
     Schedule solve();
-
 }

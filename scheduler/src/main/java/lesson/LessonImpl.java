@@ -50,21 +50,4 @@ public class LessonImpl implements Lesson {
     public Course getCourse() {
         return _course;
     }
-
-    @Override
-    public boolean conflictsWith(Lesson lesson2) {
-        if (this._timeslot.equals(lesson2.getTimeSlot())) {
-            if (this._group.equals(lesson2.getGroup())) {
-                return true;
-            }
-            if (this._teachers.stream().anyMatch(teacher -> lesson2.getTeachers().anyMatch(teacher::equals))) {
-                return true;
-            }
-            if (this._place.equals(lesson2.getPlace())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

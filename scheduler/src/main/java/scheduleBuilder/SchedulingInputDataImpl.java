@@ -341,7 +341,7 @@ public class SchedulingInputDataImpl implements SchedulingInputData {
                 .map(entry -> {
                     var occupation = entry.getKey();
                     int numTeachers = (int)occupation.getOccupiedTeachers().count();
-                    return new Pair<>(occupation, entry.getValue()/(numTeachers+1));
+                    return new Pair<>(occupation, entry.getValue()/numTeachers);
                 });
     }
 
@@ -373,19 +373,16 @@ public class SchedulingInputDataImpl implements SchedulingInputData {
 
         Group group = lesson.getGroup();
         occupyGroup(group, timeSlot);
+
+        LessonRequestOccupation lessonRequestOccupation  = getRelatedOccupation(lesson).get();
+
+        lessonRequestOccupation.getOccupiedTeachers().forEach(teacher -> occupyTeacher(teacher, timeSlot));
+        updateToScheduleStructuresByScheduling(lessonRequestOccupation, timeSlot);
+
         Place place = lesson.getPlace();
-        occupyPlace(place, timeSlot);
-
+        updateStructuresByRelatedConstraints(lessonRequestOccupation, place, timeSlot);
         _scheduledLessons.add(lesson);
-
-        Optional<LessonRequestOccupation> lessonRequestOccupationOpt  = getRelatedOccupation(lesson);
-        if(lessonRequestOccupationOpt.isPresent()){
-            LessonRequestOccupation lessonRequestOccupation = lessonRequestOccupationOpt.get();
-            lessonRequestOccupation.getOccupiedTeachers().forEach(teacher -> occupyTeacher(teacher, timeSlot));
-            updateToScheduleStructuresByScheduling(lessonRequestOccupation, timeSlot);
-
-            updateStructuresByRelatedConstraints(lessonRequestOccupation, place, timeSlot);
-        }
+        occupyPlace(place, timeSlot);
     }
 
 

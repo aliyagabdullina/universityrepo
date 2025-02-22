@@ -48,14 +48,8 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addAvailablePlaceForCourse(Course course, Place place) {
         Set<Place> places = _coursePlaceMap.get(course);
-        if(places != null) {
-            places.add(place);
-        } else{
-            _coursePlaceMap.put(course, new HashSet<>());
-            _coursePlaceMap.get(course).add(place);
-        }
+        places.add(place);
     }
-
 
     @Override
     public void setAvailablePlacesForGroup(Group group, Stream<Place> placeStream) {
@@ -66,13 +60,7 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addAvailablePlaceForGroup(Group group, Place place) {
         Set<Place> places = _groupPlaceMap.get(group);
-        if(places != null) {
-            places.add(place);
-        }
-        else{
-            _groupPlaceMap.put(group, new HashSet<>());
-            _groupPlaceMap.get(group).add(place);
-        }
+        places.add(place);
     }
 
 
@@ -85,13 +73,7 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addAvailablePlaceForTeacher(Teacher teacher, Place place) {
         Set<Place> places = _teacherPlaceMap.get(teacher);
-        if(places != null) {
-            places.add(place);
-        }
-        else{
-            _teacherPlaceMap.put(teacher, new HashSet<>());
-            _teacherPlaceMap.get(teacher).add(place);
-        }
+        places.add(place);
     }
 
 
@@ -119,13 +101,7 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addTeacherForCourse(Course course, Teacher teacher) {
         Set<Teacher> teachers = _availableTeachersForCourse.get(course);
-        if(teachers != null) {
-            teachers.add(teacher);
-        } else{
-            _availableTeachersForCourse.put(course, new HashSet<>());
-            _availableTeachersForCourse.get(course).add(teacher);
-        }
-
+        teachers.add(teacher);
     }
 
 
@@ -139,11 +115,6 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void setCourseProgramForGroup(Group group, CourseProgram courseProgram) {
         _groupCoursePrograms.put(group, courseProgram);
-    }
-
-    @Override
-    public void addCourseProgramForGroup(Group group, CourseProgram courseProgram) {
-
     }
 
     @Override

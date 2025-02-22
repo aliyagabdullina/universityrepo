@@ -27,7 +27,7 @@ public class LoginController {
         return "redirect:/account";
     }
 
-    @GetMapping("/authorisation")
+    @GetMapping("/authorise")
     public String authorisationPage() {
         return "authorisation";
     }
