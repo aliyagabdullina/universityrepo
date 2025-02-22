@@ -1,0 +1,39 @@
+.line {
+    display: flex;
+    flex-direction: row;
+}
+.button-settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(242, 242, 242, 1);
+    color: black;
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    width: 30vw;
+    font-size: 1.1vw;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.button-settings:hover {
+    background-color: #000;
+    color: #fff;
+}
+.spacer-width {
+    margin-left: 1vw;
+}
+.spacer-height {
+    margin-bottom: 1vh;
+}
+.tariff-info {
+    background-color: rgba(242, 242, 242, 1);
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.button-tariff {
+    border: 1px solid #ccc;
+}
