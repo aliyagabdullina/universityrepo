@@ -6,26 +6,23 @@ import javax.persistence.Id;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Teachers")
+@Table(name = "Students")
 @Data
 @NoArgsConstructor
-public class TeacherData {
+public class StudentData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "teacher_id")
-    private int teacherId;
+    @Column(name = "student_id")
+    private int studentId;
     @Column(name = "name")
     private String name;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
     private String password;
-    @Column(name = "max_number_of_lessons")
-    private int maxNumberOfLessons;
+    @Column(name = "group_id")
+    private int groupId;
     @Column(name = "degree")
     private String degree;
-    @Column(name = "timeslot_id")
-    private int timeslotId;
-
 
 }
