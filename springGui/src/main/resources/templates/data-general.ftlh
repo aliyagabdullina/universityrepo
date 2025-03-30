@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
-        <link rel="stylesheet" href="/styles/styleSettings.css">
     </head>
     <body>
         <selection>
@@ -42,30 +41,33 @@
                 <div></div>
                 <div class="frame">
                     <div class="header">
-                        <h2>Настройки</h2>
+                        <h2>Данные</h2>
+                        <div class="spacer"></div>
+
+                        <div class="custom-select">
+                          <select onchange="if(this.value === '1') window.location.href='/places';
+                                            else if(this.value === '2') window.location.href='/subjects';
+                                            else if(this.value === '3') window.location.href='/teachers';
+                                            else if(this.value === '4') window.location.href='/students';
+                                            else if(this.value === '5') window.location.href='/groups';
+                                            else if(this.value === '6') window.location.href='/programs';
+                                            else if(this.value === '7') window.location.href='/plan'">
+                              <option value="" disabled selected class="placeholder">Выберите раздел</option>
+                              <option value="1">Аудитории</option>
+                              <option value="2">Предметы</option>
+                              <option value="3">Преподаватели</option>
+                              <option value="4">Студенты</option>
+                              <option value="5">Группы</option>
+                              <option value="6">Программы</option>
+                              <option value="7">Индивидуальный план</option>
+                          </select>
+                      </div>
                     </div>
-                    <div>
-                        <div class="line">
-                            <button class="button-settings"><h4>Инструкции</h4></button>
-                            <div class="spacer-width"></div>
-                            <button class="button-settings"<h4>Служба поддержки</h4></button>
-                        </div>
-                        <div class="spacer-height"></div>
-                        <div class="line">
-                            <button class="button-settings"><h4>Условия пользования</h4></button>
-                            <div class="spacer-width"></div>
-                            <button class="button-settings"<h4>Политика пользования</h4></button>
-                        </div>
+                    <div class="main">
+
                     </div>
-                    <div>
-                        <h2>Тарифы</h2>
-                    </div>
-                    <div class="tariff-info">
-                        <h3>Тарифный план "Профессионал"</h3>
-                        <p><h4>Дата покупки: 12 апреля 2024</h4></p>
-                        <p><h4>Дата окончания: 12 апреля 2025</h4></p>
-                        <p><h4>Описание: Подходит для крупных образовательных учреждений и университетов, где требуется высокая производительность и масштабируемость.</h4></p>
-                        <p><button class="button-settings button-tariff"<h4>Сменить</h4></button></p>
+                    <div class="footer">
+
                     </div>
                 </div>
             </div>

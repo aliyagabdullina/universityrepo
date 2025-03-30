@@ -15,20 +15,24 @@
                 <input class="input-max" type="text" id="name" name="name" placeholder="Введите ФИО" required>
                 <div class="space"></div>
 
-                <label for="role">Роль</label>
-                <input class="input-max" type="text" id="role" name="role" placeholder="Выберите роль" required>
+                <label for="role">Название университета</label>
+                <input class="input-max" type="text" id="university" name="university" placeholder="Выберите университет" required>
                 <div class="space"></div>
 
-                <label for="school">Школа</label>
-                <input class="input-max" type="text" id="school" name="school" placeholder="Выберите школу" required>
+                <label for="school">Должность</label>
+                <input class="input-max" type="text" id="role" name="role" placeholder="Выберите должность" required>
                 <div class="space"></div>
 
-                <label for="username">Username</label>
-                <input class="input-max" type="text" id="username" name="username" placeholder="Username" required>
-
+                <label for="username">Факультет</label>
+                <input class="input-max" type="text" id="facuily" name="facuily" placeholder="Выберите факультет" required>
                 <div class="space"></div>
-                <label for="password">Password</label>
-                <input class="input-max" type="password" id="password" name="password" placeholder="Password" required>
+
+                <label for="username">Почта</label>
+                <input class="input-max" type="text" id="email" name="email" placeholder="Введите почту" required>
+                <div class="space"></div>
+
+                <label for="password">Пароль</label>
+                <input class="input-max" type="password" id="password" name="password" placeholder="Введите пароль" required>
 
 
                 <div class="space"></div><br><div class="space"></div><br><div class="space"></div>

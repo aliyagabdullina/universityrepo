@@ -215,6 +215,15 @@ body{
     cursor: pointer;
     outline: none;
 }
+
+.university {
+    color: #0E2ECC;
+    font-size: 1.5vw;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+}
 /* Header */
 
 
@@ -319,6 +328,40 @@ input {
     height: 2vh;
 }
 
+.custom-select {
+    position: relative;
+    width: 200px;
+}
+
+.custom-select select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    appearance: none; /* убирает стандартную стрелку */
+}
+
+/* Добавляем свою стрелку */
+.custom-select::after {
+    content: "Раздел ▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Эффект при наведении */
+.custom-select select:hover {
+    border-color: #888;
+}
+
+.placeholder {
+    color: #666;
+}
+
 
 .select-block {
     display: flex;
@@ -336,6 +379,32 @@ input {
   display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.job-title {
+    color: #0E2ECC;
+    font-size: 0.7vw;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.group {
+    color: #888;
+    font-size: 0.7vw;
+    margin: 0;
 }
 /* Main */
 
