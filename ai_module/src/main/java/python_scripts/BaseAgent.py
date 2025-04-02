@@ -1,3 +1,7 @@
+from openai import OpenAI
+from typing import Dict, Any
+
+
 class BaseAgent:
     def __init__(self, client: OpenAI):
         self.client = client

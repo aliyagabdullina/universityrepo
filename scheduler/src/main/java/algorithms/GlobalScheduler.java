@@ -35,15 +35,12 @@ public class GlobalScheduler implements Scheduler{
     @Override
     public Schedule generateSchedule() {
         // 1. Жадный алгоритм строит стартовое расписание
-        GreedyScheduler greedyScheduler = new GreedySchedulerImpl(_dataCollector,
-        _timeSlotSequence,
-        _scheduleInputData,
-        _constraintAccumulator);
+        GreedyScheduler greedyScheduler = new GreedySchedulerImpl(_scheduleInputData);
         Schedule initialSchedule = greedyScheduler.generateSchedule();
 
         // 2. Двухуровневый Tabu + Local Search
-        TabuSearchOptimizer optimizer = new TabuSearchOptimizer(
-                initialSchedule, constraintAccumulator, objectiveAccumulator, 100, 10);
+        TabuSearchOptimizer optimizer = new TabuSearchOptimizerImpl(
+                initialSchedule, _constraintAccumulator, _objectiveAccumulator, 100, 10);
         Schedule optimizedSchedule = optimizer.optimize(initialSchedule);
 
         return optimizedSchedule;

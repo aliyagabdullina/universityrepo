@@ -1,12 +1,9 @@
-import openai
-from openai import OpenAI
-import json
-import logging
-from typing import Dict, Any
-import BaseAgent
 import ParserAgent
+from ParserAgent import *
 import ValidatorAgent
+from ValidatorAgent import *
 import DialogAgent
+from DialogAgent import *
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
