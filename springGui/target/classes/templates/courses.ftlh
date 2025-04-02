@@ -41,26 +41,27 @@
                 <div></div>
                 <div class="frame">
                     <div class="header">
-                        <h2>Редактирование данных</h2>
-                        <div class="spacer"></div>
-                        <div class="buttons-container">
-                            <button onclick="window.location.href='/places'">
-                                <h4>Кабинеты</h4>
-                            </button>
-                            <button onclick="window.location.href='/courses'">
-                                <h4>Курсы</h4>
-                            </button>
-                            <button onclick="window.location.href='/teachers'">
-                                <h4>Учителя</h4>
-                            </button>
-                            <button onclick="window.location.href='/groups'">
-                                <h4>Группы</h4>
-                            </button>
-                            <button onclick="window.location.href='/programs'">
-                                <h4>Программы</h4>
-                            </button>
-                        </div>
+                    <h2>Данные</h2>
+                    <div class="spacer"></div>
+                    <div class="custom-select">
+                        <select onchange="if(this.value === '1') window.location.href='/places';
+                                        else if(this.value === '2') window.location.href='/subjects';
+                                        else if(this.value === '3') window.location.href='/teachers';
+                                        else if(this.value === '4') window.location.href='/students';
+                                        else if(this.value === '5') window.location.href='/groups';
+                                        else if(this.value === '6') window.location.href='/programs';
+                                        else if(this.value === '7') window.location.href='/plan'">
+                            <option value="" disabled selected class="placeholder">Раздел</option>
+                            <option value="1">Аудитории</option>
+                            <option value="2">Предметы</option>
+                            <option value="3">Преподаватели</option>
+                            <option value="4">Студенты</option>
+                            <option value="5">Группы</option>
+                            <option value="6">Программы</option>
+                            <option value="7">Индивидуальный план</option>
+                        </select>
                     </div>
+                </div>
                     <div class="main">
                         <div class="sorting">
                             <button id="sortButton" class="menu-button icon sorter-button">
@@ -78,25 +79,16 @@
                         <div class="table-style">
                             <table>
                                 <tr>
-                                    <th>Курс</th>
-                                    <th>Уроков в неделю</th>
-                                    <th>Дней в неделю</th>
-                                    <th>Макс уроков в день</th>
-                                    <th>Сложность</th>
-                                    <th>Кабинет</th>
+                                    <th>Название</th>
+                                    <th>Кол-во пар в неделю</th>
+                                    <th>Кол-во пар в день</th>
                                 </tr>
 
-                                <#list courses as course>
+                                <#list subjects as subject>
                                     <tr>
-                                        <td>${course.name}</td>
-                                        <td>${course.numOfLessonsPerWeek}</td>
-                                        <td>${course.numOfDaysPerWeek}</td>
-                                        <td>${course.maxLessonsPerDay}</td>
-                                        <td>${course.complexity}</td>
-                                        <td><#list places as place>
-                                               ${place.name},
-                                            </#list>
-                                        </td>
+                                        <td>${subject.name}</td>
+                                        <td>${subject.pairsPerWeek}</td>
+                                        <td>${subject.pairsPerDay}</td>
                                     </tr>
                                 </#list>
                             </table>
@@ -104,17 +96,17 @@
                     </div>
                     <div class="footer">
                         <div class="footer-buttons-container">
-                            <button class="footer-button" onclick="window.location.href='/course/create'">
+                            <button class="footer-button" onclick="window.location.href='/subject/create'">
                                 <h4>Редактировать</h4>
                             </button>
-                            <button class="footer-button" onclick="window.location.href='/course/create'">
+                            <button class="footer-button" onclick="window.location.href='/subject/create'">
                                 <h4>Добавить</h4>
                             </button>
-                            <button class="footer-button" onclick="window.location.href='/course/create'">
+                            <button class="footer-button" onclick="window.location.href='/subject/create'">
                                 <h4>Удалить</h4>
                             </button>
-                            <form id="importForm" action="/course/import" method="post" enctype="multipart/form-data">
-                                  <input type="file" name="file" id="fileInput" accept=".csv">
+                            <form id="importForm" action="/subject/import" method="post" enctype="multipart/form-data">
+                                <input type="file" name="file" id="fileInput" accept=".csv">
                             </form>
 
                             <label for="fileInput" class="footer-button">

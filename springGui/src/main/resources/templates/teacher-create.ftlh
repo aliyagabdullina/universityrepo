@@ -72,10 +72,10 @@
 
 
                             <div class="input-block">
-                                <h5>Кол-во пар в день</h5><input type="text" name="pairsPerDay" placeholder="Введите кол-во пар в день"/>
+                                <h5>Кол-во пар в день</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во пар в день"/>
                             </div>
                             <div class="input-block">
-                                <h5>Должность</h5><input type="text" name="role" placeholder="Введите должность"/>
+                                <h5>Должность</h5><input type="text" name="degree" placeholder="Введите должность"/>
                             </div>
                            <div class="input-block">
                                 <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/>

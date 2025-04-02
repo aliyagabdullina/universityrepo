@@ -98,8 +98,8 @@
                                               </#list>
                                          </td>
                                         <td>${teacher.maxNumberOfLessons}</td>
-                                        <td>${teacher.timeslotId}</td>
-                                        <td>${teacher.role}</td>
+                                        <td><#if teacher.timeslotId??>${teacher.timeslotId}</#if></td>
+                                        <td><#if teacher.degree??>${teacher.degree}</#if></td>
                                     </tr>
                                 </#list>
                             </table>

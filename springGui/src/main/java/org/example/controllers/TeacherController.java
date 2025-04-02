@@ -30,7 +30,7 @@ public class TeacherController {
     public String teachers(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("teachers", teacherService.listTeachers(name));
         //model.addAttribute("places", placeRepository.findAll());
-        model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("subjects", courseRepository.findAll());
         return "teachers";
     }
 
@@ -44,7 +44,7 @@ public class TeacherController {
     public String showCreateTeacherForm(Model model) {
         model.addAttribute("teacher");
         model.addAttribute("places", placeRepository.findAll());
-        model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("subjects", courseRepository.findAll());
         return "teacher-create";
 
     }

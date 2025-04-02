@@ -21,11 +21,11 @@ public class TeacherData {
     @Column(name = "password")
     private String password;
     @Column(name = "max_number_of_lessons")
-    private int maxNumberOfLessons;
+    private Integer maxNumberOfLessons;
     @Column(name = "degree")
     private String degree;
     @Column(name = "timeslot_id")
-    private int timeslotId;
+    private Integer timeslotId;
 
 
 }

@@ -49,44 +49,50 @@
                     <div class="main">
                         <form action="/teacher/create" method="post">
                             <div class="input-block">
-                                <h5>Имя учителя</h5> <input type="text" name="name"" placeholder="Введите ФИО"/><br>
+                                <h5>ФИО преподавателя</h5><input type="text" name="name" placeholder="Введите  ФИО"/>
                             </div>
                             <div class="input-block">
-                                 <h5>Кабинет учителя</h5>
-                                 <div class="select-block">
-                                     <select name="placeId">
-                                         <option value="" disabled selected>Выберите кабинет</option>
-                                         <#list places as place>
-                                             <option value="${place.placeId}">${place.name}</option>
-                                         </#list>
-                                     </select><br>
-                                 </div>
-                             </div>
+                                <h5>Почта</h5><input type="text" name="email" placeholder="Введите  почту"/>
+                            </div>
+                            <div class="input-block">
+                                <h5>Пароль</h5><input type="text" name="password" placeholder="Введите  пароль"/>
+                            </div>
+
                              <div class="input-block">
                                   <h5>Предметы</h5>
                                   <div class="select-block">
-                                      <select name="courseId" multiple>
-                                          <option value="" disabled selected>Выберите предметт</option>
-                                          <#list courses as course>
-                                              <option value="${course.courseId}">${course.name}</option>
+                                      <select name="subjectId" multiple>
+                                        <option value="" disabled selected >Выберите предметы</option>
+                                          <#list subjects as subject>
+                                              <option value="${subject.subjectId}">${subject.name}</option>
                                           </#list>
                                       </select><br>
                                   </div>
                               </div>
+
+
                             <div class="input-block">
-                                <h5>Количество уроков</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во уроков"/><br>
+                                <h5>Кол-во пар в день</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во пар в день"/>
                             </div>
                             <div class="input-block">
-                                <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/><br>
+                                <h5>Должность</h5><input type="text" name="degree" placeholder="Введите должность"/>
+                            </div>
+                           <div class="input-block">
+                                <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/>
                             </div>
                             <div class="footer">
-                                <div class="footer-buttons-container">
-                                    <button type="submit" class="footer-button" onclick="window.location.href='/teachers'">
+                            <div class="footer-buttons-container">
+
+                                <button class="footer-button" type="button" onclick="window.history.back()">
+                                    <h4>Назад</h4>
+                                </button>
+                              <div class="footer-right">
+                                    <button type="submit" class="footer-button save-button">
                                         <h4>Сохранить</h4>
                                     </button>
-                                    <button class="footer-button" type="button" onclick="window.history.back()"><h4>Назад</h4></button>
-                                </div>
+                              </div>
                             </div>
+                        </div>
                         </form>
                     </div>
                 </div>

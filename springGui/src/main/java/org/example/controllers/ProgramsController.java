@@ -28,7 +28,7 @@ public class ProgramsController {
     @GetMapping("/programs")
     public String programs(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("programs", programsService.listPrograms(name));
-        model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("subjects", courseRepository.findAll());
         model.addAttribute("groups", groupsRepository.findAll());
         return "programs";
     }
@@ -42,7 +42,7 @@ public class ProgramsController {
     @GetMapping("/program/create")
     public String showCreateProgramForm(Model model) {
         model.addAttribute("program");
-        model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("subjects", courseRepository.findAll());
         model.addAttribute("groups", groupsRepository.findAll());
         return "program-create";
     }
@@ -50,7 +50,7 @@ public class ProgramsController {
     @GetMapping("/program/create-2")
     public String showCreateProgramForm2(Model model) {
         model.addAttribute("program");
-        model.addAttribute("courses", courseRepository.findAll());
+        model.addAttribute("subjects", courseRepository.findAll());
         model.addAttribute("groups", groupsRepository.findAll());
         return "program-create-2";
     }
