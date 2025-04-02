@@ -79,16 +79,16 @@
                         <div class="table-style">
                             <table>
                                 <tr>
-                                    <th>Аудитория</th>
-                                    <th>Вместимость</th>
-                                    <th>Тип</th>
+                                    <th>Название</th>
+                                    <th>Кол-во пар в неделю</th>
+                                    <th>Кол-во пар в день</th>
                                 </tr>
 
-                                <#list places as place>
+                                <#list subjects as subject>
                                     <tr>
-                                        <td>${place.name}</td>
-                                        <td>${place.capacity}</td>
-                                        <td>${place.description}</td>
+                                        <td>${subject.name}</td>
+                                        <td>${subject.pairsPerWeek}</td>
+                                        <td>${subject.pairsPerDay}</td>
                                     </tr>
                                 </#list>
                             </table>

@@ -2,15 +2,9 @@
     font-family: 'Roboto';
 }
 
-/* АЛИЯ ДОБАВИЛА - ПОСМОТРЕТЬ*/
 #fileInput {
     display: none;
 }
-
-/* АЛИЯ ДОБАВИЛА - ПОСМОТРЕТЬ*/
-
-
-
 
 /* Стили для текста */
 h1 {
@@ -74,6 +68,15 @@ h5 {
 .black {
   color: rgba(0, 0, 0, 1);
 }
+
+.light-blue {
+  color: rgba(212, 218, 247, 1);
+}
+
+.blue {
+  color: rgba(18, 32, 100, 1);
+}
+
 /* Цвета */
 
 body{
@@ -139,6 +142,12 @@ body{
   border: none;
   border-radius: 60px;
   cursor: pointer;
+}
+.university {
+   color: #0E2ECC;
+  font-size: 1.5vw;
+  margin: 0;
+  text-transform: uppercase;
 }
 /* Menu */
 
@@ -257,7 +266,7 @@ body{
 }
 
 .item {
-    margin-left: 10px; /* Расстояние между элементами */
+    margin-left: 10px;
 }
 
 .spacer-bottom {
@@ -329,38 +338,56 @@ input {
 }
 
 .custom-select {
-    position: relative;
-    width: 200px;
+  position: relative;
+  width: 16vw;
+  display: inline-block;
 }
 
 .custom-select select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
-    appearance: none; /* убирает стандартную стрелку */
+  display: flex;
+  align-items: flex-start;
+  background-color: rgba(212, 218, 247, 1);
+  border: none;
+  border-radius: 60px;
+  padding: 2vh 2vw;
+  font-size: 1.1vw;
+  width: 100%;
+  box-sizing: border-box;
+  color: rgba(18, 32, 100, 1);
+  appearance: none;
 }
 
-/* Добавляем свою стрелку */
 .custom-select::after {
-    content: "Раздел ▼";
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
+  content: "▼";
+  position: absolute;
+  right: 1vw;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: rgba(18, 32, 100, 1);
+  font-size: 1vw;
 }
 
-/* Эффект при наведении */
-.custom-select select:hover {
-    border-color: #888;
+/* Цвет плейсхолдера */
+.custom-select select option[disabled][selected] {
+  color: rgba(183, 183, 183, 1); /* Серый для плейсхолдера */
+}
+
+/* Цвет остальных опций */
+.custom-select select option:not([disabled]) {
+  color: rgba(0, 0, 0, 0.5); /* Цвет опций */
 }
 
 .placeholder {
     color: #666;
 }
+
+/* Скрытый input для пользовательского типа */
+        #customTypeInput {
+            display: none;
+            margin-left: 1vw;
+            width: 13vw;
+        }
 
 
 .select-block {
@@ -392,6 +419,7 @@ input {
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
+    cursor: pointer;
 }
 
 .job-title {
@@ -406,10 +434,35 @@ input {
     font-size: 0.7vw;
     margin: 0;
 }
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.job-title {
+  color: #0E2ECC;
+  font-size: 0.7vw;
+  margin: 0;
+  text-transform: uppercase;
+}
+.group {
+  color: #888;
+  font-size: 0.7vw;
+  margin: 0;
+}
 /* Main */
 
 /* Footer */
 .footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: calc(69vw);
+
+}
+
+.footer-right {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -429,9 +482,19 @@ input {
     cursor: pointer;
 }
 
+.save-button {
+    background-color: rgba(18, 32, 100, 1);
+    color: rgba(242, 242, 242, 1);
+}
+
 .footer-button:hover {
     background-color: rgba(242, 242, 242, 0.8);
     color: rgba(0, 0, 0, 0.6);
+}
+
+.save-button:hover {
+  background-color: rgba(18, 32, 100, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Footer */
@@ -440,17 +503,14 @@ input {
 }
 
 select {
-  background-color: transparent; /* Прозрачный фон */
-  border: none; /* Убираем обводку */
+  background-color: transparent;
+  border: none;
   height: 2vh;
 }
-
 
 .select-block-schedule {
     padding: 2vh 2vw;
     width: 9vw;
-
-
 }
 
 .select-block select {
