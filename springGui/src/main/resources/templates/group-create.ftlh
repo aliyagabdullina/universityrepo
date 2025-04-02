@@ -47,49 +47,45 @@
                         </button>
                     </div>
                     <div class="main">
-                        <form action="/group/create" method="post">
+                        <form action="/teacher/create" method="post">
                             <div class="input-block">
-                                <h5>Группа</h5> <input type="text" name="name" placeholder="Введите группу"/><br>
+                                <h5>Название группы</h5> <input type="text" name="name" placeholder="Введите группу"/>
                             </div>
                             <div class="input-block">
-                                <h5>Кол-во студентов</h5><input type="text" name="num_of_students" placeholder="Введите кол-во студентов"/><br>
+                                <h5>Студенты</h5><input type="text" name="numOfStudents" placeholder="Введите кол-во студентов"/>
                             </div>
                             <div class="input-block">
-                                 <h5>Кабинеты</h5>
-                                 <div class="select-block">
-                                     <select name="placeId"">
-                                         <option value="" disabled selected>Выберите кабинет</option>
-                                         <#list places as place>
-                                             <option value="${place.placeId}">${place.name}</option>
-                                         </#list>
-                                     </select><br>
-                                 </div>
-                            </div>
-                            <div class="input-block">
-                                 <h5>Учителя</h5>
+                                 <h5>Преподаватели</h5>
                                  <div class="select-block">
                                      <select name="teacherId" multiple>
-                                         <option value="" disabled selected>Выберите учителя</option>
+                                         <option value="" disabled selected>Выберите преподавателей</option>
                                          <#list teachers as teacher>
                                              <option value="${teacher.teacherId}">${teacher.name}</option>
                                          </#list>
-                                     </select><br>
+                                     </select>
                                  </div>
                              </div>
                             <div class="input-block">
-                                <h5>Макс уроков</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во макс уроков"/><br>
+                                <h5>Максимум пар в день</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во макс пар"/>
                             </div>
                             <div class="input-block">
                                 <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/><br>
                             </div>
+
+
                             <div class="footer">
-                                <div class="footer-buttons-container">
-                                    <button type="submit" class="footer-button" onclick="window.location.href='/groups'">
+                            <div class="footer-buttons-container">
+
+                                <button class="footer-button" type="button" onclick="window.history.back()">
+                                    <h4>Назад</h4>
+                                </button>
+                              <div class="footer-right">
+                                    <button type="submit" class="footer-button save-button">
                                         <h4>Сохранить</h4>
                                     </button>
-                                    <button class="footer-button" type="button" onclick="window.history.back()"><h4>Назад</h4></button>
-                                </div>
+                              </div>
                             </div>
+                        </div>
                         </form>
                     </div>
                 </div>
