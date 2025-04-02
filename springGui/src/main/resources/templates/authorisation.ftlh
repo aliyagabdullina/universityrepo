@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/styles/styleLogin2.css">
-    </head>
-    <body>
-        <div class="main">
-            <h2 class="blue">Scheduling</h2><br>
-            <form action="/login" method="post">
-                <label for="name">ФИО</label>
-                <input class="input-max" type="text" id="name" name="name" placeholder="Введите ФИО" required>
-                <div class="space"></div>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/styleLogin2.css">
+</head>
+<body>
+    <div class="main">
+        <h2 class="blue">Scheduling</h2><br>
+        <form id="loginForm" onsubmit="return validateForm(event)">
+            <div class="space">
+                <label for="username">Почта</label>
+                <input type="text" id="username" name="username" placeholder="Введите почту" required>
+            </div>
 
-                <label for="role">Роль</label>
-                <input class="input-max" type="text" id="role" name="role" placeholder="Выберите роль" required>
-                <div class="space"></div>
+            <div class="space">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <div class="space"></div><div class="space"></div><br><div class="space"></div>
+            <button type="submit" class="login-button space">Войти</button>
+            <div class="error" id="errorMsg">Ошибка! Неверный логин или пароль</div>
+        </form>
+    </div>
 
-                <label for="school">Школа</label>
-                <input class="input-max" type="text" id="school" name="school" placeholder="Выберите школу" required>
-                <div class="space"></div>
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
 
-                <label for="username">Username</label>
-                <input class="input-max" type="text" id="username" name="username" placeholder="Username" required>
+            // Пример правильных учетных данных (для демонстрации)
+            const correctUsername = "admin";
+            const correctPassword = "12345";
 
-                <div class="space"></div>
-                <label for="password">Password</label>
-                <input class="input-max" type="password" id="password" name="password" placeholder="Password" required>
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("errorMsg");
 
+            // Проверка логина и пароля
+            if (username === correctUsername && password === correctPassword) {
+                errorMsg.style.display = "none";
+                alert("Успешная авторизация!");
+                window.location.href = '/account';
+            } else {
+                errorMsg.style.display = "block";
+            }
 
-                <div class="space"></div><br><div class="space"></div><br><div class="space"></div>
-                <button type="submit" class="login-button" onclick="window.location.href='/courses'">
-                    <h4>Registration</h4>
-                </button>
-            </form>
-        </div>
-    </body>
+            return false; // Предотвращаем стандартную отправку
+        }
+    </script>
+</body>
 </html>
