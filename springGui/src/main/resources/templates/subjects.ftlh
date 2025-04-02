@@ -96,16 +96,16 @@
                     </div>
                     <div class="footer">
                         <div class="footer-buttons-container">
-                            <button class="footer-button" onclick="window.location.href='/place/create'">
+                            <button class="footer-button" onclick="window.location.href='/subject/create'">
                                 <h4>Редактировать</h4>
                             </button>
-                            <button class="footer-button" onclick="window.location.href='/place/create'">
+                            <button class="footer-button" onclick="window.location.href='/subject/create'">
                                 <h4>Добавить</h4>
                             </button>
-                            <button class="footer-button" onclick="window.location.href='/place/create'">
+                            <button class="footer-button" onclick="window.location.href='/subject/create'">
                                 <h4>Удалить</h4>
                             </button>
-                            <form id="importForm" action="/place/import" method="post" enctype="multipart/form-data">
+                            <form id="importForm" action="/subject/import" method="post" enctype="multipart/form-data">
                                 <input type="file" name="file" id="fileInput" accept=".csv">
                             </form>
 
