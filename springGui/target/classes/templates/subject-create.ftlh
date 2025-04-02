@@ -50,27 +50,18 @@
                 <div class="main">
                     <form action="/place/create" method="post" onsubmit="return handleFormSubmit()">
                         <div class="input-block">
-                            <h5>Аудитория</h5>
-                            <input type="text" name="name" placeholder="Введите аудиторию" required>
+                            <h5>Предмет</h5>
+                            <input type="text" name="name" placeholder="Введите предмет" required>
                         </div>
                         <div class="input-block">
-                            <h5>Вместимость</h5>
-                            <input type="text" name="capacity" placeholder="Введите кол-во мест" required>
+                            <h5>Кол-во пар в неделю</h5>
+                            <input type="text" name="pairsPerWeek" placeholder="Введите кол-во пар в неделю" required>
                         </div>
                         <div class="input-block">
-                            <h5>Тип</h5>
-                            <div class="custom-select">
-                                <select id="typeSelect" name="description" onchange="toggleCustomInput()">
-                                    <option value="" disabled selected>Выберите тип аудитории</option>
-                                    <option value="Лекционная">Лекционная</option>
-                                    <option value="Практическая">Практическая</option>
-                                    <option value="Лаборатория">Лаборатория</option>
-                                    <option value="Компьютерный класс">Компьютерный класс</option>
-                                    <option value="Другое">Другое</option>
-                                </select>
-                            </div>
-                            <input type="text" id="customTypeInput" name="customDescription" placeholder="Введите свой тип">
+                            <h5>Кол-во пар в день</h5>
+                            <input type="text" name="pairsPerDay" placeholder="Введите кол-во пар в день" required>
                         </div>
+
                         <div class="footer">
                             <div class="footer-buttons-container">
 

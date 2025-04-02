@@ -97,7 +97,7 @@
                                                     ${subject.name},
                                               </#list>
                                          </td>
-                                        <td>${teacher.pairsPerDay}</td>
+                                        <td>${teacher.maxNumberOfLessons}</td>
                                         <td>${teacher.timeslotId}</td>
                                         <td>${teacher.role}</td>
                                     </tr>

@@ -29,7 +29,7 @@ public class TeacherController {
     @GetMapping("/teachers")
     public String teachers(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("teachers", teacherService.listTeachers(name));
-        model.addAttribute("places", placeRepository.findAll());
+        //model.addAttribute("places", placeRepository.findAll());
         model.addAttribute("courses", courseRepository.findAll());
         return "teachers";
     }

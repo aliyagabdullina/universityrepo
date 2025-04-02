@@ -59,7 +59,7 @@ public class CsvParser {
                 // Заполняем courseData
                 groupData.setName(fields[0]);
                 groupData.setNumOfStudents(Integer.parseInt(fields[1]));
-                groupData.setPlaceId(Integer.parseInt(fields[2]));
+                //groupData.setPlaceId(Integer.parseInt(fields[2]));
                 groupData.setMaxNumberOfLessons(Integer.parseInt(fields[3]));
                 groupData.setTimeslotId(Integer.parseInt(fields[4]));
 
@@ -143,7 +143,7 @@ public class CsvParser {
                 TeacherData teacherData = new TeacherData();
                 // Заполняем courseData
                 teacherData.setName(fields[0]);
-                teacherData.setPlaceId(Integer.parseInt(fields[1]));
+                //teacherData.setPlaceId(Integer.parseInt(fields[1]));
                 teacherData.setMaxNumberOfLessons(Integer.parseInt(fields[2]));
                 teacherData.setTimeslotId(Integer.parseInt(fields[3]));
 
