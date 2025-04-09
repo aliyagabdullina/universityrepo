@@ -87,8 +87,8 @@
                                 <#list courses as course>
                                     <tr>
                                         <td>${course.name}</td>
-                                        <td>${course.pairsPerWeek}</td>
-                                        <td>${course.pairsPerDay}</td>
+                                        <td>${course.numOfLessonsPerWeek}</td>
+                                        <td>${course.maxLessonsPerDay}</td>
                                     </tr>
                                 </#list>
                             </table>
