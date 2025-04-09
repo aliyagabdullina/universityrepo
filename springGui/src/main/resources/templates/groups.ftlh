@@ -89,11 +89,11 @@
                                     <tr>
                                         <td>${group.name}</td>
                                         <td>${group.numOfStudents}</td>
-                                        <td>${group.maxNumberOfLessons}</td>
                                         <td><#list teachers as teacher>
                                                   ${teacher.name},
                                             </#list>
                                         </td>
+                                        <td>${group.maxNumberOfLessons}</td>
                                         <td><#if group.timeslotId??>${group.timeslotId}</#if></td>
                                     </tr>
                                 </#list>

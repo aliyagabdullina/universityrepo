@@ -55,11 +55,11 @@
                         </div>
                         <div class="input-block">
                             <h5>Кол-во пар в неделю</h5>
-                            <input type="text" name="pairsPerWeek" placeholder="Введите кол-во пар в неделю" required>
+                            <input type="text" name="numOfLessonsPerWeek" placeholder="Введите кол-во пар в неделю" required>
                         </div>
                         <div class="input-block">
                             <h5>Кол-во пар в день</h5>
-                            <input type="text" name="pairsPerDay" placeholder="Введите кол-во пар в день" required>
+                            <input type="text" name="maxLessonsPerDay" placeholder="Введите кол-во пар в день" required>
                         </div>
 
                         <div class="footer">
