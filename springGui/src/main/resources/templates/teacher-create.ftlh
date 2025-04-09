@@ -14,15 +14,15 @@
                     <h1>Scheduling</h1>
                     <p class="university">UNIVERSITY</p>
                     <div class="menu-buttons-container">
-                        <button class="menu-button icon highlight" onclick="window.location.href='/account'">
+                        <button class="menu-button icon" onclick="window.location.href='/account'">
                             <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Аккаунт</h4>
                         </button>
-                        <button class="menu-button icon" onclick="window.location.href='/schedul'">
+                        <button class="menu-button icon" onclick="window.location.href='/schedule'">
                             <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Расписание</h4>
                         </button>
-                        <button class="menu-button icon" onclick="window.location.href='/places'">
+                        <button class="menu-button icon highlight" onclick="window.location.href='/places'">
                             <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Данные</h4>
                         </button>
@@ -61,10 +61,10 @@
                              <div class="input-block">
                                   <h5>Предметы</h5>
                                   <div class="select-block">
-                                      <select name="subjectId" multiple>
+                                      <select name="courseId" multiple>
                                         <option value="" disabled selected >Выберите предметы</option>
-                                          <#list subjects as subject>
-                                              <option value="${subject.subjectId}">${subject.name}</option>
+                                          <#list courses as course>
+                                              <option value="${course.courseId}">${course.name}</option>
                                           </#list>
                                       </select><br>
                                   </div>

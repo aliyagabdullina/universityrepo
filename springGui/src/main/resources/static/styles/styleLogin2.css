@@ -81,11 +81,16 @@ h5 {
 
 body{
     height: 100%;
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    margin-bottom: 15vh;
+    margin-top: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
 }
+
 
 .container {
     display: grid;
@@ -241,6 +246,19 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+.main {
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 50vw;
+}
+
 
 .line {
   display: flex;
@@ -492,4 +510,43 @@ select {
 .select-block select {
     max-height: 4vh;
     overflow-y: auto;
+}
+
+
+
+
+
+
+label {
+  padding-left: 2vw;
+  font-size: 0.8vw;
+  font-weight: lighter;
+}
+
+button {
+  display: block;
+  width: 30vw;
+  align-items: center;
+  border: none;
+  border-radius: 60px;
+  padding: 2vh 2vw;
+  font-size: 1.1vw;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.login-button {
+  color: white;
+  background-color: rgba(18, 32, 100, 1);
+}
+
+.space {
+  margin-bottom: 1vh;
+}
+
+.error {
+  text-align: center;
+  font-size: 0.8vw;
+  color: rgba(197, 9, 9, 1);
+  display: none; /* Скрыто по умолчанию */
 }

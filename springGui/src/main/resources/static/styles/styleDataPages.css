@@ -94,6 +94,7 @@ body{
     position: relative;
 }
 
+
 /* Menu */
 .menu {
     display: flex;
@@ -242,6 +243,13 @@ body{
     flex-direction: column;
 }
 
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
 .line {
   display: flex;
   justify-content: space-between;
@@ -310,6 +318,15 @@ table th {
     text-align: left;
 }
 
+.table-style {
+    flex: 1;
+    background-color: rgba(242, 242, 242, 1);
+    border-radius: 60px;
+    padding: 30px 50px;
+    overflow-y: auto;
+    width: calc(62vw);
+}
+
 .table-cell {
     background-color: white;
     border-radius: 60px;
@@ -317,6 +334,25 @@ table th {
 
 .table-program {
   max-height: 40vh;
+}
+
+.table-style table {
+    table-layout: fixed;
+}
+
+.table-style th,
+.table-style td {
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.table-style td:first-child {
+    text-align: left; /* Сохраняем выравнивание первого столбца влево */
 }
 
 
@@ -370,12 +406,12 @@ input {
 
 /* Цвет плейсхолдера */
 .custom-select select option[disabled][selected] {
-  color: rgba(183, 183, 183, 1); /* Серый для плейсхолдера */
+  color: rgba(183, 183, 183, 1);
 }
 
 /* Цвет остальных опций */
 .custom-select select option:not([disabled]) {
-  color: rgba(0, 0, 0, 0.5); /* Цвет опций */
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .placeholder {
@@ -383,11 +419,11 @@ input {
 }
 
 /* Скрытый input для пользовательского типа */
-        #customTypeInput {
-            display: none;
-            margin-left: 1vw;
-            width: 13vw;
-        }
+#customTypeInput {
+  display: none;
+  margin-left: 1vw;
+  width: 13vw;
+}
 
 
 .select-block {
@@ -514,6 +550,6 @@ select {
 }
 
 .select-block select {
-    max-height: 4vh; /* Установить максимальную высоту */
+    max-height: 4vh;
     overflow-y: auto; /* Добавить вертикальную прокрутку при необходимости */
 }

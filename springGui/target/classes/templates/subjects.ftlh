@@ -14,15 +14,15 @@
                     <h1>Scheduling</h1>
                     <p class="university">UNIVERSITY</p>
                     <div class="menu-buttons-container">
-                        <button class="menu-button icon highlight" onclick="window.location.href='/account'">
+                        <button class="menu-button icon" onclick="window.location.href='/account'">
                             <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Аккаунт</h4>
                         </button>
-                        <button class="menu-button icon" onclick="window.location.href='/schedul'">
+                        <button class="menu-button icon" onclick="window.location.href='/schedule'">
                             <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Расписание</h4>
                         </button>
-                        <button class="menu-button icon" onclick="window.location.href='/places'">
+                        <button class="menu-button icon highlight" onclick="window.location.href='/places'">
                             <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Данные</h4>
                         </button>
@@ -45,7 +45,7 @@
                     <div class="spacer"></div>
                     <div class="custom-select">
                         <select onchange="if(this.value === '1') window.location.href='/places';
-                                        else if(this.value === '2') window.location.href='/subjects';
+                                        else if(this.value === '2') window.location.href='/courses';
                                         else if(this.value === '3') window.location.href='/teachers';
                                         else if(this.value === '4') window.location.href='/students';
                                         else if(this.value === '5') window.location.href='/groups';
@@ -84,11 +84,11 @@
                                     <th>Кол-во пар в день</th>
                                 </tr>
 
-                                <#list subjects as subject>
+                                <#list courses as course>
                                     <tr>
-                                        <td>${subject.name}</td>
-                                        <td>${subject.pairsPerWeek}</td>
-                                        <td>${subject.pairsPerDay}</td>
+                                        <td>${course.name}</td>
+                                        <td>${course.pairsPerWeek}</td>
+                                        <td>${course.pairsPerDay}</td>
                                     </tr>
                                 </#list>
                             </table>
@@ -96,16 +96,16 @@
                     </div>
                     <div class="footer">
                         <div class="footer-buttons-container">
-                            <button class="footer-button" onclick="window.location.href='/subject/create'">
+                            <button class="footer-button" onclick="window.location.href='/course/create'">
                                 <h4>Редактировать</h4>
                             </button>
-                            <button class="footer-button" onclick="window.location.href='/subject/create'">
+                            <button class="footer-button" onclick="window.location.href='/course/create'">
                                 <h4>Добавить</h4>
                             </button>
-                            <button class="footer-button" onclick="window.location.href='/subject/create'">
+                            <button class="footer-button" onclick="window.location.href='/course/create'">
                                 <h4>Удалить</h4>
                             </button>
-                            <form id="importForm" action="/subject/import" method="post" enctype="multipart/form-data">
+                            <form id="importForm" action="/course/import" method="post" enctype="multipart/form-data">
                                 <input type="file" name="file" id="fileInput" accept=".csv">
                             </form>
 

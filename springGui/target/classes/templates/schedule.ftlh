@@ -15,11 +15,11 @@
                             <h1>Scheduling</h1>
                             <p class="university">UNIVERSITY</p>
                             <div class="menu-buttons-container">
-                                <button class="menu-button icon highlight" onclick="window.location.href='/account'">
+                                <button class="menu-button icon" onclick="window.location.href='/account'">
                                     <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
                                     <h4>Аккаунт</h4>
                                 </button>
-                                <button class="menu-button icon" onclick="window.location.href='/schedul'">
+                                <button class="menu-button icon highlight" onclick="window.location.href='/schedule'">
                                     <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
                                     <h4>Расписание</h4>
                                 </button>

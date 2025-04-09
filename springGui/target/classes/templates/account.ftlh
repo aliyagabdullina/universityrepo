@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/styleDataPages.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles/styleDataPages.css">
+    </head>
 <body>
     <section>
         <div class="container">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="footer">
-                    <div class="footer-buttons-container">
+                    <div class="footer-buttons-container footer-right">
                         <button class="footer-button" onclick="window.location.href='/logout'">
                             <h4>Выйти из аккаунта</h4>
                         </button>
