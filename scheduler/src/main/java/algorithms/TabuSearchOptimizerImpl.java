@@ -38,8 +38,8 @@ public class TabuSearchOptimizerImpl implements TabuSearchOptimizer {
             LSMove bestMove = neighbourhood.getBestMove(tabuList);
 
             if (bestMove != null) {
-                localSearch(bestMove);
                 bestMove.makeMove(currentSchedule);
+                localSearch();
                 if (currentSchedule.evaluate() < bestSchedule.evaluate()) {
                     bestSchedule = new ScheduleImpl(currentSchedule.getAllLessons());
                 }
@@ -50,9 +50,8 @@ public class TabuSearchOptimizerImpl implements TabuSearchOptimizer {
         return bestSchedule;
     }
 
-    private void localSearch(LSMove move) {
-        // Мы проводим локальный поиск для улучшения конкретного выбранного перемещения
-        // Это может включать несколько шагов в поиске соседей внутри текущего состояния расписания.
+    private void localSearch() {
+
         LocalSearchOptimizer localSearch = new LocalSearchOptimizerImpl(currentSchedule);
         LSMove bestLocalMove = localSearch.findBestLocalMove();
 
@@ -65,7 +64,6 @@ public class TabuSearchOptimizerImpl implements TabuSearchOptimizer {
         }
     }
 
-    // Применение табу-операции
     private void applyTabu(LSMove move) {
         if (move != null) {
             tabuList.add(move);

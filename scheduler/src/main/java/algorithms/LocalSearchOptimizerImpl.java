@@ -18,7 +18,6 @@ public class LocalSearchOptimizerImpl implements LocalSearchOptimizer {
         LSMove bestMove = null;
         double bestEvaluation = Double.MAX_VALUE;
 
-        // Пробуем все возможные локальные перемещения и выбираем лучшее
         for (LSMove move : localMoves) {
             move.makeMove(currentSchedule);
             double evaluation = currentSchedule.evaluate();
@@ -31,7 +30,6 @@ public class LocalSearchOptimizerImpl implements LocalSearchOptimizer {
         return bestMove;
     }
 
-    // Генерация возможных локальных перемещений
     private List<LSMove> generateLocalMoves() {
         List<LSMove> localMoves = new ArrayList<>();
         List<Lesson> lessons = currentSchedule.getAllLessons().toList();
@@ -44,7 +42,6 @@ public class LocalSearchOptimizerImpl implements LocalSearchOptimizer {
         return localMoves;
     }
 
-    // Отмена локального перемещения
     private void undoMove(LSMove move) {
         move.makeMove(currentSchedule);
     }
