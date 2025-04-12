@@ -9,4 +9,6 @@ public interface Schedule {
     static Schedule createEmpty() {
         return new ScheduleImpl(Stream.empty());
     }
+
+    double evaluate();
 }
