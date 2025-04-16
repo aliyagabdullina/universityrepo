@@ -281,9 +281,20 @@ body{
     margin-bottom: 3%;
 }
 
-html, body, .main{
+html, body, .main {
     height: 73vh;
 }
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 73vh;
+    padding-right: 10px;
+}
+
+
 
 .table-style {
     flex: 1;
@@ -544,12 +555,205 @@ select {
   height: 2vh;
 }
 
-.select-block-schedule {
-    padding: 2vh 2vw;
-    width: 9vw;
+.select-block.select-block-schedule {
+    padding: 1.5vh 2vw;
+    width: 16vw;
+    font-size: 0.9vw;
+    background-color: rgba(212, 218, 247, 1);
+    color: rgba(18, 32, 100, 1);
+    border-radius: 60px;
+}
+
+.select-block.select-block-schedule select {
+    font-size: 1.5vw;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    color: rgba(0, 0, 0, 1);
+}
+
+.select-block.select-block-schedule select {
+    color: rgba(18, 32, 100, 1);
+    cursor: pointer;
+    text-align: center;
+    text-align-last: center;
+}
+
+#searchInput {
+    background-color: rgba(242, 242, 242, 1); /* или синий, если включён */
+    color: rgba(0, 0, 0, 0.6); /* или white, если активен */
+    border: none;
+    border-radius: 60px;
+    padding: 1.5vh 2vw;
+    font-size: 1.5vw; /* <-- увеличенный размер */
+    width: 20vw;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#searchInput:disabled {
+    background-color: rgba(242, 242, 242, 1); /* тот же серый */
+    color: rgba(183, 183, 183, 1); /* более светлый текст */
+    cursor: not-allowed;
+}
+
+#searchInput:enabled {
+    background-color: rgba(212, 218, 247, 1);
+    color: (18, 32, 100, 1);
 }
 
 .select-block select {
     max-height: 4vh;
     overflow-y: auto; /* Добавить вертикальную прокрутку при необходимости */
+}
+
+
+.availability-grid {
+    margin-top: 10px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.availability-grid table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    font-size: 1vw;
+}
+
+.availability-grid th, .availability-grid td {
+    padding: 10px;
+    border: none;
+}
+
+.availability-grid td:first-child {
+    width: 2vw; /* можно уменьшить ещё */
+    text-align: center;
+    padding-right: 5px;
+}
+
+
+.availability-grid td.cell {
+    width: 1vw;
+    height: 2vw;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cell[data-level="0"] {
+    background-color: #d4daf7;
+}
+
+.cell[data-level="1"] {
+    background-color: #a2b0ea;
+}
+
+.cell[data-level="2"] {
+    background-color: #121f64;
+}
+
+.cell[data-level="3"] {
+    background-color: #b3b3b3;
+}
+
+.color-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.color-option {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    margin: 0 0.5vw;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s;
+}
+
+.level-0 { background-color: #d4daf7; }
+.level-1 { background-color: #a2b0ea; }
+.level-2 { background-color: #121f64; }
+.level-disabled { background-color: #b3b3b3; }
+
+.color-option:hover {
+    border: 2px solid #00000050;
+}
+
+.color-option.selected {
+    border: 2px solid black;
+}
+
+.cell[data-level="0"] { background-color: #d4daf7; }
+.cell[data-level="1"] { background-color: #a2b0ea; }
+.cell[data-level="2"] { background-color: #121f64; }
+.cell[data-level="3"] { background-color: #b3b3b3; }
+
+
+
+
+.cell-filled {
+  background-color: rgba(212, 218, 247, 1);
+  border-radius: 60px;
+  padding: 0.7vw 1.2vw;
+  font-size: 1vw;
+  text-align: center;
+  line-height: 1.4;
+}
+
+
+.search-wrapper {
+  position: relative;
+  width: 20vw;
+}
+
+.search-results {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 30vh;
+  overflow-y: auto;
+  display: none;
+}
+
+.result-item {
+  background-color: rgba(242, 242, 242, 1);
+  padding: 1.5vh 2vw;
+  border-radius: 60px;
+  font-size: 1.1vw;
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.result-item {
+  padding: 1vh 1.5vw;
+  font-size: 1.1vw;
+  color: #000;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.result-item:hover {
+  background-color: rgba(212, 218, 247, 0.4);
+}
+
+.cell-filled {
+  background-color: rgba(212, 218, 247, 1);
+  border-radius: 60px;
+  padding: 0.7vw 1.2vw;
+  font-size: 1vw;
+  text-align: center;
+  line-height: 1.4;
 }

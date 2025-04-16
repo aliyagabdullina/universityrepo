@@ -74,26 +74,47 @@
     </div>
 
     <script>
-        function validateForm(event) {
-            event.preventDefault();
-            const errorMsg = document.getElementById("errorMsg");
-            // Здесь можно добавить проверку данных
-            // Для примера: если все поля заполнены, перенаправляем
-            const name = document.getElementById("name").value;
-            const university = document.getElementById("university").value;
-            const role = document.getElementById("role").value;
-            const faculty = document.getElementById("faculty").value;
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+    // Валидация формы при отправке
+    function validateForm(event) {
+        event.preventDefault();
 
-            if (name && university && role && faculty && email && password) {
-                errorMsg.style.display = "none";
-                window.location.href = '/courses';
-            } else {
-                errorMsg.style.display = "block";
-            }
-            return false;
+        const errorMsg = document.getElementById("errorMsg");
+        const name = document.getElementById("name").value;
+        const university = document.getElementById("university").value;
+        const role = document.getElementById("role").value;
+        const faculty = document.getElementById("faculty").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (name && university && role && faculty && email && password) {
+            errorMsg.style.display = "none";
+            window.location.href = '/courses'; // Успешный переход
+        } else {
+            errorMsg.style.display = "block"; // Показываем ошибку
         }
-    </script>
+
+        return false;
+    }
+
+    // Обновление цвета текста у <select> при выборе значения
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.custom-select select').forEach(select => {
+            // Начальная проверка при загрузке
+            if (select.value) {
+                select.classList.add('has-value');
+            }
+
+            // Добавляем/удаляем класс при изменении значения
+            select.addEventListener('change', () => {
+                if (select.value) {
+                    select.classList.add('has-value');
+                } else {
+                    select.classList.remove('has-value');
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

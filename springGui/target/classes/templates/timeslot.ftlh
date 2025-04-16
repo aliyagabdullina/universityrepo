@@ -22,7 +22,7 @@
                             <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Расписание</h4>
                         </button>
-                        <button class="menu-button icon" onclick="window.location.href='/places'">
+                        <button class="menu-button icon" onclick="window.location.href='/data'">
                             <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Данные</h4>
                         </button>

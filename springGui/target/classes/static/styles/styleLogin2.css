@@ -1,5 +1,5 @@
 * {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 
 #fileInput {
@@ -8,18 +8,18 @@
 
 /* Стили для текста */
 h1 {
-  font-size: 3vw;
-  font-weight: 900;
-  letter-spacing: -3%;
-  white-space: nowrap;
+    font-size: 3vw;
+    font-weight: 900;
+    letter-spacing: -3%;
+    white-space: nowrap;
 }
 
 h2 {
-  font-size: 2vw;
-  font-weight: bolder;
-  letter-spacing: -3%;
-  white-space: nowrap;
-  padding: 0;
+    font-size: 2vw;
+    font-weight: bolder;
+    letter-spacing: -3%;
+    white-space: nowrap;
+    padding: 0;
 }
 
 h3 {
@@ -46,40 +46,38 @@ h5 {
     padding-bottom: 0.3vw;
     margin: 0;
 }
-/* Стили для текста */
 
 /* Цвета */
 .white {
-  color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .light-grey {
-  color: rgba(242, 242, 242, 1);
+    color: rgba(242, 242, 242, 1);
 }
 
 .grey {
-  color: rgba(183, 183, 183, 1);
+    color: rgba(183, 183, 183, 1);
 }
 
 .dark-grey {
-  color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .black {
-  color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 1);
 }
 
 .light-blue {
-  color: rgba(212, 218, 247, 1);
+    color: rgba(212, 218, 247, 1);
 }
 
 .blue {
-  color: rgba(18, 32, 100, 1);
+    color: rgba(18, 32, 100, 1);
 }
 
-/* Цвета */
-
-body{
+/* Body */
+body {
     height: 100%;
     margin-left: 30vw;
     margin-right: 30vw;
@@ -91,7 +89,7 @@ body{
     background-color: white;
 }
 
-
+/* Container */
 .container {
     display: grid;
     grid-template-columns: 4fr 4% 14fr;
@@ -143,18 +141,18 @@ body{
 }
 
 .highlight {
-  background-color: white;
-  border: none;
-  border-radius: 60px;
-  cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
 }
+
 .university {
-   color: #0E2ECC;
-  font-size: 1.5vw;
-  margin: 0;
-  text-transform: uppercase;
+    color: #0E2ECC;
+    font-size: 1.5vw;
+    margin: 0;
+    text-transform: uppercase;
 }
-/* Menu */
 
 /* Header */
 .header {
@@ -230,42 +228,29 @@ body{
     outline: none;
 }
 
-.university {
-    color: #0E2ECC;
-    font-size: 1.5vw;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-}
-/* Header */
-
-
 /* Main */
 .main {
+    padding: 3%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 60px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    width: 50vw;
 }
 
-.main {
-  padding: 3%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 60px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  width: 50vw;
+html, body, .main {
+    height: 73vh;
 }
-
 
 .line {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
-.spacer-button{
+.spacer-button {
     margin-left: 10px;
 }
 
@@ -279,8 +264,8 @@ body{
 }
 
 .sorting-buttons {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .item {
@@ -289,10 +274,6 @@ body{
 
 .spacer-bottom {
     margin-bottom: 3%;
-}
-
-html, body, .main{
-    height: 73vh;
 }
 
 .table-style {
@@ -334,9 +315,8 @@ table th {
 }
 
 .table-program {
-  max-height: 40vh;
+    max-height: 40vh;
 }
-
 
 input {
     display: flex;
@@ -355,50 +335,9 @@ input {
     height: 2vh;
 }
 
-.custom-select {
-  position: relative;
-  width: 16vw;
-}
-
-.custom-select select {
-  display: flex;
-  align-items: flex-start;
-  background-color: rgba(212, 218, 247, 1);
-  border: none;
-  border-radius: 60px;
-  padding: 2vh 2vw;
-  font-size: 1.1vw;
-  width: 100%;
-  box-sizing: border-box;
-  color: rgba(18, 32, 100, 0.5);
-  appearance: none;
-}
-
-.custom-select::after {
-  content: "▼";
-  position: absolute;
-  right: 1vw;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 1vw;
-}
-
-/* Цвет плейсхолдера */
-.custom-select select option[disabled][selected] {
-  color: rgba(212, 218, 247, 1);
-}
-
-/* Цвет остальных опций */
-.custom-select select option:not([disabled]) {
-  color: rgba(212, 218, 247, 1);
-}
-
 .placeholder {
     color: #666;
 }
-
 
 .select-block {
     display: flex;
@@ -413,7 +352,7 @@ input {
 }
 
 .centre-text {
-  display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -444,23 +383,11 @@ input {
     font-size: 0.7vw;
     margin: 0;
 }
-.details {
-  display: flex;
-  flex-direction: column;
-}
 
-.job-title {
-  color: #0E2ECC;
-  font-size: 0.7vw;
-  margin: 0;
-  text-transform: uppercase;
+.details {
+    display: flex;
+    flex-direction: column;
 }
-.group {
-  color: #888;
-  font-size: 0.7vw;
-  margin: 0;
-}
-/* Main */
 
 /* Footer */
 .footer {
@@ -488,23 +415,19 @@ input {
     color: rgba(0, 0, 0, 0.6);
 }
 
-/* Footer */
 .select-block select {
-  all: initial;
+    all: initial;
 }
 
 select {
-  background-color: transparent;
-  border: none;
-  height: 2vh;
+    background-color: transparent;
+    border: none;
+    height: 2vh;
 }
-
 
 .select-block-schedule {
     padding: 2vh 2vw;
     width: 9vw;
-
-
 }
 
 .select-block select {
@@ -512,41 +435,103 @@ select {
     overflow-y: auto;
 }
 
-
-
-
-
-
 label {
-  padding-left: 2vw;
-  font-size: 0.8vw;
-  font-weight: lighter;
+    padding-left: 2vw;
+    font-size: 0.8vw;
+    font-weight: lighter;
 }
 
 button {
-  display: block;
-  width: 30vw;
-  align-items: center;
-  border: none;
-  border-radius: 60px;
-  padding: 2vh 2vw;
-  font-size: 1.1vw;
-  margin: 0;
-  box-sizing: border-box;
+    display: block;
+    width: 30vw;
+    align-items: center;
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    font-size: 1.1vw;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .login-button {
-  color: white;
-  background-color: rgba(18, 32, 100, 1);
+    color: white;
+    background-color: rgba(18, 32, 100, 1);
 }
 
 .space {
-  margin-bottom: 1vh;
+    margin-bottom: 1vh;
 }
 
 .error {
-  text-align: center;
-  font-size: 0.8vw;
-  color: rgba(197, 9, 9, 1);
-  display: none; /* Скрыто по умолчанию */
+    text-align: center;
+    font-size: 0.8vw;
+    color: rgba(197, 9, 9, 1);
+    display: none; /* Скрыто по умолчанию */
+}
+
+.custom-select {
+    position: relative;
+    width: 30vw;
+}
+
+.custom-select select {
+    display: block;
+    width: 100%;
+    background-color: rgba(242, 242, 242, 1);
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    padding-right: 4vw; /* важно: отступ справа для стрелки */
+    font-size: 1.1vw;
+    font-family: 'Roboto', sans-serif;
+    appearance: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6); /* серый по умолчанию (placeholder) */
+}
+
+/* выбранное значение — чёрный */
+.custom-select select:valid {
+    color: black;
+}
+
+/* опции в выпадающем списке */
+.custom-select select option {
+    color: black;
+    background-color: white;
+}
+
+/* плейсхолдерная опция */
+.custom-select select option[value=""][disabled] {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* стрелка */
+.custom-select::after {
+    content: "▼";
+    position: absolute;
+    right: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 1vw;
+}
+
+.custom-select select {
+    background-color: rgba(242, 242, 242, 1);
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    padding-right: 4vw;
+    font-size: 1.1vw;
+    font-family: 'Roboto', sans-serif;
+    appearance: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6); /* серый по умолчанию */
+}
+
+.custom-select select.has-value {
+    color: black; /* если выбрано — чёрный */
 }
