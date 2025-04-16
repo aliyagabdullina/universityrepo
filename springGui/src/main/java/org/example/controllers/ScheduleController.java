@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.DataBaseInteractor;
 import org.example.DataBaseInteractorImpl;
 import org.example.SchoolDataCollectorImpl;
+import org.example.data.ScheduleDto;
 import org.example.repositories.GroupsRepository;
 import org.example.repositories.PlacesRepository;
 import org.example.repositories.TeacherRepository;
@@ -85,7 +86,7 @@ public class ScheduleController {
     private Schedule _result;
 
     @GetMapping("/schedule")
-    public String schedule() {
+    public String schedule(Model model) {
         _fileSettings = initializeSettings(root);
         _dataLoader = new DataLoaderImpl(_fileSettings);
         _dataCollector = loadData();
@@ -115,8 +116,43 @@ public class ScheduleController {
         _result = scheduleBuilder.solve();
         System.out.println(_result);
         System.out.println(_result.getAllLessons().map(Lesson::getTimeSlot).map(WeeklyTimeSlot::getDayOfWeek).toList());
-
+        ScheduleDto sch = new ScheduleDto(_result);
+        model.addAttribute("schedule", sch);
         return "schedule";
+    }
+
+    @GetMapping("/scheduleTest")
+    public String getSchedule(Model model) {
+        // Пример данных для schedule
+        List<Map<String, String>> schedule = new ArrayList<>();
+
+        // Пример расписания для 1-го урока
+        Map<String, String> mondaySchedule = new HashMap<>();
+        mondaySchedule.put("ПН", "Математика, Иванов, 101");
+        mondaySchedule.put("ВТ", "Физика, Петров, 102");
+
+        // Пример расписания для 2-го урока
+        Map<String, String> tuesdaySchedule = new HashMap<>();
+        tuesdaySchedule.put("ПН", "Химия, Смирнов, 103");
+        tuesdaySchedule.put("ВТ", "Программирование, Иванов, 104");
+
+        // Добавляем данные расписания в map
+        schedule.add(mondaySchedule);  // Урок 1
+        schedule.add(tuesdaySchedule);  // Урок 2
+
+        // Список дней недели
+        List<String> days = Arrays.asList("ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ");
+        String scheduleName = "My schedule";
+        // Список уроков
+        List<Integer> lessons = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+
+        // Передаем данные в модель
+        model.addAttribute("schedule", schedule);
+        model.addAttribute("name", scheduleName);
+        model.addAttribute("DAYS", days);
+        model.addAttribute("LESSONS", lessons);
+
+        return "schedule"; // Имя вашего шаблона .ftlh
     }
     @GetMapping("/schedule2")
     public String schedule2() {

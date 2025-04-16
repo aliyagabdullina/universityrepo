@@ -40,7 +40,7 @@ public class GlobalScheduler implements Scheduler{
 
         // 2. Двухуровневый Tabu + Local Search
         TabuSearchOptimizer optimizer = new TabuSearchOptimizerImpl(
-                initialSchedule, _constraintAccumulator, _objectiveAccumulator, 100, 10);
+                initialSchedule, _constraintAccumulator, _objectiveAccumulator, 10, 10);
         Schedule optimizedSchedule = optimizer.optimize(initialSchedule);
 
         return optimizedSchedule;

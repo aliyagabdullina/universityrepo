@@ -555,9 +555,52 @@ select {
   height: 2vh;
 }
 
-.select-block-schedule {
-    padding: 2vh 2vw;
-    width: 9vw;
+.select-block.select-block-schedule {
+    padding: 1.5vh 2vw;
+    width: 16vw;
+    font-size: 0.9vw;
+    background-color: rgba(212, 218, 247, 1);
+    color: rgba(18, 32, 100, 1);
+    border-radius: 60px;
+}
+
+.select-block.select-block-schedule select {
+    font-size: 1.5vw;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    color: rgba(0, 0, 0, 1);
+}
+
+.select-block.select-block-schedule select {
+    color: rgba(18, 32, 100, 1);
+    cursor: pointer;
+    text-align: center;
+    text-align-last: center;
+}
+
+#searchInput {
+    background-color: rgba(242, 242, 242, 1); /* или синий, если включён */
+    color: rgba(0, 0, 0, 0.6); /* или white, если активен */
+    border: none;
+    border-radius: 60px;
+    padding: 1.5vh 2vw;
+    font-size: 1.5vw; /* <-- увеличенный размер */
+    width: 20vw;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#searchInput:disabled {
+    background-color: rgba(242, 242, 242, 1); /* тот же серый */
+    color: rgba(183, 183, 183, 1); /* более светлый текст */
+    cursor: not-allowed;
+}
+
+#searchInput:enabled {
+    background-color: rgba(212, 218, 247, 1);
+    color: (18, 32, 100, 1);
 }
 
 .select-block select {
@@ -649,3 +692,68 @@ select {
 .cell[data-level="2"] { background-color: #121f64; }
 .cell[data-level="3"] { background-color: #b3b3b3; }
 
+
+
+
+.cell-filled {
+  background-color: rgba(212, 218, 247, 1);
+  border-radius: 60px;
+  padding: 0.7vw 1.2vw;
+  font-size: 1vw;
+  text-align: center;
+  line-height: 1.4;
+}
+
+
+.search-wrapper {
+  position: relative;
+  width: 20vw;
+}
+
+.search-results {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 30vh;
+  overflow-y: auto;
+  display: none;
+}
+
+.result-item {
+  background-color: rgba(242, 242, 242, 1);
+  padding: 1.5vh 2vw;
+  border-radius: 60px;
+  font-size: 1.1vw;
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.result-item {
+  padding: 1vh 1.5vw;
+  font-size: 1.1vw;
+  color: #000;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.result-item:hover {
+  background-color: rgba(212, 218, 247, 0.4);
+}
+
+.cell-filled {
+  background-color: rgba(212, 218, 247, 1);
+  border-radius: 60px;
+  padding: 0.7vw 1.2vw;
+  font-size: 1vw;
+  text-align: center;
+  line-height: 1.4;
+}
