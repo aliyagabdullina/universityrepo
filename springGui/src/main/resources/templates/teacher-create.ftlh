@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/styles/styleDataPages.css">
     </head>
     <body>
-        <selection>
+        <section>
             <div class="container">
                 <div class="menu">
                     <h1>Scheduling</h1>
@@ -22,7 +22,7 @@
                             <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Расписание</h4>
                         </button>
-                        <button class="menu-button icon highlight" onclick="window.location.href='/places'">
+                        <button class="menu-button icon highlight" onclick="window.location.href='/data'">
                             <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
                             <h4>Данные</h4>
                         </button>
@@ -80,6 +80,40 @@
                            <div class="input-block">
                                 <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/>
                             </div>
+
+
+                            <div class="input-block">
+                              <h5>Доступные временные слоты</h5>
+                              <div class="availability-grid">
+                                <table>
+                                  <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>ПН</th>
+                                      <th>ВТ</th>
+                                      <th>СР</th>
+                                      <th>ЧТ</th>
+                                      <th>ПТ</th>
+                                      <th>СБ</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="grid-body">
+                                    <!-- сюда будет вставлена таблица -->
+                                  </tbody>
+                                </table>
+                                <div class="color-legend">
+                                  <div class="color-option level-2" data-level="2" title="Высокий приоритет"></div>
+                                  <div class="color-option level-1" data-level="1" title="Средний приоритет"></div>
+                                  <div class="color-option level-0" data-level="0" title="Низкий приоритет"></div>
+                                  <div class="color-option level-disabled" data-level="3" title="Недоступно"></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- скрытое поле для отправки -->
+                            <input type="hidden" name="availabilityGrid" id="availabilityGrid">
+
+
                             <div class="footer">
                             <div class="footer-buttons-container">
 
@@ -97,6 +131,70 @@
                     </div>
                 </div>
             </div>
-        </selection>
+        </section>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+            const lessons = 7;
+            const gridBody = document.getElementById('grid-body');
+            const selectedColorInput = document.getElementById("selectedColorLevel");
+            const hiddenInput = document.getElementById("availabilityGrid");
+            const colorOptions = document.querySelectorAll(".color-option");
+            let selectedLevel = "0";
+
+            // Сгенерировать таблицу
+            for (let i = 1; i <= lessons; i++) {
+              const tr = document.createElement('tr');
+              const numberCell = document.createElement('td');
+              numberCell.textContent = i;
+              tr.appendChild(numberCell);
+
+              for (let j = 0; j < days.length; j++) {
+                const td = document.createElement('td');
+                td.classList.add('cell');
+                td.dataset.level = "0";
+                td.dataset.day = j;
+                td.dataset.lesson = i;
+                tr.appendChild(td);
+              }
+              gridBody.appendChild(tr);
+            }
+
+            // Переключение выбранного цвета
+            colorOptions.forEach(option => {
+              option.addEventListener("click", () => {
+                colorOptions.forEach(opt => opt.classList.remove("selected"));
+                option.classList.add("selected");
+                selectedLevel = option.getAttribute("data-level");
+              });
+            });
+
+            // Клик по ячейке: назначаем цвет и сохраняем данные
+            gridBody.addEventListener("click", (e) => {
+              if (e.target.classList.contains('cell')) {
+                e.target.dataset.level = selectedLevel;
+                updateHiddenInput();
+              }
+            });
+
+            function updateHiddenInput() {
+              const data = [];
+              const cells = document.querySelectorAll('.cell');
+              cells.forEach(cell => {
+                data.push({
+                  day: parseInt(cell.dataset.day),
+                  lesson: parseInt(cell.dataset.lesson),
+                  level: parseInt(cell.dataset.level)
+                });
+              });
+              hiddenInput.value = JSON.stringify(data);
+            }
+
+            // начальное обновление
+            updateHiddenInput();
+          });
+        </script>
+
+
     </body>
 </html>

@@ -1,125 +1,193 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/styles/styleDataPages.css">
-        <link rel="stylesheet" href="/styles/styleRectangle.css">
-    </head>
-    <body>
-        <selection>
-            <div class="container">
-                <div class="menu">
-                    <h1>Scheduling</h1>
-                    <p class="university">UNIVERSITY</p>
-                    <div class="menu-buttons-container">
-                        <button class="menu-button icon" onclick="window.location.href='/account'">
-                            <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Аккаунт</h4>
-                        </button>
-                        <button class="menu-button icon highlight" onclick="window.location.href='/schedule'">
-                            <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Расписание</h4>
-                        </button>
-                        <button class="menu-button icon" onclick="window.location.href='/places'">
-                            <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Данные</h4>
-                        </button>
-                        <button class="menu-button icon" onclick="window.location.href='/timeslot'">
-                            <img src="/images/time.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Сетка пар</h4>
-                        </button>
-                    </div>
-                    <div class="menu-buttons-container-bottom">
-                        <button class="menu-button icon" onclick="window.location.href='/settings'">
-                            <img src="/images/setting.svg" alt="Аккаунт" width="25" height="25">
-                            <h4>Настройки</h4>
-                        </button>
-                    </div>
-                </div>
-                <div></div>
-                <div class="frame">
-                    <div class="header">
-                        <h2>Расписание</h2>
-                        <div class="sorting-buttons">
-                          <div class="select-block select-block-schedule">
-                          <form id="groupForm">
-                            <select id="groupSelect" onchange="redirectToGroupPage()">
-                              <option value="">Группа</option>
-                              <option value="/schedule/group">Остапец Валерия</option>
-                              <option value="/schedule/group">Габдуллина Алия</option>
-                              <option value="/schedule/group">Соколова Александра</option>
-                              <!-- Добавьте другие учителей по мере необходимости -->
-                            </select>
-                          </form>
-                      </div>
-                          <script>
-                            function redirectToGroupPage() {
-                              var selectElement = document.getElementById("groupSelect");
-                              var selectedGroup = selectElement.value;
-                              if (selectedGroup) {
-                                window.location.href = selectedGroup;
-                              }
-                            }
-                          </script>
-                                                      <div class="spacer">
-
-                          </div>
-                        <div class="select-block select-block-schedule">
-                          <form id="teacherForm">
-                            <select id="teacherSelect" onchange="redirectToTeacherPage()">
-                              <option value="">Учитель</option>
-                              <option value="/schedule/teacher">Остапец Валерия</option>
-                              <option value="/schedule/teacher">Габдуллина Алия</option>
-                              <option value="/schedule/teacher">Соколова Александра</option>
-                              <!-- Добавьте другие учителей по мере необходимости -->
-                            </select>
-                          </form>
-                      </div>
-                          <script>
-                            function redirectToTeacherPage() {
-                              var selectElement = document.getElementById("teacherSelect");
-                              var selectedTeacher = selectElement.value;
-                              if (selectedTeacher) {
-                                window.location.href = selectedTeacher;
-                              }
-                            }
-                          </script>
-                          <div class="spacer">
-
-                          </div>
-                          <div class="select-block select-block-schedule">
-                          <form id="placeForm">
-                            <select id="placeSelect" onchange="redirectToPlacePage()">
-                              <option value="">Кабинет</option>
-                              <option value="/schedule/place">Остапец Валерия</option>
-                              <option value="/schedule/place">Габдуллина Алия</option>
-                              <option value="/schedule/place">Соколова Александра</option>
-                              <!-- Добавьте другие учителей по мере необходимости -->
-                            </select>
-                          </form>
-                      </div>
-                          <script>
-                            function redirectToPlacerPage() {
-                              var selectElement = document.getElementById("placeSelect");
-                              var selectedPlace = selectElement.value;
-                              if (selectedPlace) {
-                                window.location.href = selectedPlace;
-                              }
-                            }
-                          </script>
-                      </div>
-                    </div>
-                    <div class="main">
-                        <div class="centre-text">
-                            <h2>Выберите группу или учителя или кабинет для отображения расписания</h2>
-                        </div>
-                        <div class="spacer-bottom"></div>
-                    </div>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/styleDataPages.css" />
+    <link rel="stylesheet" href="/styles/styleRectangle.css" />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="menu">
+          <h1>Scheduling</h1>
+          <p class="university">UNIVERSITY</p>
+          <div class="menu-buttons-container">
+            <button class="menu-button icon" onclick="window.location.href='/account'">
+              <img src="/images/account.svg" alt="Аккаунт" width="25" height="25" />
+              <h4>Аккаунт</h4>
+            </button>
+            <button class="menu-button icon highlight" onclick="window.location.href='/schedule'">
+              <img src="/images/scheduling.svg" alt="Расписание" width="25" height="25" />
+              <h4>Расписание</h4>
+            </button>
+            <button class="menu-button icon" onclick="window.location.href='/data'">
+              <img src="/images/data.svg" alt="Данные" width="25" height="25" />
+              <h4>Данные</h4>
+            </button>
+            <button class="menu-button icon" onclick="window.location.href='/timeslot'">
+              <img src="/images/time.svg" alt="Сетка пар" width="25" height="25" />
+              <h4>Сетка пар</h4>
+            </button>
+          </div>
+          <div class="menu-buttons-container-bottom">
+            <button class="menu-button icon" onclick="window.location.href='/settings'">
+              <img src="/images/setting.svg" alt="Настройки" width="25" height="25" />
+              <h4>Настройки</h4>
+            </button>
+          </div>
+        </div>
+        <div></div>
+        <div class="frame">
+          <div class="header">
+            <h2>Расписание</h2>
+            <div class="select-block select-block-schedule">
+              <select id="categorySelect">
+                <option value="" selected disabled>Категория</option>
+                <option value="student">Студент</option>
+                <option value="group">Группа</option>
+                <option value="teacher">Преподаватель</option>
+                <option value="place">Кабинет</option>
+              </select>
             </div>
-        </selection>
-    </body>
+            <div class="spacer"></div>
+            <div class="search-wrapper">
+              <input type="text" id="searchInput" class="select-block select-block-schedule" placeholder="Поиск" disabled />
+              <div id="results" class="search-results"></div>
+            </div>
+          </div>
+          <div class="main">
+            <div id="schedule-title" class="centre-text"></div>
+            <div id="schedule-table" class="table-style table-program"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const teacherList = [ { name: "Иванов" }, { name: "Петров" } ];
+        const studentList = [ { name: "Сидоров А." }, { name: "Кузнецова И." } ];
+        const groupList = [ { name: "БПИ214" }, { name: "БПИ222" } ];
+        const placeList = [ { name: "101" }, { name: "202" } ];
+
+        const groupScheduleMap = {
+          "БПИ214": [
+            {
+              timeslot: { dayOfWeek: "ПН", lessonNumber: 1 },
+              course: "Математика",
+              teacher: "Иванов",
+              place: "101"
+            }
+          ]
+        };
+
+        const categorySelect = document.getElementById('categorySelect');
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('results');
+
+        const categoryMap = {
+          teacher: teacherList,
+          student: studentList,
+          group: groupList,
+          place: placeList
+        };
+
+        categorySelect.addEventListener('change', () => {
+          searchInput.disabled = false;
+          searchInput.value = "";
+          searchInput.placeholder = "Введите запрос...";
+          resultsContainer.innerHTML = "";
+          resultsContainer.style.display = "none";
+        });
+
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.toLowerCase();
+          const selectedCategory = categorySelect.value;
+          const list = categoryMap[selectedCategory] || [];
+
+          const results = list.filter(item =>
+            item.name.toLowerCase().includes(query)
+          );
+
+          showResults(results, selectedCategory);
+        });
+
+        function showResults(results, entityType) {
+          resultsContainer.innerHTML = "";
+
+          if (results.length === 0) {
+            resultsContainer.style.display = "none";
+            return;
+          }
+
+          resultsContainer.style.display = "block";
+
+          results.forEach(item => {
+            const el = document.createElement("div");
+            el.className = "result-item";
+            el.textContent = item.name;
+            el.onclick = () => {
+              resultsContainer.style.display = "none";
+              searchInput.value = item.name;
+              if (entityType === 'group') {
+                renderSchedule("group", item.name, groupScheduleMap);
+              }
+            };
+            resultsContainer.appendChild(el);
+          });
+        }
+
+        const DAYS = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+        const LESSONS = [1, 2, 3, 4, 5, 6, 7, 8];
+
+        function renderSchedule(entityType, entityName, scheduleMap) {
+          const schedule = scheduleMap[entityName];
+          if (!schedule) {
+            document.getElementById("schedule-table").innerHTML = "<p>Расписание не найдено</p>";
+            return;
+          }
+
+          const tableData = {};
+          LESSONS.forEach(lesson => {
+            tableData[lesson] = {};
+            DAYS.forEach(day => {
+              tableData[lesson][day] = "";
+            });
+          });
+
+          schedule.forEach(entry => {
+            const day = entry.timeslot.dayOfWeek;
+            const lesson = entry.timeslot.lessonNumber;
+
+            let content = `${entry.course}<br>${entry.place}<br>${entry.teacher}`;
+            tableData[lesson][day] = content;
+          });
+
+          let html = "<table><thead><tr><th></th>";
+          DAYS.forEach(day => {
+            html += `<th>${day}</th>`;
+          });
+          html += "</tr></thead><tbody>";
+
+          LESSONS.forEach(lesson => {
+            html += `<tr><th>${lesson}</th>`;
+            DAYS.forEach(day => {
+              const cell = tableData[lesson][day];
+              html += `<td class="table-cell">${cell ? `<div class="cell-filled">${cell}</div>` : ""}</td>`;
+            });
+            html += "</tr>";
+          });
+
+          html += "</tbody></table>";
+
+          document.getElementById("schedule-title").innerHTML = `<h3>${entityName}</h3>`;
+          document.getElementById("schedule-table").innerHTML = html;
+        }
+      });
+    </script>
+
+  </body>
 </html>
