@@ -39,7 +39,7 @@
             </button>
           </div>
         </div>
-
+        <div></div>
         <div class="frame">
           <div class="header">
             <h2>Расписание</h2>
@@ -58,46 +58,15 @@
               <div id="results" class="search-results"></div>
             </div>
           </div>
-
           <div class="main">
-            <div id="schedule-title" class="centre-text">
-              <#if schedule??>
-                <h3>${name}</h3>
-              </#if>
-            </div>
-            <div id="schedule-table" class="table-style table-program">
-              <#if schedule??>
-                <table>
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <#list DAYS as day>
-                        <th>${day}</th>
-                      </#list>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <#list LESSONS as lesson>
-                      <tr>
-                        <th>${lesson}</th>
-                        <#list DAYS as day>
-                          <td class="table-cell">
-                            <#if schedule[lesson]?? && schedule[lesson][day]??>
-                              <div class="cell-filled">${schedule[lesson][day]}</div>
-                            </#if>
-                          </td>
-                        </#list>
-                      </tr>
-                    </#list>
-                  </tbody>
-                </table>
-              <#else>
-                <p>Расписание не найдено</p>
-              </#if>
-            </div>
+            <div id="schedule-title" class="centre-text"></div>
+            <div id="schedule-table" class="table-style table-program"></div>
           </div>
         </div>
       </div>
     </section>
-  </body>
-</html>
+
+    <script src="/static/scripts/schedule.js"></script>
+
+          </body>
+        </html>
