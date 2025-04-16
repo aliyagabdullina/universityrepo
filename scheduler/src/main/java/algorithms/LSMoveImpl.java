@@ -1,10 +1,6 @@
 package algorithms;
 
-import lesson.Lesson;
 import schedule.Schedule;
-import schedule.ScheduleImpl;
-
-import java.util.stream.Stream;
 
 public class LSMoveImpl implements LSMove{
     private final int i;
@@ -16,11 +12,12 @@ public class LSMoveImpl implements LSMove{
     }
 
     @Override
-    public void makeMove(Schedule schedule) {
+    public Schedule makeMove(Schedule schedule) {
         //Lesson l1 = schedule.getAllLessons().toList().get(i);
         //Lesson l2 = schedule.getAllLessons().toList().get(j);
         //Schedule scheduleNew = new ScheduleImpl(newLessons);
 
+        return schedule;
     }
 
     @Override

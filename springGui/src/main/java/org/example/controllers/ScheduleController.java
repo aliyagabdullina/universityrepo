@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 
+import algorithms.GlobalScheduler;
 import collector.SchoolDataCollector;
 import constraint.OptionalConstraintsSettings;
 import constraint.OptionalConstraintsSettingsImpl;
@@ -112,6 +113,44 @@ public class ScheduleController {
         scheduleBuilder.setSettings(_scheduleBuilderSettings);
 
         _result = scheduleBuilder.solve();
+        System.out.println(_result);
+        System.out.println(_result.getAllLessons().map(Lesson::getTimeSlot).map(WeeklyTimeSlot::getDayOfWeek).toList());
+
+        return "schedule";
+    }
+    @GetMapping("/schedule2")
+    public String schedule2() {
+        _fileSettings = initializeSettings(root);
+        _dataLoader = new DataLoaderImpl(_fileSettings);
+        _dataCollector = loadData();
+        _timeSlots = loadTimeSlots();
+        _timeTablesCollector = loadCollector();
+        _assignmentCollector = loadAssignmentsCollector();
+        _scheduleBuilderSettings = new DtoScheduleBuilderSettings();
+
+        ScheduleBuilder scheduleBuilder = new ScheduleBuilderImpl();
+        scheduleBuilder.setSchoolDataCollector(_dataCollector);
+
+        List<WeeklyTimeSlot> timeSlotSequence = createTimeSlotSequence(_timeSlots);
+        scheduleBuilder.setTimeSlotSequence(timeSlotSequence);
+
+        SchedulingInputData scheduleInputData = _schedulingInputData != null ? _schedulingInputData
+                : createSchedulingInputData();
+        scheduleBuilder.setScheduleInputData(scheduleInputData);
+
+        ScheduleConstraintsAccumulator constraintAccumulator = initializeScheduleConstraints();
+        scheduleBuilder.setConstraintAccumulator(constraintAccumulator);
+
+        ScheduleObjectiveAccumulator objectiveAccumulator = new ScheduleObjectiveAccumulatorImpl();
+        scheduleBuilder.setObjectiveAccumulator(objectiveAccumulator);
+
+        scheduleBuilder.setSettings(_scheduleBuilderSettings);
+
+        GlobalScheduler globalScheduler = new GlobalScheduler( _dataCollector, timeSlotSequence,
+                scheduleInputData, constraintAccumulator, objectiveAccumulator, _scheduleBuilderSettings);
+        _result = globalScheduler.generateSchedule();
+        System.out.println(_result);
+        System.out.println(_result.getAllLessons().map(Lesson::getTimeSlot).map(WeeklyTimeSlot::getDayOfWeek).toList());
 
         return "schedule";
     }

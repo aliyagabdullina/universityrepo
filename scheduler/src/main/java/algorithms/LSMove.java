@@ -4,5 +4,5 @@ import schedule.Schedule;
 
 public interface LSMove {
 
-    void makeMove(Schedule schedule);
+    Schedule makeMove(Schedule schedule);
 }
