@@ -23,6 +23,7 @@ import org.example.DataBaseInteractor;
 import org.example.DataBaseInteractorImpl;
 import org.example.SchoolDataCollectorImpl;
 import org.example.data.ScheduleDto;
+import org.example.data.ScheduleEntry;
 import org.example.repositories.GroupsRepository;
 import org.example.repositories.PlacesRepository;
 import org.example.repositories.TeacherRepository;
@@ -30,8 +31,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import output.DtoFileSettings;
 import pair.Pair;
+import person.Student;
 import person.Teacher;
 import place.Place;
 import programSettings.VocabularyFiles;
@@ -122,37 +126,37 @@ public class ScheduleController {
     }
 
     @GetMapping("/scheduleTest")
-    public String getSchedule(Model model) {
-        // Пример данных для schedule
-        List<Map<String, String>> schedule = new ArrayList<>();
+    public String getSchedulePage(Model model) {
+        return "schedule"; // Возвращаем HTML-страницу
+    }
 
-        // Пример расписания для 1-го урока
-        Map<String, String> mondaySchedule = new HashMap<>();
-        mondaySchedule.put("ПН", "Математика, Иванов, 101");
-        mondaySchedule.put("ВТ", "Физика, Петров, 102");
+    @GetMapping("/api/schedule")
+    @ResponseBody
+    public Map<String, Object> getScheduleData() {
+        _fileSettings = initializeSettings(root);
+        _dataLoader = new DataLoaderImpl(_fileSettings);
+        _dataCollector = loadData();
 
-        // Пример расписания для 2-го урока
-        Map<String, String> tuesdaySchedule = new HashMap<>();
-        tuesdaySchedule.put("ПН", "Химия, Смирнов, 103");
-        tuesdaySchedule.put("ВТ", "Программирование, Иванов, 104");
+        List<Teacher> teachers = _dataCollector.getTeachers()
+                .toList();
+        List<Student> students = _dataCollector.getStudents()
+                .toList();
+        List<Group> groups = _dataCollector.getGroups()
+                .toList();
+        List<Place> places = _dataCollector.getPlaces()
+                .toList();
 
-        // Добавляем данные расписания в map
-        schedule.add(mondaySchedule);  // Урок 1
-        schedule.add(tuesdaySchedule);  // Урок 2
+        Map<String, List<ScheduleEntry>> groupScheduleMap = new HashMap<>();
+        groupScheduleMap.put("11-3", Arrays.asList(new ScheduleEntry("Математика", "Рогачёва  Елена Николаевна", "22", "ПН", 1)));
 
-        // Список дней недели
-        List<String> days = Arrays.asList("ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ");
-        String scheduleName = "My schedule";
-        // Список уроков
-        List<Integer> lessons = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+        Map<String, Object> data = new HashMap<>();
+        data.put("teachers", teachers);
+        data.put("students", students);
+        data.put("groups", groups);
+        data.put("places", places);
+        data.put("groupScheduleMap", groupScheduleMap);
 
-        // Передаем данные в модель
-        model.addAttribute("schedule", schedule);
-        model.addAttribute("name", scheduleName);
-        model.addAttribute("DAYS", days);
-        model.addAttribute("LESSONS", lessons);
-
-        return "schedule"; // Имя вашего шаблона .ftlh
+        return data; // Возвращаем данные в формате JSON
     }
     @GetMapping("/schedule2")
     public String schedule2() {
