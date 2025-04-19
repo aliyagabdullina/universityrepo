@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles/styleDataPages.css" />
   <link rel="stylesheet" href="/styles/styleRectangle.css" />
+
 </head>
 <body>
 <section>
@@ -66,9 +66,8 @@
     </div>
   </div>
 </section>
-
 <script>
-      document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
         fetch('/api/schedule')  // Выполняем запрос к серверу для получения данных
           .then(response => response.json())
           .then(data => {
@@ -79,6 +78,9 @@
             const groupList = data.groups;
             const placeList = data.places;
             const groupScheduleMap = data.groupScheduleMap;
+            const teacherScheduleMap = data.teacherScheduleMap;
+            const placeScheduleMap = data.placeScheduleMap;
+            const studentScheduleMap = data.studentScheduleMap;
 
             const categorySelect = document.getElementById('categorySelect');
             const searchInput = document.getElementById('searchInput');
@@ -131,13 +133,22 @@
                   if (entityType === 'group') {
                     renderSchedule("group", item.name, groupScheduleMap);
                   }
+                  if (entityType === 'teacher') {
+                    renderSchedule("teacher", item.name, teacherScheduleMap);
+                  }
+                  if (entityType === 'place') {
+                    renderSchedule("place", item.name, placeScheduleMap);
+                  }
+                  if (entityType === 'student') {
+                    renderSchedule("student", item.name, studentScheduleMap);
+                  }
                 };
                 resultsContainer.appendChild(el);
               });
             }
 
-            const DAYS = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
-            const LESSONS = [1, 2, 3, 4, 5, 6, 7, 8];
+            const DAYS = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
+            const LESSONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
             function renderSchedule(entityType, entityName, scheduleMap) {
               const schedule = scheduleMap[entityName];
@@ -192,6 +203,7 @@
             }
           });
       });
-    </script>
+</script>
+
 </body>
 </html>

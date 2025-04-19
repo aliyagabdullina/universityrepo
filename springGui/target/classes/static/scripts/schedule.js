@@ -1,4 +1,4 @@
- document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
         fetch('/api/schedule')  // Выполняем запрос к серверу для получения данных
           .then(response => response.json())
           .then(data => {
@@ -37,8 +37,6 @@
               const results = list.filter(item =>
                 item.name && item.name.toLowerCase().includes(query)
               );
-              console.log("Введенный запрос:", query);
-              console.log("Результаты поиска:", results);
 
               showResults(results, selectedCategory);
             });
@@ -73,45 +71,54 @@
 
             function renderSchedule(entityType, entityName, scheduleMap) {
               const schedule = scheduleMap[entityName];
+              console.log("Schedule:", schedule);
               if (!schedule) {
                 document.getElementById("schedule-table").innerHTML = "<p>Расписание не найдено</p>";
                 return;
               }
 
               const tableData = {};
-                        LESSONS.forEach(lesson => {
-                          tableData[lesson] = {};
-                          DAYS.forEach(day => {
-                            tableData[lesson][day] = "";
-                          });
-                        });
+              LESSONS.forEach(lesson => {
+                tableData[lesson] = {};
+                DAYS.forEach(day => {
+                  tableData[lesson][day] = "";
+                });
+              });
 
-                        schedule.forEach(entry => {
-                          const day = entry.timeslot.dayOfWeek;
-                          const lesson = entry.timeslot.lessonNumber;
+              schedule.forEach(entry => {
+                const day = entry.dayOfWeek;
+                const lesson = entry.lessonNumber;
 
-                          let content = `${entry.course}<br>${entry.place}<br>${entry.teacher}`;
-                          tableData[lesson][day] = content;
-                        });
+                let content = `${entry.course}<br>${entry.place}<br>${entry.teacher}`;
+                tableData[lesson][day] = content;
+              });
+              console.log("table:", tableData);
 
-                        let html = "<table><thead><tr><th></th>";
-                        DAYS.forEach(day => {
-                          html += `<th>${day}</th>`;
-                        });
-                        html += "</tr></thead><tbody>";
+              let html = "<table border='1'><thead><tr><th>Урок</th>";
 
-                        LESSONS.forEach(lesson => {
-                          html += `<tr><th>${lesson}</th>`;
-                          DAYS.forEach(day => {
-                            const cell = tableData[lesson][day];
-                            html += `<td class="table-cell">${cell ? `<div class="cell-filled">${cell}</div>` : ""}</td>`;
-                          });
-                          html += "</tr>";
-                        });
+    // Заголовки дней недели
+    DAYS.forEach(day => {
+        html += `<th>${day}</th>`;
+    });
+    html += "</tr></thead><tbody>";
 
-                        html += "</tbody></table>";
+    // Формируем строки с уроками и днями недели
+    LESSONS.forEach(lesson => {
+        html += `<tr><th>${lesson}</th>`;  // Добавляем номер урока
 
-                        document.getElementById("schedule-title").innerHTML = `<h3>${entityName}</h3>`;
-                        document.getElementById("schedule-table").innerHTML = html;
-                      }
-                    });
+        // Добавляем содержимое ячеек для каждого дня недели
+        DAYS.forEach(day => {
+            const entry = schedule.find(e => e.dayOfWeek === day && e.lessonNumber === lesson);
+            const content = entry ? `${entry.course}<br>${entry.place}<br>${entry.teacher}` : "";
+            html += `<td>${content || "&nbsp;"}</td>`;
+        });
+        html += "</tr>";
+    });
+
+    html += "</tbody></table>";
+              console.log("html:", html);
+              document.getElementById("schedule-title").innerHTML = `<h3>${entityName}</h3>`;
+              document.getElementById("schedule-table").innerHTML = html;
+            }
+          });
+      });

@@ -310,6 +310,7 @@ html, body, .main {
     width: calc(62vw);
     margin-bottom: 1vw;
     overflow-y: auto;
+    white-space: nowrap;
     table-layout: auto;
 }
 
