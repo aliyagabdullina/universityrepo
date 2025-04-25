@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/styleRectangle.css" />
+
+</head>
+<body>
+<section>
+  <div class="container">
+    <div class="menu">
+      <h1>Scheduling</h1>
+      <p class="university">UNIVERSITY</p>
+      <div class="menu-buttons-container">
+        <button class="menu-button icon" onclick="window.location.href='/account'">
+          <img src="/images/account.svg" alt="Аккаунт" width="25" height="25" />
+          <h4>Аккаунт</h4>
+        </button>
+        <button class="menu-button icon highlight" onclick="window.location.href='/schedule'">
+          <img src="/images/scheduling.svg" alt="Расписание" width="25" height="25" />
+          <h4>Расписание</h4>
+        </button>
+        <button class="menu-button icon" onclick="window.location.href='/data'">
+          <img src="/images/data.svg" alt="Данные" width="25" height="25" />
+          <h4>Данные</h4>
+        </button>
+        <button class="menu-button icon" onclick="window.location.href='/timeslot'">
+          <img src="/images/time.svg" alt="Сетка пар" width="25" height="25" />
+          <h4>Сетка пар</h4>
+        </button>
+      </div>
+      <div class="menu-buttons-container-bottom">
+        <button class="menu-button icon" onclick="window.location.href='/settings'">
+          <img src="/images/setting.svg" alt="Настройки" width="25" height="25" />
+          <h4>Настройки</h4>
+        </button>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="header">
+        <h2>Расписание</h2>
+        <div class="select-block select-block-schedule">
+          <select id="categorySelect">
+            <option value="" selected disabled>Категория</option>
+            <option value="student">Студент</option>
+            <option value="group">Группа</option>
+            <option value="teacher">Преподаватель</option>
+            <option value="place">Кабинет</option>
+          </select>
+        </div>
+        <div class="spacer"></div>
+        <div class="search-wrapper">
+          <input type="text" id="searchInput" class="select-block select-block-schedule" placeholder="Поиск" disabled />
+          <div id="results" class="search-results"></div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div id="schedule-title" class="centre-text"></div>
+        <div id="schedule-table" class="table-style table-program"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+        fetch('/api/schedule')  // Выполняем запрос к серверу для получения данных
+          .then(response => response.json())
+          .then(data => {
+            console.log("Полученные данные: ", data); // Отладка
+            // Извлекаем данные из ответа и передаем их в нужные переменные
+            const teacherList = data.teachers;
+            const studentList = data.students;
+            const groupList = data.groups;
+            const placeList = data.places;
+            const groupScheduleMap = data.groupScheduleMap;
+            const teacherScheduleMap = data.teacherScheduleMap;
+            const placeScheduleMap = data.placeScheduleMap;
+            const studentScheduleMap = data.studentScheduleMap;
+
+            const categorySelect = document.getElementById('categorySelect');
+            const searchInput = document.getElementById('searchInput');
+            const resultsContainer = document.getElementById('results');
+
+            const categoryMap = {
+              teacher: teacherList,
+              student: studentList,
+              group: groupList,
+              place: placeList
+            };
+
+            categorySelect.addEventListener('change', () => {
+              searchInput.disabled = false;
+              searchInput.value = "";
+              searchInput.placeholder = "Введите запрос...";
+              resultsContainer.innerHTML = "";
+              resultsContainer.style.display = "none";
+            });
+
+            searchInput.addEventListener('input', () => {
+              const query = searchInput.value.toLowerCase();
+              const selectedCategory = categorySelect.value;
+              const list = categoryMap[selectedCategory] || [];
+
+              const results = list.filter(item =>
+                item.name && item.name.toLowerCase().includes(query)
+              );
+
+              showResults(results, selectedCategory);
+            });
+
+            function showResults(results, entityType) {
+              resultsContainer.innerHTML = "";
+
+              if (results.length === 0) {
+                resultsContainer.style.display = "none";
+                return;
+              }
+
+              resultsContainer.style.display = "block";
+
+              results.forEach(item => {
+                const el = document.createElement("div");
+                el.className = "result-item";
+                el.textContent = item.name;
+                el.onclick = () => {
+                  resultsContainer.style.display = "none";
+                  searchInput.value = item.name;
+                  if (entityType === 'group') {
+                    renderSchedule("group", item.name, groupScheduleMap);
+                  }
+                  if (entityType === 'teacher') {
+                    renderSchedule("teacher", item.name, teacherScheduleMap);
+                  }
+                  if (entityType === 'place') {
+                    renderSchedule("place", item.name, placeScheduleMap);
+                  }
+                  if (entityType === 'student') {
+                    renderSchedule("student", item.name, studentScheduleMap);
+                  }
+                };
+                resultsContainer.appendChild(el);
+              });
+            }
+
+            const DAYS = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
+            const LESSONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
+            function renderSchedule(entityType, entityName, scheduleMap) {
+              const schedule = scheduleMap[entityName];
+              console.log("Schedule:", schedule);
+              if (!schedule) {
+                document.getElementById("schedule-table").innerHTML = "<p>Расписание не найдено</p>";
+                return;
+              }
+
+              const tableData = {};
+              LESSONS.forEach(lesson => {
+                tableData[lesson] = {};
+                DAYS.forEach(day => {
+                  tableData[lesson][day] = "";
+                });
+              });
+
+              schedule.forEach(entry => {
+                const day = entry.dayOfWeek;
+                const lesson = entry.lessonNumber;
+
+                let content = `${entry.course}<br>${entry.place}<br>${entry.teacher}`;
+                tableData[lesson][day] = content;
+              });
+              console.log("table:", tableData);
+
+              let html = "<table border='1'><thead><tr><th>Урок</th>";
+
+    // Заголовки дней недели
+    DAYS.forEach(day => {
+        html += `<th>${day}</th>`;
+    });
+    html += "</tr></thead><tbody>";
+
+    // Формируем строки с уроками и днями недели
+    LESSONS.forEach(lesson => {
+        html += `<tr><th>${lesson}</th>`;  // Добавляем номер урока
+
+        // Добавляем содержимое ячеек для каждого дня недели
+        DAYS.forEach(day => {
+            const entry = schedule.find(e => e.dayOfWeek === day && e.lessonNumber === lesson);
+            const content = entry ? `${entry.course}<br>${entry.place}<br>${entry.teacher}` : "";
+            html += `<td>${content || "&nbsp;"}</td>`;
+        });
+        html += "</tr>";
+    });
+
+    html += "</tbody></table>";
+              console.log("html:", html);
+              document.getElementById("schedule-title").innerHTML = `<h3>${entityName}</h3>`;
+              document.getElementById("schedule-table").innerHTML = html;
+            }
+          });
+      });
+</script>
+
+</body>
+</html>
