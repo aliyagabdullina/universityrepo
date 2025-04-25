@@ -34,7 +34,6 @@ public class TabuSearchOptimizerImpl implements TabuSearchOptimizer {
     @Override
     public Schedule optimize(Schedule schedule) {
         for (int i = 0; i < _maxIterations; i++) {
-            System.out.println("Tabu iteration № " + i);
             LSNeighbourhood neighbourhood = new LSNeighbourhoodImpl(currentSchedule);
             LSMove bestMove = neighbourhood.getBestMove(tabuList);
 
