@@ -69,7 +69,7 @@ public class ScheduleController {
     private static final String USER = "userschool";
     private static final String PASSWORD = "passwordschool";
     private static VocabularyFiles _vocabularyFiles = new VocabularyFilesImpl();
-    private File root = new File("/Users/aliya/Documents/Курсач/School Scheduling/school10-11");
+    private File root = new File("/Users/valeria_ostapets/Downloads/school10-11");
 
     private AssignmentCollector _assignmentCollector;
     private SchoolDataCollector _dataCollector;
