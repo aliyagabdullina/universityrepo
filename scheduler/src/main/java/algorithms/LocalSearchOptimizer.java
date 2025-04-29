@@ -2,6 +2,8 @@ package algorithms;
 
 import schedule.Schedule;
 
+import java.util.Optional;
+
 public interface LocalSearchOptimizer {
-    LSMove findBestLocalMove();
+    Optional<LSMove> findBestLocalMove();
 }

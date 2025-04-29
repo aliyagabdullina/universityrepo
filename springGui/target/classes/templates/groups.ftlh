@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/FloatingButton.css">
+
     </head>
     <body>
         <selection>
@@ -123,5 +125,98 @@
                 </div>
             </div>
         </selection>
+
+        <!-- Chatbot button -->
+            <div id="floatingButton" class="floating-button">
+                <img src="/images/robot-icon.png" alt="Chatbot" id="chatBotButton"/>
+            </div>
+        <!-- Chat window -->
+            <div id="chatWindow" class="chat-window" style="display: none;">
+                <div class="chat-header">
+                    <h3>Chat with AI</h3>
+                    <button id="closeChat" class="close-btn">X</button>
+                </div>
+                <div id="chatHistory" class="chat-history"></div>
+                <textarea id="chatInput" placeholder="Type your message..."></textarea>
+                <button id="sendMessage">Send</button>
+            </div>
+        <script>
+            // Open chat window
+            document.getElementById('chatBotButton').onclick = function () {
+                console.log("Chatbot button clicked");
+                document.getElementById('chatWindow').style.display = 'flex';
+                loadChatHistory();
+            };
+
+
+            // Close chat window
+            document.getElementById('closeChat').onclick = function () {
+                document.getElementById('chatWindow').style.display = 'none';
+            };
+
+            // Function to load chat history
+            function loadChatHistory() {
+                fetch('/api/chat/history')
+                    .then(response => response.json())
+                    .then(messages => {
+                        const chatHistory = document.getElementById('chatHistory');
+                        chatHistory.innerHTML = ''; // Clear previous history
+                        messages.forEach(msg => appendMessage(msg.sender, msg.message));
+                    });
+            }
+
+            function appendMessage(sender, message) {
+                    const chatHistory = document.getElementById('chatHistory');
+
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+                    messageDiv.classList.add(sender === 'You' ? 'user' : 'bot');
+                    messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+
+                    chatHistory.appendChild(messageDiv);
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }
+
+            function appendMessageAI(sender, message) {
+                    const chatHistory = document.getElementById('chatHistory');
+
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+                    messageDiv.classList.add(sender === 'You' ? 'user' : 'bot');
+                    messageDiv.innerHTML = `<strong>${aiSender}:</strong> ${aiMessage}`;
+
+                    chatHistory.appendChild(messageDiv);
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }
+
+            // Send a message to server
+            document.getElementById('sendMessage').onclick = function () {
+                    const input = document.getElementById('chatInput');
+                    const message = input.value.trim();
+                    if (!message) return;
+
+                    appendMessage('You', message); // ← ты написала
+                    input.value = '';
+
+                    fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Проверяем, что бот вернул ответ
+                        if (data.reply) {
+                            appendMessageAI('Chatbot', data.reply);
+                        } else {
+                            appendMessageAI('Chatbot', '(нет ответа от сервера)');
+                        }
+                    })
+                    .catch(() => {
+                        appendMessageAI('Chatbot', 'Ошибка при соединении с сервером');
+                    });
+                };
+
+        </script>
     </body>
 </html>

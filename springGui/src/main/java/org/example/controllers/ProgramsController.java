@@ -30,6 +30,10 @@ public class ProgramsController {
         model.addAttribute("programs", programsService.listPrograms(name));
         model.addAttribute("courses", courseRepository.findAll());
         model.addAttribute("groups", groupsRepository.findAll());
+        model.addAttribute("sender", "You");
+        model.addAttribute("message", "Hello!\n");
+        model.addAttribute("aiSender", "AI");
+        model.addAttribute("aiMessage", "How can I assist you?\n");
         return "programs";
     }
 
