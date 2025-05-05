@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
     <body>
         <selection>
@@ -41,7 +42,7 @@
                 <div></div>
                 <div class="body">
                     <div class="header-create icon-back">
-                        <h2>Редактирование данных</h2>
+                        <h2>Редактирование данных об индивидульных планах</h2>
                         <button class="button-none" type="button" onclick="window.history.back()">
                             <img src="/images/back.svg" alt="Аккаунт" width="25" height="25">
                         </button>
@@ -50,7 +51,7 @@
                         <form action="/teacher/create" method="post">
                             <div class="input-block">
                                  <h5>Студенты</h5>
-                                 <div class="select-block">
+                                 <div class="select-block custom-select-data">
                                      <select name="studentId" multiple>
                                          <option value="" disabled selected>Выберите студентов</option>
                                          <#list students as student>
@@ -59,9 +60,10 @@
                                      </select>
                                  </div>
                              </div>
+                             <div class="spacer-bottom"></div>
                             <div class="input-block">
                                  <h5>Программы</h5>
-                                 <div class="select-block">
+                                 <div class="select-block custom-select-data">
                                      <select name="programId" multiple>
                                          <option value="" disabled selected>Выберите программы</option>
                                          <#list programs as program>
@@ -70,9 +72,10 @@
                                      </select>
                                  </div>
                              </div>
+                             <div class="spacer-bottom"></div>
                             <div class="input-block">
                                  <h5>Дополнительные предметы</h5>
-                                 <div class="select-block">
+                                 <div class="select-block custom-select-data">
                                      <select name="courseId" multiple>
                                          <option value="" disabled selected>Выберите предметы</option>
                                          <#list courses as course>
@@ -81,6 +84,7 @@
                                      </select>
                                  </div>
                              </div>
+                             <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Кол-во часов</h5><input type="text" name="hours" placeholder="Введите кол-во часов"/>
                             </div>

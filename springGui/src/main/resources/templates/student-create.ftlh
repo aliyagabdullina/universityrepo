@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
     <body>
         <selection>
@@ -41,7 +42,7 @@
                 <div></div>
                 <div class="body">
                     <div class="header-create icon-back">
-                        <h2>Редактирование данных</h2>
+                        <h2>Редактирование данных о студентах</h2>
                         <button class="button-none" type="button" onclick="window.history.back()">
                             <img src="/images/back.svg" alt="Аккаунт" width="25" height="25">
                         </button>
@@ -51,15 +52,19 @@
                             <div class="input-block">
                                 <h5>ФИО студента</h5><input type="text" name="name" placeholder="Введите  ФИО"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Почта</h5><input type="text" name="email" placeholder="Введите  почту"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Пароль</h5><input type="text" name="password" placeholder="Введите  пароль"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Группа</h5><input type="text" name="group" placeholder="Введите группу"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Степень образования</h5><input type="text" name="role" placeholder="Введите степень"/>
                             </div>

@@ -76,8 +76,8 @@ h5 {
 .blue {
   color: rgba(18, 32, 100, 1);
 }
-
 /* Цвета */
+
 
 body{
     height: 100%;
@@ -117,8 +117,8 @@ body{
 }
 
 .menu-button {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 1.0vw;
+    margin-bottom: 1.0vw;
     display: flex;
     background-color: transparent;
     align-items: center;
@@ -143,6 +143,8 @@ body{
   border: none;
   border-radius: 60px;
   cursor: pointer;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 .university {
    color: #0E2ECC;
@@ -153,18 +155,22 @@ body{
 /* Menu */
 
 /* Header */
+.frame {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
+    width: calc(70vw);
     align-items: center;
-    align-self: center;
-    width: calc(69vw);
 }
 
 .header-create {
     display: flex;
     align-items: center;
-    width: calc(69vw);
+    width: calc(70vw);
 }
 
 .spacer {
@@ -232,22 +238,34 @@ body{
     margin: 0;
     text-transform: uppercase;
 }
-
-}
 /* Header */
 
 
 /* Main */
 .main {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+html, body, .main {
+    height: 73vh;
 }
 
 .main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 73vh;
+    padding-right: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .line {
@@ -278,23 +296,8 @@ body{
 }
 
 .spacer-bottom {
-    margin-bottom: 3%;
+    margin-bottom: 1.5vh;
 }
-
-html, body, .main {
-    height: 73vh;
-}
-
-.main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 73vh;
-    padding-right: 10px;
-}
-
-
 
 .table-style {
     flex: 1;
@@ -366,249 +369,6 @@ table th {
     text-align: left; /* Сохраняем выравнивание первого столбца влево */
 }
 
-
-input {
-    display: flex;
-    align-items: center;
-    background-color: rgba(242, 242, 242, 1);
-    color: black;
-    border: none;
-    border-radius: 60px;
-    padding: 2vh 2vw;
-    width: 30vw;
-    font-size: 1.1vw;
-}
-
-.input-slot {
-    width: 10vw;
-    height: 2vh;
-}
-
-.custom-select {
-  position: relative;
-  width: 16vw;
-  display: inline-block;
-}
-
-.custom-select select {
-  display: flex;
-  align-items: flex-start;
-  background-color: rgba(212, 218, 247, 1);
-  border: none;
-  border-radius: 60px;
-  padding: 2vh 2vw;
-  font-size: 1.1vw;
-  width: 100%;
-  box-sizing: border-box;
-  color: rgba(18, 32, 100, 1);
-  appearance: none;
-}
-
-.custom-select::after {
-  content: "▼";
-  position: absolute;
-  right: 1vw;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: rgba(18, 32, 100, 1);
-  font-size: 1vw;
-}
-
-/* Цвет плейсхолдера */
-.custom-select select option[disabled][selected] {
-  color: rgba(183, 183, 183, 1);
-}
-
-/* Цвет остальных опций */
-.custom-select select option:not([disabled]) {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.placeholder {
-    color: #666;
-}
-
-/* Скрытый input для пользовательского типа */
-#customTypeInput {
-  display: none;
-  margin-left: 1vw;
-  width: 13vw;
-}
-
-
-.select-block {
-    display: flex;
-    align-items: center;
-    background-color: rgba(242, 242, 242, 1);
-    color: black;
-    border: none;
-    border-radius: 60px;
-    padding: 2vh 2vw;
-    width: 30vw;
-    font-size: 1.1vw;
-}
-
-.centre-text {
-  display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-    cursor: pointer;
-}
-
-.job-title {
-    color: #0E2ECC;
-    font-size: 0.7vw;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.group {
-    color: #888;
-    font-size: 0.7vw;
-    margin: 0;
-}
-.details {
-  display: flex;
-  flex-direction: column;
-}
-
-.job-title {
-  color: #0E2ECC;
-  font-size: 0.7vw;
-  margin: 0;
-  text-transform: uppercase;
-}
-.group {
-  color: #888;
-  font-size: 0.7vw;
-  margin: 0;
-}
-/* Main */
-
-/* Footer */
-.footer {
-    position: relative;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    width: calc(69vw);
-
-}
-
-.footer-right {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-.footer-buttons-container {
-    display: flex;
-}
-
-.footer-button {
-    margin-left: 10px;
-    padding: 15px 25px;
-    background-color: rgba(242, 242, 242, 1);
-    color: black;
-    border: none;
-    border-radius: 60px;
-    cursor: pointer;
-}
-
-.save-button {
-    background-color: rgba(18, 32, 100, 1);
-    color: rgba(242, 242, 242, 1);
-}
-
-.footer-button:hover {
-    background-color: rgba(242, 242, 242, 0.8);
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.save-button:hover {
-  background-color: rgba(18, 32, 100, 0.8);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* Footer */
-.select-block select {
-  all: initial;
-}
-
-select {
-  background-color: transparent;
-  border: none;
-  height: 2vh;
-}
-
-.select-block.select-block-schedule {
-    padding: 1.5vh 2vw;
-    width: 16vw;
-    font-size: 0.9vw;
-    background-color: rgba(212, 218, 247, 1);
-    color: rgba(18, 32, 100, 1);
-    border-radius: 60px;
-}
-
-.select-block.select-block-schedule select {
-    font-size: 1.5vw;
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    appearance: none;
-    color: rgba(0, 0, 0, 1);
-}
-
-.select-block.select-block-schedule select {
-    color: rgba(18, 32, 100, 1);
-    cursor: pointer;
-    text-align: center;
-    text-align-last: center;
-}
-
-#searchInput {
-    background-color: rgba(242, 242, 242, 1); /* или синий, если включён */
-    color: rgba(0, 0, 0, 0.6); /* или white, если активен */
-    border: none;
-    border-radius: 60px;
-    padding: 1.5vh 2vw;
-    font-size: 1.5vw; /* <-- увеличенный размер */
-    width: 20vw;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#searchInput:disabled {
-    background-color: rgba(242, 242, 242, 1); /* тот же серый */
-    color: rgba(183, 183, 183, 1); /* более светлый текст */
-    cursor: not-allowed;
-}
-
-#searchInput:enabled {
-    background-color: rgba(212, 218, 247, 1);
-    color: (18, 32, 100, 1);
-}
-
-.select-block select {
-    max-height: 4vh;
-    overflow-y: auto; /* Добавить вертикальную прокрутку при необходимости */
-}
-
-
 .availability-grid {
     margin-top: 10px;
     width: 100%;
@@ -628,11 +388,10 @@ select {
 }
 
 .availability-grid td:first-child {
-    width: 2vw; /* можно уменьшить ещё */
+    width: 2vw;
     text-align: center;
     padding-right: 5px;
 }
-
 
 .availability-grid td.cell {
     width: 1vw;
@@ -692,9 +451,6 @@ select {
 .cell[data-level="2"] { background-color: #121f64; }
 .cell[data-level="3"] { background-color: #b3b3b3; }
 
-
-
-
 .cell-filled {
   background-color: rgba(212, 218, 247, 1);
   border-radius: 60px;
@@ -703,6 +459,105 @@ select {
   text-align: center;
   line-height: 1.4;
 }
+
+.centre-text {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.job-title {
+    color: #0E2ECC;
+    font-size: 0.7vw;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.group {
+    color: #888;
+    font-size: 0.7vw;
+    margin: 0;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.job-title {
+  color: #0E2ECC;
+  font-size: 0.7vw;
+  margin: 0;
+  text-transform: uppercase;
+}
+.group {
+  color: #888;
+  font-size: 0.7vw;
+  margin: 0;
+}
+/* Main */
+
+
+/* Footer */
+.footer {
+    position: relative;
+    justify-content: space-between;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: calc(69vw);
+    margin-top: auto;
+}
+
+.footer-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.footer-buttons-container {
+  display: flex;
+}
+
+.footer-button {
+    margin-left: 10px;
+    padding: 15px 25px;
+    background-color: rgba(242, 242, 242, 1);
+    color: black;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.save-button {
+    background-color: rgba(18, 32, 100, 1);
+    color: rgba(242, 242, 242, 1);
+}
+
+.footer-button:hover {
+    background-color: rgba(242, 242, 242, 0.8);
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.save-button:hover {
+  background-color: rgba(18, 32, 100, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Footer */
 
 
 .search-wrapper {
@@ -757,3 +612,170 @@ select {
   text-align: center;
   line-height: 1.4;
 }
+
+/* Input */
+input {
+    display: flex;
+    align-items: center;
+    background-color: rgba(242, 242, 242, 1);
+    color: black;
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    width: 30vw;
+    font-size: 1.1vw;
+}
+
+.input-slot {
+    width: 10vw;
+    height: 2vh;
+}
+
+#searchInput {
+    background-color: rgba(242, 242, 242, 1);
+    color: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 60px;
+    padding: 1.5vh 2vw;
+    font-size: 1.5vw;
+    width: 20vw;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#searchInput:disabled {
+    background-color: rgba(242, 242, 242, 1);
+    color: rgba(183, 183, 183, 1);
+    cursor: not-allowed;
+}
+
+#searchInput:enabled {
+    background-color: rgba(212, 218, 247, 1);
+    color: (18, 32, 100, 1);
+}
+/* Input */
+
+
+/*/ Select /*/
+.custom-select {
+  position: relative;
+  width: 18vw;
+  display: inline-block;
+}
+
+.custom-select select {
+  width: 100%;
+  height: 6vh;
+  font-size: 1.1vw;
+  border: none;
+  border-radius: 60px;
+  background-color: rgba(212, 218, 247, 1);
+  color: rgba(18, 32, 100, 1);
+  appearance: none;
+  text-align: center;
+  text-align-last: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.custom-select-data {
+  width: 34vw;
+}
+
+.custom-select-data select {
+  height: 6vh;
+  font-size: 1.1vw;
+  border: none;
+  border-radius: 60px;
+  background-color: rgba(242, 242, 242, 1);
+  color: rgba(0, 0, 0, 0.6);
+  appearance: none;
+  text-align: center;
+  text-align-last: left;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 0vh 2vw;
+}
+
+.custom-select::after {
+  content: "▼";
+  position: absolute;
+  right: 1.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.2vw;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.custom-select select option[disabled][selected] {
+  color: rgba(183, 183, 183, 1);
+}
+
+.custom-select select option:not([disabled]) {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.placeholder {
+    color: #666;
+}
+
+#customTypeInput {
+  display: none;
+  margin-left: 1vw;
+  width: 13vw;
+}
+
+
+.select-block {
+    display: flex;
+    align-items: center;
+    background-color: rgba(242, 242, 242, 1);
+    color: black;
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    width: 30vw;
+    font-size: 1.1vw;
+}
+
+.select-block select {
+  all: initial;
+}
+
+select {
+  background-color: transparent;
+  border: none;
+  height: 2vh;
+}
+
+.select-block.select-block-schedule {
+    padding: 1.5vh 2vw;
+    width: 16vw;
+    font-size: 0.9vw;
+    background-color: rgba(212, 218, 247, 1);
+    color: rgba(18, 32, 100, 1);
+    border-radius: 60px;
+}
+
+.select-block.select-block-schedule select {
+    font-size: 1.5vw;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    color: rgba(0, 0, 0, 1);
+}
+
+.select-block.select-block-schedule select {
+    color: rgba(18, 32, 100, 1);
+    cursor: pointer;
+    text-align: center;
+    text-align-last: center;
+}
+
+.select-block select {
+    max-height: 4vh;
+    overflow-y: auto;
+}
+/*/ Select /*/

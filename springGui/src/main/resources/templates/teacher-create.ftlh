@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
     <body>
         <section>
@@ -41,7 +42,7 @@
                 <div></div>
                 <div class="body">
                     <div class="header-create icon-back">
-                        <h2>Редактирование данных</h2>
+                        <h2>Редактирование данных о преподавателях</h2>
                         <button class="button-none" type="button" onclick="window.history.back()">
                             <img src="/images/back.svg" alt="Аккаунт" width="25" height="25">
                         </button>
@@ -51,16 +52,18 @@
                             <div class="input-block">
                                 <h5>ФИО преподавателя</h5><input type="text" name="name" placeholder="Введите  ФИО"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Почта</h5><input type="text" name="email" placeholder="Введите  почту"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Пароль</h5><input type="text" name="password" placeholder="Введите  пароль"/>
                             </div>
-
+                            <div class="spacer-bottom"></div>
                              <div class="input-block">
                                   <h5>Предметы</h5>
-                                  <div class="select-block">
+                                  <div class="select-block custom-select-data">
                                       <select name="courseId" multiple>
                                         <option value="" disabled selected >Выберите предметы</option>
                                           <#list courses as course>
@@ -69,19 +72,15 @@
                                       </select><br>
                                   </div>
                               </div>
-
-
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Кол-во пар в день</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во пар в день"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Должность</h5><input type="text" name="degree" placeholder="Введите должность"/>
                             </div>
-                           <div class="input-block">
-                                <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/>
-                            </div>
-
-
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                               <h5>Доступные временные слоты</h5>
                               <div class="availability-grid">

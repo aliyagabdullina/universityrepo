@@ -42,74 +42,74 @@
                     <div></div>
                     <div class="frame">
                         <div class="header">
-                                                    <h2>Расписание</h2>
-                                                    <div class="sorting-buttons">
-                                                      <div class="select-block select-block-schedule">
-                                                      <form id="groupForm">
-                                                        <select id="groupSelect" onchange="redirectToGroupPage()">
-                                                          <option value="">Группа</option>
-                                                          <#list groups as group>
-                                                                 <option value="/schedule/group/10-2">${group.name}</option>,
-                                                          </#list>
-                                                        </select>
-                                                      </form>
-                                                  </div>
-                                                      <script>
-                                                        function redirectToGroupPage() {
-                                                          var selectElement = document.getElementById("groupSelect");
-                                                          var selectedGroup = selectElement.value;
-                                                          if (selectedGroup) {
-                                                            window.location.href = selectedGroup;
-                                                          }
-                                                        }
-                                                      </script>
-                                                                                  <div class="spacer">
+                            <h2>Расписание</h2>
+                            <div class="sorting-buttons">
+                              <div class="select-block select-block-schedule">
+                              <form id="groupForm">
+                                <select id="groupSelect" onchange="redirectToGroupPage()">
+                                  <option value="">Группа</option>
+                                  <#list groups as group>
+                                         <option value="/schedule/group/10-2">${group.name}</option>,
+                                  </#list>
+                                </select>
+                              </form>
+                          </div>
+                              <script>
+                                function redirectToGroupPage() {
+                                  var selectElement = document.getElementById("groupSelect");
+                                  var selectedGroup = selectElement.value;
+                                  if (selectedGroup) {
+                                    window.location.href = selectedGroup;
+                                  }
+                                }
+                              </script>
+                              <div class="spacer">
 
-                                                      </div>
-                                                    <div class="select-block select-block-schedule">
-                                                      <form id="teacherForm">
-                                                        <select id="teacherSelect" onchange="redirectToTeacherPage()">
-                                                          <option value="">Учитель</option>
-                                                          <#list teachers as teacher>
-                                                               <option value="/schedule/teacher">${teacher.name}</option>,
-                                                           </#list>
+                              </div>
+                            <div class="select-block select-block-schedule">
+                              <form id="teacherForm">
+                                <select id="teacherSelect" onchange="redirectToTeacherPage()">
+                                  <option value="">Учитель</option>
+                                  <#list teachers as teacher>
+                                       <option value="/schedule/teacher">${teacher.name}</option>,
+                                   </#list>
 
-                                                        </select>
-                                                      </form>
-                                                  </div>
-                                                      <script>
-                                                        function redirectToTeacherPage() {
-                                                          var selectElement = document.getElementById("teacherSelect");
-                                                          var selectedTeacher = selectElement.value;
-                                                          if (selectedTeacher) {
-                                                            window.location.href = selectedTeacher;
-                                                          }
-                                                        }
-                                                      </script>
-                                                      <div class="spacer">
+                                </select>
+                              </form>
+                          </div>
+                              <script>
+                                function redirectToTeacherPage() {
+                                  var selectElement = document.getElementById("teacherSelect");
+                                  var selectedTeacher = selectElement.value;
+                                  if (selectedTeacher) {
+                                    window.location.href = selectedTeacher;
+                                  }
+                                }
+                              </script>
+                              <div class="spacer">
 
-                                                      </div>
-                                                      <div class="select-block select-block-schedule">
-                                                      <form id="placeForm">
-                                                        <select id="placeSelect" onchange="redirectToPlacePage()">
-                                                          <option value="">Кабинет</option>
-                                                          <#list places as place>
-                                                             <option value="/schedule/place">${place.name}</option>,
-                                                          </#list>
-                                                        </select>
-                                                      </form>
-                                                  </div>
-                                                      <script>
-                                                        function redirectToPlacePage() {
-                                                          var selectElement = document.getElementById("placeSelect");
-                                                          var selectedPlace = selectElement.value;
-                                                          if (selectedPlace) {
-                                                            window.location.href = selectedPlace;
-                                                          }
-                                                        }
-                                                      </script>
-                                                  </div>
-                                                </div>
+                              </div>
+                              <div class="select-block select-block-schedule">
+                              <form id="placeForm">
+                                <select id="placeSelect" onchange="redirectToPlacePage()">
+                                  <option value="">Кабинет</option>
+                                  <#list places as place>
+                                     <option value="/schedule/place">${place.name}</option>,
+                                  </#list>
+                                </select>
+                              </form>
+                          </div>
+                              <script>
+                                function redirectToPlacePage() {
+                                  var selectElement = document.getElementById("placeSelect");
+                                  var selectedPlace = selectElement.value;
+                                  if (selectedPlace) {
+                                    window.location.href = selectedPlace;
+                                  }
+                                }
+                              </script>
+                          </div>
+                        </div>
                         <div class="main">
                             <div class="centre-text">
                                 10-2

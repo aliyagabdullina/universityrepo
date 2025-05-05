@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
 
 <body>
@@ -42,7 +43,7 @@
             <div></div>
             <div class="body">
                 <div class="header-create icon-back">
-                    <h2>Редактирование данных</h2>
+                    <h2>Редактирование данных об аудиториях</h2>
                     <button class="button-none" type="button" onclick="window.history.back()">
                         <img src="/images/back.svg" alt="Назад" width="25" height="25">
                     </button>
@@ -53,13 +54,15 @@
                             <h5>Аудитория</h5>
                             <input type="text" name="name" placeholder="Введите аудиторию" required>
                         </div>
+                        <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Вместимость</h5>
                             <input type="text" name="capacity" placeholder="Введите кол-во мест" required>
                         </div>
+                        <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Тип</h5>
-                            <div class="custom-select">
+                            <div class="custom-select custom-select-data">
                                 <select id="typeSelect" name="description" onchange="toggleCustomInput()">
                                     <option value="" disabled selected>Выберите тип аудитории</option>
                                     <option value="Лекционная">Лекционная</option>
