@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
 
 <body>
@@ -42,7 +43,7 @@
             <div></div>
             <div class="body">
                 <div class="header-create icon-back">
-                    <h2>Редактирование данных</h2>
+                    <h2>Редактирование данных о курсах</h2>
                     <button class="button-none" type="button" onclick="window.history.back()">
                         <img src="/images/back.svg" alt="Назад" width="25" height="25">
                     </button>
@@ -53,10 +54,12 @@
                             <h5>Предмет</h5>
                             <input type="text" name="name" placeholder="Введите предмет" required>
                         </div>
+                        <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Кол-во пар в неделю</h5>
                             <input type="text" name="numOfLessonsPerWeek" placeholder="Введите кол-во пар в неделю" required>
                         </div>
+                        <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Кол-во пар в день</h5>
                             <input type="text" name="maxLessonsPerDay" placeholder="Введите кол-во пар в день" required>

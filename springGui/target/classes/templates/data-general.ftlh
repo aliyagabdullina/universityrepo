@@ -41,7 +41,10 @@
             <div></div>
             <div class="frame">
                 <div class="header">
-                    <h2>Данные</h2>
+                    <div>
+                  <h2>Данные</h2>
+                  <h3>Выберите раздел справа</h3>
+                  </div>
                     <div class="spacer"></div>
                     <div class="custom-select">
                         <select onchange="if(this.value === '1') window.location.href='/places';

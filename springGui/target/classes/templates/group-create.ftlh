@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
     <body>
         <selection>
@@ -41,7 +42,7 @@
                 <div></div>
                 <div class="body">
                     <div class="header-create icon-back">
-                        <h2>Редактирование данных</h2>
+                        <h2>Редактирование данных о группах</h2>
                         <button class="button-none" type="button" onclick="window.history.back()">
                             <img src="/images/back.svg" alt="Аккаунт" width="25" height="25">
                         </button>
@@ -51,12 +52,14 @@
                             <div class="input-block">
                                 <h5>Название группы</h5> <input type="text" name="name" placeholder="Введите группу"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Студенты</h5><input type="text" name="numOfStudents" placeholder="Введите кол-во студентов"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                  <h5>Преподаватели</h5>
-                                 <div class="select-block">
+                                 <div class="select-block custom-select-data">
                                      <select name="teacherId" multiple>
                                          <option value="" disabled selected>Выберите преподавателей</option>
                                          <#list teachers as teacher>
@@ -65,9 +68,11 @@
                                      </select>
                                  </div>
                              </div>
+                             <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Максимум пар в день</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во макс пар"/>
                             </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
                                 <h5>Временной слот</h5><input type="text" name="timeslotId" placeholder="Тут будет временной слот"/><br>
                             </div>
