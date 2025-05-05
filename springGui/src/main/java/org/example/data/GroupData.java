@@ -20,6 +20,4 @@ public class GroupData {
     private int numOfStudents;
     @Column(name = "max_number_of_lessons")
     private int maxNumberOfLessons;
-    @Column(name = "timeslot_id")
-    private int timeslotId;
 }

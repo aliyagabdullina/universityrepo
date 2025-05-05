@@ -48,7 +48,12 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addAvailablePlaceForCourse(Course course, Place place) {
         Set<Place> places = _coursePlaceMap.get(course);
-        places.add(place);
+        if(places != null) {
+            places.add(place);
+        } else{
+            _coursePlaceMap.put(course, new HashSet<>());
+            _coursePlaceMap.get(course).add(place);
+        }
     }
 
     @Override
@@ -60,7 +65,13 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addAvailablePlaceForGroup(Group group, Place place) {
         Set<Place> places = _groupPlaceMap.get(group);
-        places.add(place);
+        if(places != null) {
+            places.add(place);
+        }
+        else{
+            _groupPlaceMap.put(group, new HashSet<>());
+            _groupPlaceMap.get(group).add(place);
+        }
     }
 
 
@@ -101,7 +112,13 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addTeacherForCourse(Course course, Teacher teacher) {
         Set<Teacher> teachers = _availableTeachersForCourse.get(course);
-        teachers.add(teacher);
+        if(teachers != null) {
+            teachers.add(teacher);
+        } else{
+            _availableTeachersForCourse.put(course, new HashSet<>());
+            _availableTeachersForCourse.get(course).add(teacher);
+        }
+
     }
 
 

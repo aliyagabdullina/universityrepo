@@ -12,6 +12,7 @@ import pair.Pair;
 
 import java.time.DayOfWeek;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GreedySchedulerImpl implements GreedyScheduler {
     private final SchedulingInputData _scheduleInputData;
@@ -28,6 +29,8 @@ public class GreedySchedulerImpl implements GreedyScheduler {
 
 // Получаем все незапланированные занятия (для учителей и групп)
         Set<LessonRequestOccupation> unscheduledOccupations = new HashSet<>();
+        Set<LessonRequest> lessonRequests = _scheduleInputData.getLessonRequests()
+                .collect(Collectors.toSet());
         _scheduleInputData.getTeachers().forEach(teacher ->
                 _scheduleInputData.getUnscheduledRequestsForTeacher(teacher)
                         .map(Pair::getKey)
@@ -49,8 +52,7 @@ public class GreedySchedulerImpl implements GreedyScheduler {
                         .filter(t -> _scheduleInputData.getOccupiedTimeSlotsForTeacher(t).noneMatch(tSlot -> tSlot.ifIntersects(timeSlot)))
                         .findFirst();
 
-                if (availableTeacher.isEmpty()) continue;
-                Teacher teacher = availableTeacher.get();
+                Teacher teacher = availableTeacher.orElseGet(() -> _scheduleInputData.getTeachers().toList().get(0));
 
                 Group group = occupation.getLessonRequest().getGroup();
                 if (_scheduleInputData.getOccupiedTimeSlotsForGroup(group).anyMatch(t -> t.ifIntersects(timeSlot))) {
@@ -65,8 +67,7 @@ public class GreedySchedulerImpl implements GreedyScheduler {
                 if (groupMaxLoadMap.getOrDefault(group, Map.of()).getOrDefault(day, Integer.MAX_VALUE) <= 0) continue;
 
                 Optional<Place> availablePlace = _scheduleInputData.getAvailablePlacesForOccupationInTimeSlot(occupation, timeSlot).findFirst();
-                if (availablePlace.isEmpty()) continue;
-                Place place = availablePlace.get();
+                Place place = availablePlace.orElseGet(() -> _scheduleInputData.getPlaces().toList().get(0));
 
                 // Создаем урок и добавляем его в расписание
                 Lesson lesson = new LessonImpl(timeSlot, group, place, teacher, occupation.getCourse());
