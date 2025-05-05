@@ -1,0 +1,62 @@
+.table-style {
+  flex: 1;
+  font-family: 'Roboto';
+  font-size: 1.1vw;
+  color: black;
+  background-color: rgba(242, 242, 242, 1);
+  border-radius: 60px;
+  padding: 30px 50px;
+  overflow: auto; /* обязательно! */
+  width: 100%;     /* адаптивная ширина */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.table-style table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table-style td,
+.table-style th {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal; /* чтобы текст переносился */
+}
+
+.search-results {
+  z-index: 1000;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-top: 0.5vh;
+  overflow-y: auto;
+  max-height: 30vh;
+  width: 100%;
+  pointer-events: auto; /* важно! */
+}
+
+.table-style th:first-child,
+.table-style td:first-child {
+  width: 2vw;         /* можно попробовать 2vw, если нужно ещё меньше */
+  min-width: 30px;
+  text-align: center; /* выравнивание по центру для аккуратности */
+}
+
+.table-style {
+  font-family: 'Roboto';
+  font-size: 1.1vw;
+  color: black;
+  background-color: rgba(242, 242, 242, 1);
+  border-radius: 60px;
+  padding: 30px 20px;
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+  max-height: 90vh; /* если нужно ограничить по высоте */
+  box-sizing: border-box;
+}

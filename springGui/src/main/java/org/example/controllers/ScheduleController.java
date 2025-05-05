@@ -69,7 +69,7 @@ public class ScheduleController {
     private static final String USER = "userschool";
     private static final String PASSWORD = "passwordschool";
     private static VocabularyFiles _vocabularyFiles = new VocabularyFilesImpl();
-    private File root = new File("/Users/valeria_ostapets/Downloads/school10-11");
+    //private File root = new File("/Users/aliya/Documents/Курсач/School Scheduling/school10-11");
 
     private AssignmentCollector _assignmentCollector;
     private SchoolDataCollector _dataCollector;
@@ -89,7 +89,7 @@ public class ScheduleController {
 
     @GetMapping("/schedule")
     public String schedule(Model model) {
-        _fileSettings = initializeSettings(root);
+        //_fileSettings = initializeSettings(root);
         _dataLoader = new DataLoaderImpl(_fileSettings);
         _dataCollector = loadData();
         _timeSlots = loadTimeSlots();
@@ -126,7 +126,7 @@ public class ScheduleController {
     @GetMapping("/api/schedule")
     @ResponseBody
     public Map<String, Object> getSchedule() {
-        _fileSettings = initializeSettings(root);
+        //_fileSettings = initializeSettings(root);
         _dataLoader = new DataLoaderImpl(_fileSettings);
         _dataCollector = loadData();
 
@@ -160,7 +160,7 @@ public class ScheduleController {
 
     @GetMapping("/schedule2")
     public String schedule2() {
-        _fileSettings = initializeSettings(root);
+        //_fileSettings = initializeSettings(root);
         _dataLoader = new DataLoaderImpl(_fileSettings);
         _dataCollector = loadData();
         _timeSlots = loadTimeSlots();

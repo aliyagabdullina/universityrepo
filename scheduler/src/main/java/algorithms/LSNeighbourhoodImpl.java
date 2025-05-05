@@ -5,6 +5,7 @@ import schedule.Schedule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LSNeighbourhoodImpl implements LSNeighbourhood {
     private final Schedule schedule;
@@ -14,7 +15,7 @@ public class LSNeighbourhoodImpl implements LSNeighbourhood {
     }
 
     @Override
-    public LSMove getBestMove(List<LSMove> tabuList) {
+    public Optional<LSMove> getBestMove(List<LSMove> tabuList) {
         List<LSMove> possibleMoves = generatePossibleMoves();
         LSMove bestMove = null;
         double bestEvaluation = Double.MAX_VALUE;
@@ -32,7 +33,7 @@ public class LSNeighbourhoodImpl implements LSNeighbourhood {
 
             undoMove(move);
         }
-        return bestMove;
+        return bestMove == null ? Optional.empty() : Optional.of(bestMove);
     }
 
     private List<LSMove> generatePossibleMoves() {

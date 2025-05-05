@@ -30,6 +30,10 @@ public class GroupsController {
         model.addAttribute("groups", groupsService.listGroups(name));
         model.addAttribute("places", placeRepository.findAll());
         model.addAttribute("teachers", teacherRepository.findAll());
+        model.addAttribute("sender", "You");
+        model.addAttribute("message", "Hello!\n");
+        model.addAttribute("aiSender", "AI");
+        model.addAttribute("aiMessage", "How can I assist you?\n");
         return "groups";
     }
 

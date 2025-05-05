@@ -1,7 +1,8 @@
 package algorithms;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LSNeighbourhood {
-    LSMove getBestMove(List<LSMove> tabuList);
+    Optional<LSMove> getBestMove(List<LSMove> tabuList);
 }

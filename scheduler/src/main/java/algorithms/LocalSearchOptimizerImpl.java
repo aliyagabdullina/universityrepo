@@ -5,6 +5,7 @@ import schedule.Schedule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LocalSearchOptimizerImpl implements LocalSearchOptimizer {
     private Schedule currentSchedule;
@@ -13,7 +14,7 @@ public class LocalSearchOptimizerImpl implements LocalSearchOptimizer {
     }
 
     @Override
-    public LSMove findBestLocalMove() {
+    public Optional<LSMove> findBestLocalMove() {
         List<LSMove> localMoves = generateLocalMoves();
         LSMove bestMove = null;
         double bestEvaluation = Double.MAX_VALUE;
@@ -27,7 +28,7 @@ public class LocalSearchOptimizerImpl implements LocalSearchOptimizer {
             }
             undoMove(move);
         }
-        return bestMove;
+        return bestMove == null ? Optional.empty() : Optional.of(bestMove);
     }
 
     private List<LSMove> generateLocalMoves() {
