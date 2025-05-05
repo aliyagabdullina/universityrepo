@@ -24,8 +24,5 @@ public class TeacherData {
     private Integer maxNumberOfLessons;
     @Column(name = "degree")
     private String degree;
-    @Column(name = "timeslot_id")
-    private Integer timeslotId;
-
 
 }

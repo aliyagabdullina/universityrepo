@@ -10,10 +10,7 @@ import constraint.assignment.AssignmentCollector;
 import constraint.assignment.AssignmentCollectorImpl;
 import constraint.timeConstraint.*;
 import group.Group;
-import input.DataLoader;
-import input.DataLoaderImpl;
-import input.MyFileReader;
-import input.MyFileReaderCsv;
+import input.*;
 import lesson.Lesson;
 import lesson.LessonRequest;
 import lesson.LessonRequestsBuilder;
@@ -27,7 +24,6 @@ import org.example.data.ScheduleEntry;
 import org.example.repositories.GroupsRepository;
 import org.example.repositories.PlacesRepository;
 import org.example.repositories.TeacherRepository;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +50,7 @@ import time.WeeklyTimeSlot;
 import time.WeeklyTimeSlotImpl;
 
 import java.io.File;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -125,10 +121,10 @@ public class ScheduleController {
 
     @GetMapping("/api/schedule")
     @ResponseBody
-    public Map<String, Object> getSchedule() {
+    public Map<String, Object> getSchedule() throws SQLException {
         //_fileSettings = initializeSettings(root);
-        _dataLoader = new DataLoaderImpl(_fileSettings);
-        _dataCollector = loadData();
+        _dataLoader = new DataLoaderDBImpl();
+        _dataCollector = loadDataDB();
 
         List<Teacher> teachers = _dataCollector.getTeachers()
                 .toList();
@@ -159,10 +155,9 @@ public class ScheduleController {
 
 
     @GetMapping("/schedule2")
-    public String schedule2() {
-        //_fileSettings = initializeSettings(root);
-        _dataLoader = new DataLoaderImpl(_fileSettings);
-        _dataCollector = loadData();
+    public String schedule2() throws SQLException {
+        _dataLoader = new DataLoaderDBImpl();
+        _dataCollector = loadDataDB();
         _timeSlots = loadTimeSlots();
         _timeTablesCollector = loadCollector();
         _assignmentCollector = loadAssignmentsCollector();
@@ -473,6 +468,14 @@ public class ScheduleController {
         DataBaseInteractor dataBaseInteractor = new DataBaseInteractorImpl();
         SchoolDataCollector schoolDataCollector = new SchoolDataCollectorImpl(dataBaseInteractor);
         DataLoader dataLoader = new DataLoaderImpl(_fileSettings);
+        dataLoader.loadSchoolData(schoolDataCollector);
+        return schoolDataCollector;
+    }
+
+    private SchoolDataCollector loadDataDB() throws SQLException {
+        DataBaseInteractor dataBaseInteractor = new DataBaseInteractorImpl();
+        SchoolDataCollector schoolDataCollector = new SchoolDataCollectorImpl(dataBaseInteractor);
+        DataLoader dataLoader = new DataLoaderDBImpl();
         dataLoader.loadSchoolData(schoolDataCollector);
         return schoolDataCollector;
     }
