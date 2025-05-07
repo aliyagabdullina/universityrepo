@@ -309,3 +309,26 @@ button {
     color: white;
     text-align: left;
 }
+
+.remember-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2vh;
+    font-size: 0.9vw;
+    margin-left: 2vw; /* сдвиг вправо */
+}
+
+
+.remember-checkbox {
+    width: 1vw;
+    height: 1vw;
+    accent-color: rgba(18, 32, 100, 1); /* цвет галочки */
+    margin: 0;
+    padding: 0;
+}
+
+.remember-label {
+    font-weight: lighter;
+    color: black;
+}
