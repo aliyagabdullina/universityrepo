@@ -46,4 +46,6 @@ public interface AssignmentCollector {
     void addAvailablePlaceForTeacher(Teacher teacher, Place place);
 
     void addAvailablePlaceForCourse(Course course, Place place);
+
+    void addCourseProgramForGroup(Group group, CourseProgram courseProgram);
 }

@@ -1,8 +1,8 @@
 package org.example.data;
 
 public class ChatMessage {
-    private String sender;
-    private String message;
+    private final String sender;
+    private final String message;
 
     public ChatMessage(String sender, String message) {
         this.sender = sender;

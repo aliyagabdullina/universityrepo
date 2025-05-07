@@ -45,9 +45,9 @@ public class DataLoaderDBImpl implements DataLoader {
     private static final String DB_URL = "jdbc:postgresql://82.97.244.207:5432/school";
     private static final String USER = "userschool";
     private static final String PASSWORD = "passwordschool";
-    int university_id = 2;
+    final int university_id = 1;
 
-    Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+    final Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
     public DataLoaderDBImpl() throws SQLException {
 
@@ -431,9 +431,9 @@ public class DataLoaderDBImpl implements DataLoader {
 
     private void loadAvailablePlacesForTeachers(SchoolDataCollector dataCollector, AssignmentCollector assignmentCollector) {
         try {
-            String sql = "SELECT tp.teacher_id, t.name AS teacher_name, p.name " +
+            String sql = "SELECT tp.teacher_id, t.name AS teacher_name, p.name AS place_name " +
                     "FROM TeacherPlace tp " +
-                    "INNER JOIN Teachers t ON tp.teacher_id = t.teacher_id " + // Получаем имя преподавателя
+                    "INNER JOIN Teachers t ON tp.teacher_id = t.teacher_id " +
                     "INNER JOIN Places p ON tp.place_id = p.place_id " +
                     "WHERE t.university_id = ? " +
                     "AND p.university_id = ?";
@@ -550,8 +550,9 @@ public class DataLoaderDBImpl implements DataLoader {
 
                         Set<Student> students = new HashSet<>(numStudents);
                         Group group = new GroupImpl(groupName, students);
-                        CourseProgram courseProgram = dataCollector.getCourseProgram(programName + "_" + courseName);
+                        Course course = dataCollector.getCourse(courseName);
 
+                        CourseProgram courseProgram = dataCollector.getCourseProgram(programName);
                         assignmentCollector.setCourseProgramForGroup(group, courseProgram);
                     }
                 }
@@ -687,7 +688,6 @@ public class DataLoaderDBImpl implements DataLoader {
 
     private void loadCoursePrograms(SchoolDataCollector dataCollector) {
         try {
-            // Создаем SQL запрос для выборки всех записей из таблицы Places
             String sql =
                     """
                     SELECT c.course_id, c.name as courseName, c.num_of_lessons_per_week, c.num_of_days_per_week, c.max_lessons_per_day, p.program_id, p.name as programName
@@ -708,9 +708,9 @@ public class DataLoaderDBImpl implements DataLoader {
                         int num_of_lessons_per_week = resultSet.getInt("num_of_lessons_per_week");
                         int num_of_days_per_week = resultSet.getInt("num_of_days_per_week");
                         int max_lessons_per_day = resultSet.getInt("max_lessons_per_day");
-
+                        String prCourseName = programName;
                         // Создаем объект CourseProgramImpl и добавляем его в коллектор
-                        CourseProgram courseProgram = new CourseProgramImpl(programName + "_" + courseName);
+                        CourseProgram courseProgram = dataCollector.getCourseProgram(prCourseName) == null ? new CourseProgramImpl(prCourseName) : dataCollector.getCourseProgram(prCourseName);
                         Course course = new CourseImpl(courseName);
                         CourseInProgram courseInProgram = new CourseInProgramImpl(Stream.of(course));
                         courseInProgram.setComplexity(10);

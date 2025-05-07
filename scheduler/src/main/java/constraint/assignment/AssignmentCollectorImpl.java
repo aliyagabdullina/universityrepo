@@ -56,6 +56,7 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
         }
     }
 
+
     @Override
     public void setAvailablePlacesForGroup(Group group, Stream<Place> placeStream) {
         Set<Place> places = placeStream.collect(Collectors.toUnmodifiableSet());
@@ -84,7 +85,13 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void addAvailablePlaceForTeacher(Teacher teacher, Place place) {
         Set<Place> places = _teacherPlaceMap.get(teacher);
-        places.add(place);
+        if(places != null) {
+            places.add(place);
+        }
+        else{
+            _teacherPlaceMap.put(teacher, new HashSet<>());
+            _teacherPlaceMap.get(teacher).add(place);
+        }
     }
 
 
@@ -132,6 +139,11 @@ public class AssignmentCollectorImpl implements AssignmentCollector {
     @Override
     public void setCourseProgramForGroup(Group group, CourseProgram courseProgram) {
         _groupCoursePrograms.put(group, courseProgram);
+    }
+
+    @Override
+    public void addCourseProgramForGroup(Group group, CourseProgram courseProgram) {
+
     }
 
     @Override

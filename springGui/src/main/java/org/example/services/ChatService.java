@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ChatService {
 
-    private List<ChatMessage> chatHistory = new ArrayList<>();
+    private final List<ChatMessage> chatHistory = new ArrayList<>();
 
     // Get AI reply
     public String getReply(String message) {
