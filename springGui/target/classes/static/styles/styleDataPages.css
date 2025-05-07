@@ -113,7 +113,7 @@ body{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .menu-button {
@@ -147,7 +147,7 @@ body{
   padding-bottom: 1vh;
 }
 .university {
-   color: #0E2ECC;
+  color: #0E2ECC;
   font-size: 1.5vw;
   margin: 0;
   text-transform: uppercase;

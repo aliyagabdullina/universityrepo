@@ -20,8 +20,13 @@
                 <label for="password">Пароль</label>
                 <input type="password" id="password" name="password" placeholder="Введите пароль" required>
             </div>
-            <div class="space"></div><div class="space"></div><br><div class="space"></div>
-            <button type="submit" class="login-button space">Войти</button>
+
+            <div class="space centre-text remember-block">
+              <input type="checkbox" id="remember" name="remember" class="remember-checkbox">
+              <label for="remember" class="remember-label">Запомнить меня</label>
+          </div>
+          <div class="space"></div><div class="space"></div><br>
+          <button type="submit" class="login-button space">Войти</button>
             <div class="error" id="errorMsg">Ошибка! Неверный логин или пароль</div>
         </form>
     </div>
