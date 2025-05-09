@@ -326,6 +326,7 @@ table th {
     padding: 10px;
     text-align: center;
     width: auto;
+    vertical-align: top;
 }
 
 .table-style td:first-child {
@@ -356,7 +357,7 @@ table th {
 
 .table-style th,
 .table-style td {
-    max-width: 350px;
+    max-width: 500px;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 10px;
@@ -366,7 +367,7 @@ table th {
 }
 
 .table-style td:first-child {
-    text-align: left; /* Сохраняем выравнивание первого столбца влево */
+    text-align: left;
 }
 
 .availability-grid {
