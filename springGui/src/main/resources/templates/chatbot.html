@@ -4,18 +4,18 @@
 
 <div id="chatWindow" class="chat-window" style="display: none;">
     <div class="chat-close-button">
-        <button id="closeChat" onclick="closeChat()">✕</button>
+        <button id="closeChat">✕</button>
     </div>
+
     <div id="chatHistory" class="chat-history"></div>
 
     <div class="chat-input-new">
         <textarea id="chatInput" placeholder="Введите сообщение..."></textarea>
 
         <div class="chat-actions-row">
-            <button id="sendMessage">Send</button>
-            <label for="fileInput" class="file-label">📎</label>
-            <input type="file" id="fileInput" class="hidden-file-input"/>
+            <button id="sendMessage">Отправить</button>
+            <label for="fileInput" class="file-label" title="Прикрепить файл">📎</label>
+            <input type="file" id="fileInput" class="hidden-file-input" />
         </div>
     </div>
-
 </div>
