@@ -130,7 +130,7 @@
                 </div>
             </div>
         </selection>
-        
+
         <!-- Подключаем чат-бот через внешний файл -->
         <#include "chatbot.html">
         <script src="/scripts/chatbot.js"></script>

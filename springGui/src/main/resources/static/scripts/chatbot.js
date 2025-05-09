@@ -3,7 +3,7 @@ document.getElementById('chatBotButton').onclick = function () {
     loadChatHistory();
 };
 
-document.getElementById('closeChat').onclick = function () {
+document.querySelector('.chat-close-button button').onclick = function () {
     document.getElementById('chatWindow').style.display = 'none';
 };
 
@@ -28,16 +28,23 @@ function appendMessage(sender, message) {
 
 document.getElementById('sendMessage').onclick = function () {
     const input = document.getElementById('chatInput');
+    const fileInput = document.getElementById('fileInput');
     const message = input.value.trim();
-    if (!message) return;
+    const file = fileInput.files[0];
 
-    appendMessage('You', message);
-    input.value = '';
+    if (!message && !file) return;
+
+    if (message) {
+        appendMessage('You', message);
+    }
+
+    const formData = new FormData();
+    if (message) formData.append('message', message);
+    if (file) formData.append('file', file);
 
     fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -50,4 +57,7 @@ document.getElementById('sendMessage').onclick = function () {
     .catch(() => {
         appendMessage('Chatbot', 'Ошибка при соединении с сервером');
     });
+
+    input.value = '';
+    fileInput.value = '';
 };
