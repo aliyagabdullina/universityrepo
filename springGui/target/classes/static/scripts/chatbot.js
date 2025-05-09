@@ -8,12 +8,26 @@ document.getElementById('closeChat').onclick = function () {
 };
 
 function loadChatHistory() {
-    fetch('/api/chat/history')
+    fetch('/api/chat/history') // Получаем историю чатов с сервера
         .then(response => response.json())
         .then(messages => {
             const chatHistory = document.getElementById('chatHistory');
-            chatHistory.innerHTML = '';
-            messages.forEach(msg => appendMessage(msg.sender, msg.message));
+            chatHistory.innerHTML = ''; // Очищаем старую историю
+
+            // Перебираем каждое сообщение в истории чата
+            messages.forEach(msg => {
+                // Добавляем сообщение от пользователя
+                if (msg.message) {
+                    appendMessage('You', msg.message);
+                }
+                // Добавляем сообщение от бота
+                if (msg.response) {
+                    appendMessage('Chatbot', msg.response);
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке истории чата:', error);
         });
 }
 

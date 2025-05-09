@@ -77,6 +77,8 @@ public class ScheduleController {
     private final GroupsRepository groupsRepository;
     private final TeacherRepository teacherRepository;
 
+    private int universityId = 1;
+
 
     private Schedule _result;
 
@@ -120,7 +122,7 @@ public class ScheduleController {
     @ResponseBody
     public Map<String, Object> getSchedule() throws SQLException {
         //_fileSettings = initializeSettings(root);
-        _dataLoader = new DataLoaderDBImpl();
+        _dataLoader = new DataLoaderDBImpl(universityId);
         _dataCollector = loadDataDB();
 
         List<Teacher> teachers = _dataCollector.getTeachers()
@@ -153,7 +155,7 @@ public class ScheduleController {
 
     @GetMapping("/schedule2")
     public String schedule2() throws SQLException {
-        _dataLoader = new DataLoaderDBImpl();
+        _dataLoader = new DataLoaderDBImpl(universityId);
         _dataCollector = loadDataDB();
         _timeSlots = loadTimeSlots();
         _timeTablesCollector = loadCollector();
@@ -472,7 +474,7 @@ public class ScheduleController {
     private SchoolDataCollector loadDataDB() throws SQLException {
         DataBaseInteractor dataBaseInteractor = new DataBaseInteractorImpl();
         SchoolDataCollector schoolDataCollector = new SchoolDataCollectorImpl(dataBaseInteractor);
-        DataLoader dataLoader = new DataLoaderDBImpl();
+        DataLoader dataLoader = new DataLoaderDBImpl(universityId);
         dataLoader.loadSchoolData(schoolDataCollector);
         return schoolDataCollector;
     }

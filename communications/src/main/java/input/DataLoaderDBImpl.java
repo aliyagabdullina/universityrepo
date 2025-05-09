@@ -45,12 +45,12 @@ public class DataLoaderDBImpl implements DataLoader {
     private static final String DB_URL = "jdbc:postgresql://82.97.244.207:5432/school";
     private static final String USER = "userschool";
     private static final String PASSWORD = "passwordschool";
-    final int university_id = 1;
+    private int university_id;
 
     final Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
-    public DataLoaderDBImpl() throws SQLException {
-
+    public DataLoaderDBImpl(int university_id) throws SQLException {
+        this.university_id = university_id;
     }
 
     @Override
