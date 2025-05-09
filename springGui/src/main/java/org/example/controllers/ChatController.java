@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -27,7 +28,8 @@ public class ChatController {
     @Autowired
     private ChatHistoryRepository chatHistoryRepository;
 
-    @PostMapping
+
+    /*@PostMapping
     public Map<String, String> sendMessage(@RequestBody Map<String, String> request) {
         String message = request.get("message");
         int universityId = 1;  // Получить университет ID из сессии
@@ -40,6 +42,22 @@ public class ChatController {
         chatHistoryRepository.save(chatHistory);
 
         return Map.of("reply", response);
+    }*/
+
+    @PostMapping("/api/chat")
+    public ResponseEntity<?> handleMessage(
+            @RequestParam(required = false) String message,
+            @RequestParam(required = false) MultipartFile file) {
+
+        if (file != null && !file.isEmpty()) {
+            // Пример: сохраняем файл или обрабатываем его содержимое
+            String originalFilename = file.getOriginalFilename();
+            String contentType = file.getContentType();
+
+            // обработка файла: можно проверить тип, сохранить, распарсить и т.д.
+        }
+
+        return ResponseEntity.ok(Map.of("reply", ""));
     }
 
     @GetMapping("/history")
