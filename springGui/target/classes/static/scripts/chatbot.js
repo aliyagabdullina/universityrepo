@@ -1,36 +1,31 @@
-document.getElementById('chatBotButton').onclick = function () {
-    document.getElementById('chatWindow').style.display = 'flex';
-    loadChatHistory();
-};
+// Открытие/закрытие окна чата
+document.addEventListener('DOMContentLoaded', function () {
+    const chatBotButton = document.getElementById('chatBotButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeBtn = document.getElementById('closeChat');
 
-document.querySelector('.chat-close-button button').onclick = function () {
-    document.getElementById('chatWindow').style.display = 'none';
-};
+    chatBotButton.onclick = () => {
+        chatWindow.style.display = 'flex';
+        loadChatHistory();
+    };
 
+    closeBtn.onclick = () => {
+        chatWindow.style.display = 'none';
+    };
+});
+
+// Загрузка истории
 function loadChatHistory() {
-    fetch('/api/chat/history') // Получаем историю чатов с сервера
-        .then(response => response.json())
+    fetch('/api/chat/history')
+        .then(res => res.json())
         .then(messages => {
             const chatHistory = document.getElementById('chatHistory');
-            chatHistory.innerHTML = ''; // Очищаем старую историю
-
-            // Перебираем каждое сообщение в истории чата
-            messages.forEach(msg => {
-                // Добавляем сообщение от пользователя
-                if (msg.message) {
-                    appendMessage('You', msg.message);
-                }
-                // Добавляем сообщение от бота
-                if (msg.response) {
-                    appendMessage('Chatbot', msg.response);
-                }
-            });
-        })
-        .catch(error => {
-            console.error('Ошибка при загрузке истории чата:', error);
+            chatHistory.innerHTML = '';
+            messages.forEach(msg => appendMessage(msg.sender, msg.message));
         });
 }
 
+// Добавление сообщений в чат
 function appendMessage(sender, message) {
     const chatHistory = document.getElementById('chatHistory');
     const messageDiv = document.createElement('div');
@@ -40,38 +35,37 @@ function appendMessage(sender, message) {
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
-document.getElementById('sendMessage').onclick = function () {
-    const input = document.getElementById('chatInput');
-    const fileInput = document.getElementById('fileInput');
-    const message = input.value.trim();
-    const file = fileInput.files[0];
+// Отправка сообщения и/или файла
+document.addEventListener('DOMContentLoaded', function () {
+    const sendButton = document.getElementById('sendMessage');
 
-    if (!message && !file) return;
+    sendButton.onclick = function () {
+        const input = document.getElementById('chatInput');
+        const fileInput = document.getElementById('fileInput');
+        const message = input.value.trim();
+        const file = fileInput.files[0];
 
-    if (message) {
-        appendMessage('You', message);
-    }
+        if (!message && !file) return;
 
-    const formData = new FormData();
-    if (message) formData.append('message', message);
-    if (file) formData.append('file', file);
+        if (message) appendMessage('You', message);
 
-    fetch('/api/chat', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.reply) {
-            appendMessage('Chatbot', data.reply);
-        } else {
-            appendMessage('Chatbot', '(нет ответа от сервера)');
-        }
-    })
-    .catch(() => {
-        appendMessage('Chatbot', 'Ошибка при соединении с сервером');
-    });
+        const formData = new FormData();
+        if (message) formData.append('message', message);
+        if (file) formData.append('file', file);
 
-    input.value = '';
-    fileInput.value = '';
-};
+        fetch('/api/chat', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            appendMessage('Chatbot', data.reply || '(нет ответа от сервера)');
+        })
+        .catch(() => {
+            appendMessage('Chatbot', 'Ошибка при соединении с сервером');
+        });
+
+        input.value = '';
+        fileInput.value = '';
+    };
+});
