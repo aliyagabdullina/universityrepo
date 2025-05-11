@@ -3,7 +3,8 @@ from openai import OpenAI
 import json
 import logging
 from typing import Dict, Any
-import BaseAgent
+from BaseAgent import BaseAgent
+
 
 class ParserAgent(BaseAgent):
     def __init__(self, client: OpenAI):

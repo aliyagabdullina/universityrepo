@@ -2,7 +2,7 @@ import openai
 from openai import OpenAI
 import json
 from typing import Dict, Any
-import BaseAgent
+from BaseAgent import BaseAgent
 
 class ValidatorAgent(BaseAgent):
     def __init__(self, client: OpenAI):

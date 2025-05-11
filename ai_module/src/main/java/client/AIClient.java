@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 public class AIClient {
     public static String runPythonScript(String input) throws Exception {
-        ProcessBuilder pb = new ProcessBuilder("python", "python_scripts/ai_module.py", input);
+        ProcessBuilder pb = new ProcessBuilder("python", "ai.py", input);
         Process p = pb.start();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
