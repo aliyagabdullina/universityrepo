@@ -28,6 +28,7 @@
         <module>utils_uni</module>
         <module>myLogger</module>
         <module>communications</module>
+        <module>ai_module</module>
         <!-- Add other modules if needed -->
     </modules>
 

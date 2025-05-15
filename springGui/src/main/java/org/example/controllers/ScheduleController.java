@@ -62,7 +62,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class ScheduleController {
     private static final VocabularyFiles _vocabularyFiles = new VocabularyFilesImpl();
-    private final File root = new File("/Users/aliya/Documents/Курсач/AI_Scheduling");
+    private final File root = new File("/Users/aliya/Documents/Курсач/School Scheduling/school10-11");
 
     private AssignmentCollector _assignmentCollector;
     private SchoolDataCollector _dataCollector;
@@ -79,10 +79,11 @@ public class ScheduleController {
 
     private int universityId = 1;
 
+
     private Schedule _result;
 
-    @GetMapping("/schedule2")
-    public String schedule(Model model) throws SQLException {
+    @GetMapping("/schedule")
+    public String schedule(Model model) {
         _fileSettings = initializeSettings(root);
         _dataLoader = new DataLoaderImpl(_fileSettings);
         _dataCollector = loadData();
@@ -109,35 +110,7 @@ public class ScheduleController {
 
         scheduleBuilder.setSettings(_scheduleBuilderSettings);
 
-        /*_dataLoader = new DataLoaderDBImpl(universityId);
-        _dataCollector = loadDataDB();
-        _timeSlots = loadTimeSlots();
-        _timeTablesCollector = loadCollector();
-        _assignmentCollector = loadAssignmentsCollector();
-        _scheduleBuilderSettings = new DtoScheduleBuilderSettings();
-
-        ScheduleBuilder scheduleBuilder = new ScheduleBuilderImpl();
-        scheduleBuilder.setSchoolDataCollector(_dataCollector);
-
-        List<WeeklyTimeSlot> timeSlotSequence = createTimeSlotSequence(_timeSlots);
-        scheduleBuilder.setTimeSlotSequence(timeSlotSequence);
-
-        SchedulingInputData scheduleInputData = _schedulingInputData != null ? _schedulingInputData
-                : createSchedulingInputData();
-        scheduleBuilder.setScheduleInputData(scheduleInputData);
-
-        ScheduleConstraintsAccumulator constraintAccumulator = initializeScheduleConstraints();
-        scheduleBuilder.setConstraintAccumulator(constraintAccumulator);
-
-        ScheduleObjectiveAccumulator objectiveAccumulator = new ScheduleObjectiveAccumulatorImpl();
-        scheduleBuilder.setObjectiveAccumulator(objectiveAccumulator);
-
-        scheduleBuilder.setSettings(_scheduleBuilderSettings);*/
-
-        //_result = scheduleBuilder.solve();
-        GlobalScheduler globalScheduler = new GlobalScheduler( _dataCollector, timeSlotSequence,
-                scheduleInputData, constraintAccumulator, objectiveAccumulator, _scheduleBuilderSettings);
-        _result = globalScheduler.generateSchedule();  //LS
+        _result = scheduleBuilder.solve();
         System.out.println(_result);
         System.out.println(_result.getAllLessons().map(Lesson::getTimeSlot).map(WeeklyTimeSlot::getDayOfWeek).toList());
         ScheduleDto sch = new ScheduleDto(_result);
@@ -180,7 +153,7 @@ public class ScheduleController {
     }
 
 
-    @GetMapping("/schedule")
+    @GetMapping("/schedule2")
     public String schedule2() throws SQLException {
         _dataLoader = new DataLoaderDBImpl(universityId);
         _dataCollector = loadDataDB();
@@ -209,8 +182,7 @@ public class ScheduleController {
 
         GlobalScheduler globalScheduler = new GlobalScheduler( _dataCollector, timeSlotSequence,
                 scheduleInputData, constraintAccumulator, objectiveAccumulator, _scheduleBuilderSettings);
-        _result = globalScheduler.generateSchedule();  //LS
-        //_result = scheduleBuilder.solve();  //MILP
+        _result = globalScheduler.generateSchedule();
 
         return "schedule";
     }

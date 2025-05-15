@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/styles/styleDataWithTimeSlots.css">
+        <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
     <body>
         <section>
@@ -48,64 +49,37 @@
                     </div>
                     <div class="main">
                         <form action="/teacher/create" method="post">
-                          <div class="input-grid">
                             <div class="input-block">
-                                <h5>ФИО преподавателя</h5>
-                                    <input type="text" name="name" placeholder="Введите ФИО" required
-                                           value="<#if teacher?? && teacher.name??>${teacher.name}</#if>">
+                                <h5>ФИО преподавателя</h5><input type="text" name="name" placeholder="Введите  ФИО"/>
                             </div>
-
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
-                                <h5>Почта</h5>
-                                    <input type="text" name="email" placeholder="Введите почту" required
-                                           value="<#if teacher?? && teacher.email??>${teacher.email}</#if>">
+                                <h5>Почта</h5><input type="text" name="email" placeholder="Введите  почту"/>
                             </div>
-
-
-
-
-
-
-
+                            <div class="spacer-bottom"></div>
+                            <div class="input-block">
+                                <h5>Пароль</h5><input type="text" name="password" placeholder="Введите  пароль"/>
+                            </div>
+                            <div class="spacer-bottom"></div>
                              <div class="input-block">
-                               <h5>Предметы</h5>
-                               <div class="custom-multiselect" id="courseSelector">
-                                 <div class="selected-options">
-                                   <#if teacher?? && teacher.courses?? && (teacher.courses?size > 0)>
-                                     ${teacher.courses?map(c -> c.name)?join(", ")}
-                                   <#else>
-                                     Выберите предметы
-                                   </#if>
-                                 </div>
-                                 <div class="options-list hidden">
-                                   <#list courses as course>
-                                     <#assign isSelected = (teacher?? && teacher.courses?? && teacher.courses?seq_contains(course))>
-                                     <div class="option-item <#if isSelected>selected</#if>" data-id="${course.courseId}">
-                                       ${course.name}
-                                     </div>
-                                   </#list>
-                                 </div>
-                               </div>
-                               <input type="hidden" name="courseId" id="selectedCourses"
-                                      value="<#if teacher?? && teacher.courses??>${teacher.courses?map(c -> c.courseId)?join(",")}</#if>">
-                             </div>
-
-
-
-
-
-
+                                  <h5>Предметы</h5>
+                                  <div class="select-block custom-select-data">
+                                      <select name="courseId" multiple>
+                                        <option value="" disabled selected >Выберите предметы</option>
+                                          <#list courses as course>
+                                              <option value="${course.courseId}">${course.name}</option>
+                                          </#list>
+                                      </select><br>
+                                  </div>
+                              </div>
+                            <div class="spacer-bottom"></div>
                             <div class="input-block">
-                                <h5>Кол-во пар в день</h5>
-                                    <input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во пар в день" required
-                                           value="<#if teacher?? && teacher.maxNumberOfLessons??>${teacher.maxNumberOfLessons}</#if>">
+                                <h5>Кол-во пар в день</h5><input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во пар в день"/>
                             </div>
-
-                          <div class="input-block">
-                              <h5>Должность</h5>
-                                  <input type="text" name="degree" placeholder="Введите должность" required
-                                         value="<#if teacher?? && teacher.degree??>${teacher.degree}</#if>">
-                          </div>
+                            <div class="spacer-bottom"></div>
+                            <div class="input-block">
+                                <h5>Должность</h5><input type="text" name="degree" placeholder="Введите должность"/>
+                            </div>
                             <div class="spacer-bottom"></div>
                             <div class="input-block">
                               <h5>Доступные временные слоты</h5>
@@ -127,18 +101,10 @@
                                   </tbody>
                                 </table>
                                 <div class="color-legend">
-                                  <div class="color-option-wrapper" data-tooltip="Не подходит">
-                                    <div class="color-option level-2" data-level="3"></div>
-                                  </div>
-                                  <div class="color-option-wrapper" data-tooltip="Не желательно">
-                                    <div class="color-option level-1" data-level="2"></div>
-                                  </div>
-                                  <div class="color-option-wrapper" data-tooltip="Желательно">
-                                    <div class="color-option level-0" data-level="1"></div>
-                                  </div>
-                                  <div class="color-option-wrapper" data-tooltip="Ничего не выбрано">
-                                    <div class="color-option level-disabled" data-level="0"></div>
-                                  </div>
+                                  <div class="color-option level-2" data-level="2" title="Высокий приоритет"></div>
+                                  <div class="color-option level-1" data-level="1" title="Средний приоритет"></div>
+                                  <div class="color-option level-0" data-level="0" title="Низкий приоритет"></div>
+                                  <div class="color-option level-disabled" data-level="3" title="Недоступно"></div>
                                 </div>
                               </div>
                             </div>
@@ -147,10 +113,7 @@
                             <input type="hidden" name="availabilityGrid" id="availabilityGrid">
 
 
-
-                        </form>
-                    </div>
-                  <div class="footer">
+                            <div class="footer">
                             <div class="footer-buttons-container">
 
                                 <button class="footer-button" type="button" onclick="window.history.back()">
@@ -163,6 +126,8 @@
                               </div>
                             </div>
                         </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -227,105 +192,8 @@
             // начальное обновление
             updateHiddenInput();
           });
-          document.addEventListener("DOMContentLoaded", () => {
-          const multiselect = document.getElementById("courseSelector");
-          const selectedDiv = multiselect.querySelector(".selected-options");
-          const optionsList = multiselect.querySelector(".options-list");
-          const hiddenInput = document.getElementById("selectedCourses");
-          const selectedIds = new Set();
-
-          // Открыть/закрыть список
-          selectedDiv.addEventListener("click", (e) => {
-            optionsList.classList.toggle("hidden");
-          });
-
-          // Выбор/отмена выбора
-          optionsList.addEventListener("click", (e) => {
-            if (e.target.classList.contains("option-item")) {
-              const id = e.target.dataset.id;
-              if (selectedIds.has(id)) {
-                selectedIds.delete(id);
-                e.target.classList.remove("selected");
-              } else {
-                selectedIds.add(id);
-                e.target.classList.add("selected");
-              }
-              updateSelectedDisplay();
-            }
-          });
-
-          function updateSelectedDisplay() {
-            if (selectedIds.size === 0) {
-              selectedDiv.textContent = "Выберите предметы";
-            } else {
-              const items = Array.from(optionsList.querySelectorAll(".option-item"))
-                .filter(item => selectedIds.has(item.dataset.id))
-                .map(item => item.textContent);
-              selectedDiv.textContent = items.join(", ");
-            }
-            hiddenInput.value = Array.from(selectedIds).join(",");
-          }
-
-          // Закрытие при клике вне
-          document.addEventListener("click", (e) => {
-            if (!multiselect.contains(e.target)) {
-              optionsList.classList.add("hidden");
-            }
-          });
-        });
-
-        const preselectedCourses = [
-            <#if teacher?? && teacher.courses??>
-              <#list teacher.courses as c>"${c.courseId}"<#if c_has_next>, </#if></#list>
-            </#if>
-          ];
-
-          <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const multiselect = document.getElementById("courseSelector");
-            const selectedDiv = multiselect.querySelector(".selected-options");
-            const optionsList = multiselect.querySelector(".options-list");
-            const hiddenInput = document.getElementById("selectedCourses");
-
-            const selectedIds = new Set();
-
-            // Заполнение selectedIds, если есть предзаполненные курсы
-            const preselected = hiddenInput.value.split(",").map(v => v.trim()).filter(Boolean);
-            preselected.forEach(id => selectedIds.add(id));
-
-            // Применить предзаполненные стили
-            const optionItems = optionsList.querySelectorAll(".option-item");
-            optionItems.forEach(item => {
-              if (selectedIds.has(item.dataset.id)) {
-                item.classList.add("selected");
-              }
-            });
-            updateSelectedDisplay();
-
-            // Открыть/закрыть список
-            selectedDiv.addEventListener("click", () => {
-              optionsList.classList.toggle("hidden");
-            });
-
-            // Клик по предмету
-            optionsList.addEventListener("click", (e) => {
-              if (e.target.classList.contains("option-item")) {
-                const id = e.target.dataset.id;
-                if (selectedIds.has(id)) {
-                  selectedIds.delete(id);
-                  e.target.classList.remove("selected");
-                } else {
-                  selectedIds.add(id);
-                  e.target.classList.add("selected");
-                }
-                updateSelectedDisplay();
-              }
-            });
-
-            // Обновить видимость и скрытое поле
-            function updateSelectedDisplay() {
-              if (selectedIds.size === 0) {
-
         </script>
+
+
     </body>
 </html>

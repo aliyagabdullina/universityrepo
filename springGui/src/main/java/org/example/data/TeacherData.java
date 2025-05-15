@@ -16,13 +16,14 @@ public class TeacherData {
     private int teacherId;
     @Column(name = "name")
     private String name;
-    @Column(name = "place_id")
-    private int placeId;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
     @Column(name = "max_number_of_lessons")
-    private int maxNumberOfLessons;
-    @Column(name = "timeslot_id")
-    private int timeslotId;
-
+    private Integer maxNumberOfLessons;
+    @Column(name = "degree")
+    private String degree;
 
     @Column(name = "university_id")
     private int universityId;

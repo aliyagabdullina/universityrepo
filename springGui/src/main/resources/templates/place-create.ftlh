@@ -52,22 +52,28 @@
                     <form action="/place/create" method="post" onsubmit="return handleFormSubmit()">
                         <div class="input-block">
                             <h5>Аудитория</h5>
-                            <input type="text" name="name" placeholder="Введите аудиторию" required
-                                   value="<#if place?? && place.name??>${place.name}</#if>">
+                            <input type="text" name="name" placeholder="Введите аудиторию" required>
                         </div>
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Вместимость</h5>
-                                <input type="text" name="capacity" placeholder="Введите кол-во мест" required
-                                       value="<#if place?? && place.capacity??>${place.capacity}</#if>">
+                            <input type="text" name="capacity" placeholder="Введите кол-во мест" required>
                         </div>
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
-                            <h5>Описание</h5>
-                                <input type="text" name="description" placeholder="Введите описание" required
-                                       value="<#if place?? && place.description??>${place.description}</#if>">
+                            <h5>Тип</h5>
+                            <div class="custom-select custom-select-data">
+                                <select id="typeSelect" name="description" onchange="toggleCustomInput()">
+                                    <option value="" disabled selected>Выберите тип аудитории</option>
+                                    <option value="Лекционная">Лекционная</option>
+                                    <option value="Практическая">Практическая</option>
+                                    <option value="Лаборатория">Лаборатория</option>
+                                    <option value="Компьютерный класс">Компьютерный класс</option>
+                                    <option value="Другое">Другое</option>
+                                </select>
+                            </div>
+                            <input type="text" id="customTypeInput" name="customDescription" placeholder="Введите свой тип">
                         </div>
-
                         <div class="footer">
                             <div class="footer-buttons-container">
 

@@ -52,20 +52,17 @@
                     <form action="/place/create" method="post" onsubmit="return handleFormSubmit()">
                         <div class="input-block">
                             <h5>Предмет</h5>
-                            <input type="text" name="name" placeholder="Введите предмет" required
-                                                               value="<#if course?? && course.name??>${course.name}</#if>">
+                            <input type="text" name="name" placeholder="Введите предмет" required>
                         </div>
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Кол-во пар в неделю</h5>
-                            <input type="text" name="numOfLessonsPerWeek" placeholder="Введите кол-во пар в неделю" required
-                                                                                           value="<#if course?? && course.numOfLessonsPerWeek??>${course.numOfLessonsPerWeek}</#if>">
+                            <input type="text" name="numOfLessonsPerWeek" placeholder="Введите кол-во пар в неделю" required>
                         </div>
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Кол-во пар в день</h5>
-                            <input type="text" name="maxLessonsPerDay" placeholder="Введите кол-во пар в день" required
-                                                      value="<#if course?? && course.maxLessonsPerDay??>${course.maxLessonsPerDay}</#if>">
+                            <input type="text" name="maxLessonsPerDay" placeholder="Введите кол-во пар в день" required>
                         </div>
 
                         <div class="footer">

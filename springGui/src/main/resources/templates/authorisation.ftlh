@@ -36,8 +36,8 @@
             event.preventDefault(); // Предотвращаем отправку формы
 
             // Пример правильных учетных данных (для демонстрации)
-            const correctUsername = "test_login";
-            const correctPassword = "test_password";
+            const correctUsername = "admin";
+            const correctPassword = "12345";
 
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;

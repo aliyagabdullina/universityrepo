@@ -85,6 +85,7 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
     }
 
 
+
     private SchedulingInput createSchedulingInput() {
         List<Teacher> teachers = _dataCollector.getTeachers().toList();
         List<Group> groups = _dataCollector.getGroups().toList();
