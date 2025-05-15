@@ -74,13 +74,18 @@
                     <form action="/teacher/create" method="post">
                         <div class="input-block">
                             <h5>Название группы</h5>
-                            <input type="text" name="name" placeholder="Введите группу" />
+                                <input type="text" name="name" placeholder="Введите группу" required
+                                       value="<#if group?? && group.name??>${group.name}</#if>">
                         </div>
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Студенты</h5>
-                            <input type="text" name="numOfStudents" placeholder="Введите кол-во студентов" />
+                                <input type="text" name="numOfStudents" placeholder="Введите кол-во студентов" required
+                                       value="<#if group?? && group.numOfStudents??>${group.numOfStudents}</#if>">
                         </div>
+
+
+                        //селектор
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Преподаватели</h5>
@@ -94,11 +99,16 @@
                                 <input type="hidden" name="teacherId" id="teacher-hidden-input" />
                             </div>
                         </div>
+
+
+
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                             <h5>Максимум пар в день</h5>
-                            <input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во макс пар" />
+                                <input type="text" name="maxNumberOfLessons" placeholder="Введите кол-во макс пар" required
+                                       value="<#if group?? && group.maxNumberOfLessons??>${group.maxNumberOfLessons}</#if>">
                         </div>
+
                         <div class="spacer-bottom"></div>
                         <div class="input-block">
                           <h5>Доступные временные слоты</h5>

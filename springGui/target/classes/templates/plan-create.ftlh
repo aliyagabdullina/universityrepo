@@ -91,10 +91,13 @@
                             </div>
                             <div class="spacer-bottom"></div>
 
+
                             <div class="input-block">
                                 <h5>Кол-во часов</h5>
-                                <input type="text" name="hours" placeholder="Введите кол-во часов" />
+                                    <input type="text" name="hours" placeholder="Введите кол-во часов" required
+                                           value="<#if plan?? && plan.hours??>${plan.hours}</#if>">
                             </div>
+
 
                             <div class="footer">
                                 <div class="footer-buttons-container">

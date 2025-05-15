@@ -80,22 +80,21 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                            <tr>
+                            <tr onclick="window.location.href='/student/edit/${student.id}'" style="cursor: pointer;">
                                     <th>ФИО студента</th>
                                     <th>Почта</th>
+                                    <th>Пароль</th>
                                     <th>Группа</th>
                                     <th>Степень</th>
                                 </tr>
 
                                 <#list students as student>
-
-                                <tr onclick="window.location.href='/student/edit/${student.studentId}'" style="cursor: pointer;">
-
-
+                                    <tr>
                                         <td>${student.name}</td>
                                         <td>${student.email}</td>
-                                        <td>${student.groupId}</td>
-                                        <td>${student.degree}</td>
+                                        <td>${student.password}</td>
+                                        <td>${student.group}</td>
+                                        <td>${student.role}</td>
                                     </tr>
                                 </#list>
                             </table>

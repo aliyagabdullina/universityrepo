@@ -90,7 +90,7 @@ public class ProgramsController {
     }
     @GetMapping("/program/edit/{id}")
     public String editProgram(@PathVariable int id, Model model) {
-        ProgramData group = programsService.getProgramById(id);
+        ProgramData program = programsService.getProgramById(id);
         model.addAttribute("program", program);
         return "program-create";  // возвращаем шаблон program-create.ftlh
     }

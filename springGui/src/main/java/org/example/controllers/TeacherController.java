@@ -3,6 +3,7 @@ package org.example.controllers;
 import course.Course;
 import lombok.RequiredArgsConstructor;
 import org.example.CsvParser;
+import org.example.data.CourseData;
 import org.example.data.PlaceData;
 import org.example.data.TeacherData;
 import org.example.repositories.CoursesRepository;
@@ -85,7 +86,7 @@ public class TeacherController {
     @GetMapping("/teacher/edit/{id}")
     public String editTeacher(@PathVariable int id, Model model) {
         TeacherData teacher = teacherService.getTeacherById(id);
-        List<Course> courses = coursesService.listCourses();
+        List<CourseData> courses = courseRepository.findAll();
         model.addAttribute("teacher", teacher);
         model.addAttribute("courses", courses);
         return "teacher-create";  // возвращаем шаблон teacher-create.ftlh
