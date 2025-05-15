@@ -3,6 +3,7 @@ package org.example.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.data.GroupData;
+import org.example.data.TeacherData;
 import org.example.repositories.GroupsRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class GroupsService {
             groupsRepository.findByName(name);
         }
         return groupsRepository.findAll();
+    }
+
+    public List<GroupData> listGroupsByUniversity(int universityId) {
+        return groupsRepository.findByUniversityId(universityId);
     }
 
     public void saveGroup(GroupData group) {

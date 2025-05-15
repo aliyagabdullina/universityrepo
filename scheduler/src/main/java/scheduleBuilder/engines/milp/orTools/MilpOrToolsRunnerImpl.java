@@ -15,6 +15,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.OptionalDouble;
 import java.util.OptionalLong;
 import java.util.stream.Stream;
@@ -53,7 +54,7 @@ public class MilpOrToolsRunnerImpl implements  MilpOrToolsRunner {
         _mpSolver.enableOutput();
         MPSolverParameters parameters = createMpSolverParameters();
         //_timeLimitInMs.ifPresent(_mpSolver::setTimeLimit);
-        _mpSolver.setTimeLimit(600000);
+        _mpSolver.setTimeLimit(60000);
         //_mpSolver.setNumThreads(2);
 
         try {
@@ -61,14 +62,19 @@ public class MilpOrToolsRunnerImpl implements  MilpOrToolsRunner {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        /*
+
         MPSolver.ResultStatus resultStatus  = _mpSolver.solve(parameters);
+
+        //if (resultStatus == MPSolver.ResultStatus.OPTIMAL || resultStatus == MPSolver.ResultStatus.FEASIBLE) {
+            saveSolutionToFile();
+        //}
+
 
         SolutionStatus solutionStatus = decodeResultStatus(resultStatus);
         Stream<Pair<String, Double>> varLabelValueStream = Arrays.stream(_mpSolver.variables())
                 .map(mpVariable -> new Pair<>(mpVariable.name(), mpVariable.solutionValue()));
         double objective = _mpSolver.objective().value();
-         */
+
 
         MilpOrToolsResult result = exportFromCplexXML();
         /*
@@ -82,8 +88,23 @@ public class MilpOrToolsRunnerImpl implements  MilpOrToolsRunner {
         return result;
     }
 
+    private void saveSolutionToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/aliya/Documents/Курсач/AI_Scheduling/buf/buf_solution.sol"))) {
+            for (MPVariable var : _mpSolver.variables()) {
+                double value = var.solutionValue();
+                if (Math.abs(value) > 1e-6) { // только значимые значения
+                    writer.write(var.name() + " " + value);
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save solution to file: " + "/Users/aliya/Documents/Курсач/AI_Scheduling/buf/buf_solution.sol", e);
+        }
+    }
+
+
     private MilpOrToolsResult exportFromCplexXML() {
-        File file = new File("/Users/aliya/Documents/Курсач/School Scheduling/school10-11/buf/buf_solution.sol");
+        File file = new File("/Users/aliya/Documents/Курсач/AI_Scheduling/buf/buf_solution.sol");
         Stream<Pair<String, Double>> varLabelValueStream = CplexSolutionReader.extractNonZeroVarValues(file);
 
         SolutionStatus solutionStatus = SolutionStatus.FEASIBLE;
@@ -92,7 +113,7 @@ public class MilpOrToolsRunnerImpl implements  MilpOrToolsRunner {
     }
 
     private void saveModelInMps() throws IOException {
-        FileWriter fWriter = new FileWriter("/Users/aliya/Documents/Курсач/School Scheduling/school10-11/buf/buf_lp.lp");
+        FileWriter fWriter = new FileWriter("/Users/aliya/Documents/Курсач/AI_Scheduling/buf/buf_lp.lp");
         BufferedWriter writer = new BufferedWriter(fWriter);
             writer.write(_mpSolver.exportModelAsLpFormat());
         writer.close();

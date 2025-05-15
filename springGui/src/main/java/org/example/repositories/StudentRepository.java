@@ -9,5 +9,7 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<StudentData, Integer> {
 
     List<StudentData> findByName(String name);
+    List<StudentData> findByUniversityId(Integer universityId);
+
 
 }

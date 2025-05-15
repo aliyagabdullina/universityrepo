@@ -24,10 +24,11 @@ public class GroupsController {
     private final GroupsService groupsService;
     private final PlacesRepository placeRepository;
     private final TeacherRepository teacherRepository;
+    private int universityId= 1;
 
     @GetMapping("/groups")
     public String groups(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("groups", groupsService.listGroups(name));
+        model.addAttribute("groups", groupsService.listGroupsByUniversity(universityId));
         model.addAttribute("places", placeRepository.findAll());
         model.addAttribute("teachers", teacherRepository.findAll());
         return "groups";

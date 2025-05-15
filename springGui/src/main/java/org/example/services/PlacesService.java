@@ -3,6 +3,7 @@ package org.example.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.data.PlaceData;
+import org.example.data.TeacherData;
 import org.example.repositories.PlacesRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class PlacesService {
         }
         return placesRepository.findAll();
     }
+    public List<PlaceData> listPlacesByUniversity(int universityId) {
+        return placesRepository.findByUniversityId(universityId);
+    }
 
     public void savePlace(PlaceData place) {
         log.info("Saved new teacher " + place);
@@ -38,7 +42,7 @@ public class PlacesService {
         placesRepository.deleteById(id);
     }
 
-    public Object getPlaceById(int id) {
+    public PlaceData getPlaceById(int id) {
         if (placesRepository.findById(id).isPresent()) {
             return placesRepository.findById(id).get();
         }

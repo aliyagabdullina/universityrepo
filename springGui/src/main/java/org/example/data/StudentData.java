@@ -2,7 +2,6 @@ package org.example.data;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Id;
 import javax.persistence.*;
 
 @Entity
@@ -24,5 +23,8 @@ public class StudentData {
     private int groupId;
     @Column(name = "degree")
     private String degree;
+
+    @Column(name = "university_id")
+    private Integer universityId;
 
 }

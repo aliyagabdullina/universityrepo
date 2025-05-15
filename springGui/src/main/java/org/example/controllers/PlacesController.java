@@ -20,10 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlacesController {
     private final PlacesService placeService;
+    private int universityId= 1;
 
     @GetMapping("/places")
     public String places(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("places", placeService.listPlaces(name));
+        model.addAttribute("places", placeService.listPlacesByUniversity(universityId));
         return "places";
     }
     @PostMapping("/places")

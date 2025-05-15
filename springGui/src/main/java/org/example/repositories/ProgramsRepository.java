@@ -8,5 +8,7 @@ import java.util.List;
 public interface ProgramsRepository extends JpaRepository<ProgramData, Integer> {
 
     List<ProgramData> findByName(String name);
+    List<ProgramData> findByUniversityId(Integer universityId);
+
 
 }

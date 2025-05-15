@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Groups")
@@ -18,10 +19,11 @@ public class GroupData {
     private String name;
     @Column(name = "num_of_students")
     private int numOfStudents;
-    @Column(name = "place_id")
-    private int placeId;
     @Column(name = "max_number_of_lessons")
     private int maxNumberOfLessons;
-    @Column(name = "timeslot_id")
-    private int timeslotId;
+    @Column(name = "university_id")
+    private Integer universityId;
+
+    @ManyToMany(mappedBy = "groups")
+    private List<ProgramData> programs;
 }

@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 
+import algorithms.GlobalScheduler;
 import collector.SchoolDataCollector;
 import constraint.OptionalConstraintsSettings;
 import constraint.OptionalConstraintsSettingsImpl;
@@ -9,10 +10,7 @@ import constraint.assignment.AssignmentCollector;
 import constraint.assignment.AssignmentCollectorImpl;
 import constraint.timeConstraint.*;
 import group.Group;
-import input.DataLoader;
-import input.DataLoaderImpl;
-import input.MyFileReader;
-import input.MyFileReaderCsv;
+import input.*;
 import lesson.Lesson;
 import lesson.LessonRequest;
 import lesson.LessonRequestsBuilder;
@@ -21,15 +19,17 @@ import lombok.RequiredArgsConstructor;
 import org.example.DataBaseInteractor;
 import org.example.DataBaseInteractorImpl;
 import org.example.SchoolDataCollectorImpl;
+import org.example.data.ScheduleDto;
+import org.example.data.ScheduleEntry;
 import org.example.repositories.GroupsRepository;
 import org.example.repositories.PlacesRepository;
 import org.example.repositories.TeacherRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import output.DtoFileSettings;
 import pair.Pair;
+import person.Student;
 import person.Teacher;
 import place.Place;
 import programSettings.VocabularyFiles;
@@ -50,7 +50,7 @@ import time.WeeklyTimeSlot;
 import time.WeeklyTimeSlotImpl;
 
 import java.io.File;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -61,11 +61,8 @@ import java.util.stream.Stream;
 @Controller
 @RequiredArgsConstructor
 public class ScheduleController {
-    private static final String DB_URL = "jdbc:postgresql://82.97.244.207:5432/school";
-    private static final String USER = "userschool";
-    private static final String PASSWORD = "passwordschool";
-    private static VocabularyFiles _vocabularyFiles = new VocabularyFilesImpl();
-    private File root = new File("/Users/aliya/Documents/Курсач/School Scheduling/school10-11");
+    private static final VocabularyFiles _vocabularyFiles = new VocabularyFilesImpl();
+    private final File root = new File("/Users/aliya/Documents/Курсач/AI_Scheduling");
 
     private AssignmentCollector _assignmentCollector;
     private SchoolDataCollector _dataCollector;
@@ -80,11 +77,12 @@ public class ScheduleController {
     private final GroupsRepository groupsRepository;
     private final TeacherRepository teacherRepository;
 
+    private int universityId = 1;
 
     private Schedule _result;
 
-    @GetMapping("/schedule")
-    public String schedule() {
+    @GetMapping("/schedule2")
+    public String schedule(Model model) throws SQLException {
         _fileSettings = initializeSettings(root);
         _dataLoader = new DataLoaderImpl(_fileSettings);
         _dataCollector = loadData();
@@ -111,9 +109,195 @@ public class ScheduleController {
 
         scheduleBuilder.setSettings(_scheduleBuilderSettings);
 
-        _result = scheduleBuilder.solve();
+        /*_dataLoader = new DataLoaderDBImpl(universityId);
+        _dataCollector = loadDataDB();
+        _timeSlots = loadTimeSlots();
+        _timeTablesCollector = loadCollector();
+        _assignmentCollector = loadAssignmentsCollector();
+        _scheduleBuilderSettings = new DtoScheduleBuilderSettings();
+
+        ScheduleBuilder scheduleBuilder = new ScheduleBuilderImpl();
+        scheduleBuilder.setSchoolDataCollector(_dataCollector);
+
+        List<WeeklyTimeSlot> timeSlotSequence = createTimeSlotSequence(_timeSlots);
+        scheduleBuilder.setTimeSlotSequence(timeSlotSequence);
+
+        SchedulingInputData scheduleInputData = _schedulingInputData != null ? _schedulingInputData
+                : createSchedulingInputData();
+        scheduleBuilder.setScheduleInputData(scheduleInputData);
+
+        ScheduleConstraintsAccumulator constraintAccumulator = initializeScheduleConstraints();
+        scheduleBuilder.setConstraintAccumulator(constraintAccumulator);
+
+        ScheduleObjectiveAccumulator objectiveAccumulator = new ScheduleObjectiveAccumulatorImpl();
+        scheduleBuilder.setObjectiveAccumulator(objectiveAccumulator);
+
+        scheduleBuilder.setSettings(_scheduleBuilderSettings);*/
+
+        //_result = scheduleBuilder.solve();
+        GlobalScheduler globalScheduler = new GlobalScheduler( _dataCollector, timeSlotSequence,
+                scheduleInputData, constraintAccumulator, objectiveAccumulator, _scheduleBuilderSettings);
+        _result = globalScheduler.generateSchedule();  //LS
+        System.out.println(_result);
+        System.out.println(_result.getAllLessons().map(Lesson::getTimeSlot).map(WeeklyTimeSlot::getDayOfWeek).toList());
+        ScheduleDto sch = new ScheduleDto(_result);
+        model.addAttribute("schedule", sch);
+        return "schedule";
+    }
+
+    @GetMapping("/api/schedule")
+    @ResponseBody
+    public Map<String, Object> getSchedule() throws SQLException {
+        //_fileSettings = initializeSettings(root);
+        _dataLoader = new DataLoaderDBImpl(universityId);
+        _dataCollector = loadDataDB();
+
+        List<Teacher> teachers = _dataCollector.getTeachers()
+                .toList();
+        List<Student> students = _dataCollector.getStudents()
+                .toList();
+        List<Group> groups = _dataCollector.getGroups()
+                .toList();
+        List<Place> places = _dataCollector.getPlaces()
+                .toList();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("teachers", teachers);
+        data.put("students", students);
+        data.put("groups", groups);
+        data.put("places", places);
+
+        Map<String, List<ScheduleEntry>> groupScheduleMap = getGroupScheduleMap();
+        data.put("groupScheduleMap", groupScheduleMap);
+        Map<String, List<ScheduleEntry>> teacherScheduleMap = getTeacherScheduleMap();
+        data.put("teacherScheduleMap", teacherScheduleMap);
+        //Map<String, List<ScheduleEntry>> studentScheduleMap = getStudentScheduleMap();
+        //data.put("studentScheduleMap", studentScheduleMap);
+        Map<String, List<ScheduleEntry>> placeScheduleMap = getPlaceScheduleMap();
+        data.put("placeScheduleMap", placeScheduleMap);
+
+        return data;
+    }
+
+
+    @GetMapping("/schedule")
+    public String schedule2() throws SQLException {
+        _dataLoader = new DataLoaderDBImpl(universityId);
+        _dataCollector = loadDataDB();
+        _timeSlots = loadTimeSlots();
+        _timeTablesCollector = loadCollector();
+        _assignmentCollector = loadAssignmentsCollector();
+        _scheduleBuilderSettings = new DtoScheduleBuilderSettings();
+
+        ScheduleBuilder scheduleBuilder = new ScheduleBuilderImpl();
+        scheduleBuilder.setSchoolDataCollector(_dataCollector);
+
+        List<WeeklyTimeSlot> timeSlotSequence = createTimeSlotSequence(_timeSlots);
+        scheduleBuilder.setTimeSlotSequence(timeSlotSequence);
+
+        SchedulingInputData scheduleInputData = _schedulingInputData != null ? _schedulingInputData
+                : createSchedulingInputData();
+        scheduleBuilder.setScheduleInputData(scheduleInputData);
+
+        ScheduleConstraintsAccumulator constraintAccumulator = initializeScheduleConstraints();
+        scheduleBuilder.setConstraintAccumulator(constraintAccumulator);
+
+        ScheduleObjectiveAccumulator objectiveAccumulator = new ScheduleObjectiveAccumulatorImpl();
+        scheduleBuilder.setObjectiveAccumulator(objectiveAccumulator);
+
+        scheduleBuilder.setSettings(_scheduleBuilderSettings);
+
+        GlobalScheduler globalScheduler = new GlobalScheduler( _dataCollector, timeSlotSequence,
+                scheduleInputData, constraintAccumulator, objectiveAccumulator, _scheduleBuilderSettings);
+        _result = globalScheduler.generateSchedule();  //LS
+        //_result = scheduleBuilder.solve();  //MILP
 
         return "schedule";
+    }
+
+    private String getTeacherNames(Lesson lesson) {
+        return lesson.getTeachers().map(Teacher::getName).collect(Collectors.joining(", "));
+    }
+    private Map<String, List<ScheduleEntry>> getGroupScheduleMap() {
+        // Собираем список всех уроков
+        List<Lesson> lessons = _result.getAllLessons().toList();
+
+        // Группируем уроки по группам (group)
+        Map<String, List<ScheduleEntry>> groupScheduleMap = lessons.stream()
+                .collect(Collectors.groupingBy(
+                        lesson -> lesson.getGroup().getName(), // Группируем по имени группы
+                        Collectors.mapping(lesson -> new ScheduleEntry(
+                                lesson.getCourse().getName(),
+                                getTeacherNames(lesson),
+                                lesson.getPlace().getName(),
+                                lesson.getTimeSlot().getDayOfWeek().name(),
+                                getLessonNumberForTimeSlot(lesson.getTimeSlot())
+                        ), Collectors.toList())
+                ));
+        return groupScheduleMap;
+    }
+    private Map<String, List<ScheduleEntry>> getTeacherScheduleMap() {
+        // Собираем список всех уроков
+        List<Lesson> lessons = _result.getAllLessons().toList();
+        // Группируем уроки по учителям
+        Map<String, List<ScheduleEntry>> teacherScheduleMap = new HashMap<>();
+
+        for (Lesson lesson : lessons) {
+            // Для каждого урока проходим по всем учителям
+            for (Teacher teacher : lesson.getTeachers().toList()) {
+                // Создаём ScheduleEntry для этого урока
+                ScheduleEntry entry = new ScheduleEntry(
+                        lesson.getCourse().getName(),
+                        getTeacherNames(lesson), // Список учителей
+                        lesson.getPlace().getName(),
+                        lesson.getTimeSlot().getDayOfWeek().name(),
+                        getLessonNumberForTimeSlot(lesson.getTimeSlot())
+                );
+
+                // Если этого учителя ещё нет в мапе, создаём пустой список
+                teacherScheduleMap.computeIfAbsent(teacher.getName(), k -> new ArrayList<>()).add(entry);
+            }
+        }
+        return teacherScheduleMap;
+    }
+
+    private Map<String, List<ScheduleEntry>> getPlaceScheduleMap() {
+        // Собираем список всех уроков
+        List<Lesson> lessons = _result.getAllLessons().toList();
+
+        // Группируем уроки по местам (кабинетам)
+        Map<String, List<ScheduleEntry>> placeScheduleMap = lessons.stream()
+                .collect(Collectors.groupingBy(
+                        lesson -> lesson.getPlace().getName(), // Группируем по имени кабинета
+                        Collectors.mapping(lesson -> new ScheduleEntry(
+                                lesson.getCourse().getName(),
+                                getTeacherNames(lesson),
+                                lesson.getPlace().getName(),
+                                lesson.getTimeSlot().getDayOfWeek().name(),
+                                getLessonNumberForTimeSlot(lesson.getTimeSlot())
+                        ), Collectors.toList())
+                ));
+        return placeScheduleMap;
+    }
+
+    private Lesson getLessonForTeacher(Teacher teacher, List<Lesson> lessons) {
+        return lessons.stream()
+                .filter(lesson -> lesson.getTeachers().anyMatch(t -> t.equals(teacher)))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Lesson not found for teacher: " + teacher.getName()));
+    }
+
+
+    private int getLessonNumberForTimeSlot(WeeklyTimeSlot timeSlot) {
+        DayOfWeek dayOfWeek = timeSlot.getDayOfWeek();
+
+        for (int lesson = 0; lesson < _timeSlots.length; lesson++) {
+            if (_timeSlots[lesson][castDayToInt(dayOfWeek)].equals(timeSlot)) {
+                return lesson + 1;
+            }
+        }
+
+        throw new IllegalArgumentException("Таймслот не найден для дня недели " + dayOfWeek);
     }
 
     @GetMapping("/schedule/place")
@@ -211,7 +395,10 @@ public class ScheduleController {
         if (dayOfWeek.equals(DayOfWeek.FRIDAY)) {
             return 4;
         }
-        return 5;
+        if (dayOfWeek.equals(DayOfWeek.SATURDAY)) {
+            return 5;
+        }
+        return 6;
     }
 
     public static Map<DayOfWeek, List<Lesson>> groupLessonsByDayOfWeekTeacher(String teacher, Stream<Lesson> lessons) {
@@ -234,13 +421,31 @@ public class ScheduleController {
 
     private WeeklyTimeSlot[][] loadTimeSlots() {
         MyFileReader<Table<String, String>> reader = new MyFileReaderCsv();
-        try {
-            Table<String, String> slots = reader.readFromFile(_fileSettings.timeSlotsFile);
-            Table<DayOfWeek, WeeklyTimeSlot> result = createTimeSlotTable(slots);
-            return result.getData();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        //Table<String, String> slots = reader.readFromFile(_fileSettings.timeSlotsFile);
+
+        // Дни недели
+        String[] days = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
+
+        // Время
+        String[][] timeSlots = {
+                {"8:30 9:10", "8:30 9:10", "8:30 9:10", "8:30 9:10", "8:30 9:10", "8:30 9:10", "8:30 9:10"},
+                {"9:20 10:00", "9:20 10:00", "9:20 10:00", "9:20 10:00", "9:20 10:00", "9:20 10:00", "9:20 10:00"},
+                {"10:15 10:55", "10:15 10:55", "10:15 10:55", "10:15 10:55", "10:15 10:55", "10:15 10:55", "10:15 10:55"},
+                {"11:10 11:50", "11:10 11:50", "11:10 11:50", "11:10 11:50", "11:10 11:50", "11:10 11:50", "11:10 11:50"},
+                {"12:00 12:40", "12:00 12:40", "12:00 12:40", "12:00 12:40", "12:00 12:40", "12:00 12:40", "12:00 12:40"},
+                {"12:50 13:30", "12:50 13:30", "12:50 13:30", "12:50 13:30", "12:50 13:30", "12:50 13:30", "12:50 13:30"},
+                {"13:50 14:30", "13:50 14:30", "13:50 14:30", "13:50 14:30", "13:50 14:30", "13:50 14:30", "13:50 14:30"},
+                {"14:40 15:20", "14:40 15:20", "14:40 15:20", "14:40 15:20", "14:40 15:20", "14:40 15:20", "14:40 15:20"},
+                {"15:35 16:15", "15:35 16:15", "15:35 16:15", "15:35 16:15", "15:35 16:15", "15:35 16:15", "15:35 16:15"},
+                {"16:30 17:10", "16:30 17:10", "16:30 17:10", "16:30 17:10", "16:30 17:10", "16:30 17:10", "16:30 17:10"},
+                {"17:20 18:00", "17:20 18:00", "17:20 18:00", "17:20 18:00", "17:20 18:00", "17:20 18:00", "17:20 18:00"},
+                {"18:05 18:45", "18:05 18:45", "18:05 18:45", "18:05 18:45", "18:05 18:45", "18:05 18:45", "18:05 18:45"}
+        };
+
+        Table<String, String> slots = new TableImpl<>(days, timeSlots);
+
+        Table<DayOfWeek, WeeklyTimeSlot> result = createTimeSlotTable(slots);
+        return result.getData();
     }
 
     private Table<DayOfWeek, WeeklyTimeSlot> createTimeSlotTable(Table<String, String> slots) {
@@ -290,6 +495,14 @@ public class ScheduleController {
         DataBaseInteractor dataBaseInteractor = new DataBaseInteractorImpl();
         SchoolDataCollector schoolDataCollector = new SchoolDataCollectorImpl(dataBaseInteractor);
         DataLoader dataLoader = new DataLoaderImpl(_fileSettings);
+        dataLoader.loadSchoolData(schoolDataCollector);
+        return schoolDataCollector;
+    }
+
+    private SchoolDataCollector loadDataDB() throws SQLException {
+        DataBaseInteractor dataBaseInteractor = new DataBaseInteractorImpl();
+        SchoolDataCollector schoolDataCollector = new SchoolDataCollectorImpl(dataBaseInteractor);
+        DataLoader dataLoader = new DataLoaderDBImpl(universityId);
         dataLoader.loadSchoolData(schoolDataCollector);
         return schoolDataCollector;
     }

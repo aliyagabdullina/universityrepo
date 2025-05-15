@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.example.data.User;
 import org.example.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -14,9 +17,14 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String loginPage() {
-        return "loginMy";
+    public String loginPage(@RequestParam(value = "error", required = false) String error,
+                            Model model) {
+        if (error != null) {
+            model.addAttribute("param", Map.of("error", true));
+        }
+        return "authorisation";
     }
+
 
     @PostMapping("/login")
     public String loginSubmit(@RequestParam("username") String username, @RequestParam("password") String password) {

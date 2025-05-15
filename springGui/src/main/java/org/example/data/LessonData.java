@@ -21,4 +21,6 @@ public class LessonData {
 
     @Column(name = "endTime")
     private Time endTime;
+
+
 }

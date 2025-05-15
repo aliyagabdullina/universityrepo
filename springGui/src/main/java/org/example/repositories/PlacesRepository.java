@@ -8,4 +8,6 @@ import java.util.List;
 public interface PlacesRepository  extends JpaRepository<PlaceData, Integer> {
 
     List<PlaceData> findByName(String name);
+    List<PlaceData> findByUniversityId(Integer universityId);
+
 }
