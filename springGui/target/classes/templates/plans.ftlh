@@ -80,7 +80,7 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                <tr>
+                                 <tr onclick="window.location.href='/plan/edit/${plan.planId}'" style="cursor: pointer;">
                                     <th>Cтудент</th>
                                     <th>Программа</th>
                                     <th>Доп. предметы</th>
