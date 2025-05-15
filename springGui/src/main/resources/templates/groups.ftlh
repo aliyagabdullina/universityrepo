@@ -80,7 +80,7 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                <tr>
+                                 <tr onclick="window.location.href='/group/edit/${group.groupId}'" style="cursor: pointer;">
                                     <th>Название группы</th>
                                     <th>Cтуденты</th>
                                     <th>Макс. пар в день</th>

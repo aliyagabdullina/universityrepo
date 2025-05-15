@@ -86,7 +86,7 @@
                                 </tr>
 
                                 <#list courses as course>
-                                    <tr>
+                                    <tr ondblclick="window.location.href='/course/edit/${course.courseId}'" style="cursor: pointer;">
                                         <td>${course.name}</td>
                                         <td>${course.numOfLessonsPerWeek}</td>
                                         <td>${course.maxLessonsPerDay}</td>

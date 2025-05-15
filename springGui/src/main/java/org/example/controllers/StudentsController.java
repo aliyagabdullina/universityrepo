@@ -91,5 +91,10 @@ public class StudentsController {
 
         return "plan";
     }
-
+    @GetMapping("/student/edit/{id}")
+    public String editStudent(@PathVariable int id, Model model) {
+        StudentData student = studentService.getStudentById(id);
+        model.addAttribute("student", student);
+        return "student-create";  // возвращаем шаблон student-create.ftlh
+    }
 }

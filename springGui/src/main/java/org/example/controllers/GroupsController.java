@@ -3,6 +3,7 @@ package org.example.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.CsvParser;
 import org.example.data.GroupData;
+import org.example.data.PlaceData;
 import org.example.repositories.PlacesRepository;
 import org.example.repositories.TeacherRepository;
 import org.example.services.GroupsService;
@@ -77,5 +78,11 @@ public class GroupsController {
     public String deleteGroup(@PathVariable int id) {
         groupsService.deleteGroup(id);
         return "redirect:/groups";
+    }
+    @GetMapping("/group/edit/{id}")
+    public String editGroup(@PathVariable int id, Model model) {
+        GroupData group = groupsService.getGroupById(id);
+        model.addAttribute("group", group);
+        return "group-create";  // возвращаем шаблон group-create.ftlh
     }
 }

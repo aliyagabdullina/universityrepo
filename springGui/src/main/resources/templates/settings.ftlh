@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/styles/styleSettings.css">
     </head>
     <body>
-        <selection>
+        <section>
             <div class="container">
                 <div class="menu">
                     <h1>Scheduling</h1>
@@ -48,13 +48,13 @@
                         <div class="line">
                             <button class="button-settings"><h4>Инструкции</h4></button>
                             <div class="spacer-width"></div>
-                            <button class="button-settings"<h4>Служба поддержки</h4></button>
+                            <button class="button-settings" onclick="redirectToSupport()"><h4>Служба поддержки</h4></button>
                         </div>
                         <div class="spacer-height"></div>
                         <div class="line">
                             <button class="button-settings"><h4>Условия пользования</h4></button>
                             <div class="spacer-width"></div>
-                            <button class="button-settings"<h4>Политика пользования</h4></button>
+                            <button class="button-settings"><h4>Политика пользования</h4></button>
                         </div>
                     </div>
                     <div>
@@ -65,10 +65,18 @@
                         <p><h4>Дата покупки: 12 апреля 2024</h4></p>
                         <p><h4>Дата окончания: 12 апреля 2025</h4></p>
                         <p><h4>Описание: Подходит для крупных образовательных учреждений и университетов, где требуется высокая производительность и масштабируемость.</h4></p>
-                        <p><button class="button-settings button-tariff"<h4>Сменить</h4></button></p>
+                        <button class="button-settings button-tariff"><h4>Сменить</h4></button>
                     </div>
                 </div>
             </div>
-        </selection>
+        </section>
+        <script>
+            function redirectToSupport() {
+                alert("Сейчас вы будете перенаправлены на звонок в службу поддержки.");
+                setTimeout(function() {
+                    window.location.href = "tel:+79220501003";
+                }, 1000); // 1000 миллисекунд = 1 секунда задержки
+            }
+        </script>
     </body>
 </html>

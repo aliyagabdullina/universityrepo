@@ -38,7 +38,7 @@ public class PlacesService {
         placesRepository.deleteById(id);
     }
 
-    public Object getPlaceById(int id) {
+    public PlaceData getPlaceById(int id) {
         if (placesRepository.findById(id).isPresent()) {
             return placesRepository.findById(id).get();
         }
