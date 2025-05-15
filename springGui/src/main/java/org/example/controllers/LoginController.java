@@ -19,6 +19,7 @@ public class LoginController {
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             Model model) {
+        System.out.println(model.asMap());
         if (error != null) {
             model.addAttribute("param", Map.of("error", true));
         }

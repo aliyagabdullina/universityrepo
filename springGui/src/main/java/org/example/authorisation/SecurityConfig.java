@@ -27,12 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/schedule/**").authenticated() // Только аутентифицированные пользователи могут получать доступ
+                .antMatchers("/**").authenticated() // Только аутентифицированные пользователи могут получать доступ
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/schedule")
+                .defaultSuccessUrl("/account", true)
                 .permitAll()
                 .and()
                 .logout().permitAll()
