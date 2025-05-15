@@ -1,7 +1,9 @@
 package org.example.controllers;
 
+import course.Course;
 import lombok.RequiredArgsConstructor;
 import org.example.CsvParser;
+import org.example.data.CourseData;
 import org.example.data.TeacherData;
 import org.example.repositories.CoursesRepository;
 import org.example.repositories.PlacesRepository;
@@ -27,6 +29,7 @@ public class TeacherController {
     private final PlacesRepository placeRepository;
     private final CoursesRepository courseRepository;
     private final TeacherRepository teacherRepository;
+    private final CoursesService coursesService;
 
     int universityId = 1;
 
@@ -35,7 +38,6 @@ public class TeacherController {
     public String teachers(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("teachers", teacherService.listTeachersByUniversity(universityId));
         //model.addAttribute("places", placeRepository.findAll());
-        model.addAttribute("courses", courseRepository.findAll());
 
         return "teachers";
     }
@@ -83,4 +85,15 @@ public class TeacherController {
         teacherService.deleteTeacher(id);
         return "redirect:/teachers";
     }
+
+    @GetMapping("/teacher/edit/{id}")
+    public String editTeacher(@PathVariable int id, Model model) {
+        TeacherData teacher = teacherService.getTeacherById(id);
+        List<CourseData> courses = coursesService.listCoursesByUniversity(universityId);
+        model.addAttribute("teacher", teacher);
+        model.addAttribute("courses", courses);
+        return "teacher-create";  // возвращаем шаблон teacher-create.ftlh
+
+    }
+
 }

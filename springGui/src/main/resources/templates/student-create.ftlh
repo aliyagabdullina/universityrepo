@@ -50,23 +50,33 @@
                     <div class="main">
                         <form action="/teacher/create" method="post">
                             <div class="input-block">
-                                <h5>ФИО студента</h5><input type="text" name="name" placeholder="Введите  ФИО"/>
+                                <h5>ФИО студента</h5>
+                                    <input type="text" name="name" placeholder="Введите  ФИО" required
+                                           value="<#if student?? && student.name??>${student.name}</#if>">
                             </div>
                             <div class="spacer-bottom"></div>
                             <div class="input-block">
-                                <h5>Почта</h5><input type="text" name="email" placeholder="Введите  почту"/>
+                                <h5>Почта</h5>
+                                    <input type="text" name="email" placeholder="Введите почту" required
+                                           value="<#if student?? && student.email??>${student.email}</#if>">
                             </div>
                             <div class="spacer-bottom"></div>
                             <div class="input-block">
-                                <h5>Пароль</h5><input type="text" name="password" placeholder="Введите  пароль"/>
+                                <h5>Пароль</h5>
+                                    <input type="text" name="password" placeholder="Введите пароль" required
+                                           value="<#if student?? && student.password??>${student.password}</#if>">
                             </div>
                             <div class="spacer-bottom"></div>
                             <div class="input-block">
-                                <h5>Группа</h5><input type="text" name="group" placeholder="Введите группу"/>
+                                <h5>Группа</h5>
+                                    <input type="text" name="group" placeholder="Введите группу" required
+                                           value="<#if student?? && student.group??>${student.group}</#if>">
                             </div>
                             <div class="spacer-bottom"></div>
                             <div class="input-block">
-                                <h5>Степень образования</h5><input type="text" name="role" placeholder="Введите степень"/>
+                                <h5>Степень образования</h5>
+                                    <input type="text" name="role" placeholder="Введите степень" required
+                                           value="<#if student?? && student.role??>${student.role}</#if>">
                             </div>
                             <div class="footer">
                             <div class="footer-buttons-container">

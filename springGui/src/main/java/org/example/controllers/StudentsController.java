@@ -82,14 +82,10 @@ public class StudentsController {
         return "redirect:/students";
     }
 
-    @GetMapping("/plan")
-    public String plan(@PathVariable int id, Model model) {
-        model.addAttribute("student", studentService.getStudentById(id));
-        model.addAttribute("program", programsService.getProgramById(id));
-        model.addAttribute("group", groupsService.getGroupById(id));
-        model.addAttribute("subject", courseService.getCourseById(id));
-
-        return "plan";
+    @GetMapping("/student/edit/{id}")
+    public String editStudent(@PathVariable int id, Model model) {
+        StudentData student = studentService.getStudentById(id);
+        model.addAttribute("student", student);
+        return "student-create";  // возвращаем шаблон student-create.ftlh
     }
-
 }

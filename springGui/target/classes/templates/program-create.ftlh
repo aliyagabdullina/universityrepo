@@ -6,90 +6,178 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles/styleDataPages.css">
+        <link rel="stylesheet" href="/styles/styleCreate.css">
     </head>
     <body>
-            <selection>
-                <div class="container">
-                    <div class="menu">
-                        <h1>Scheduling</h1>
-                        <div class="menu-buttons-container">
-                            <button class="menu-button icon" onclick="window.location.href='/account'">
-                                <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
-                                <h4>Аккаунт</h4>
-                            </button>
-                            <button class="menu-button icon" onclick="window.location.href='/timeslot'">
-                                <img src="/images/time.svg" alt="Аккаунт" width="25" height="25">
-                                <h4>Тайм слоты</h4>
-                            </button>
-                            <button class="menu-button icon highlight" onclick="window.location.href='/places'">
-                                <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
-                                <h4>Редактирование данных</h4>
-                            </button>
-                            <button class="menu-button icon" onclick="window.location.href='/schedule'">
-                                <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
-                                <h4>Расписание</h4>
-                            </button>
-                        </div>
-                        <div class="menu-buttons-container-bottom">
-                            <button class="menu-button icon" onclick="window.location.href='/settings'">
-                                <img src="/images/setting.svg" alt="Аккаунт" width="25" height="25">
-                                <h4>Настройки</h4>
-                            </button>
-                        </div>
+        <selection>
+            <div class="container">
+                <div class="menu">
+                    <h1>Scheduling</h1>
+                    <p class="university">UNIVERSITY</p>
+                    <div class="menu-buttons-container">
+                        <button class="menu-button icon" onclick="window.location.href='/account'">
+                            <img src="/images/account.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Аккаунт</h4>
+                        </button>
+                        <button class="menu-button icon" onclick="window.location.href='/schedule'">
+                            <img src="/images/scheduling.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Расписание</h4>
+                        </button>
+                        <button class="menu-button icon highlight" onclick="window.location.href='/data'">
+                            <img src="/images/data.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Данные</h4>
+                        </button>
+                        <button class="menu-button icon" onclick="window.location.href='/timeslot'">
+                            <img src="/images/time.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Сетка пар</h4>
+                        </button>
                     </div>
-                    <div></div>
-                    <div class="body">
-                        <div class="header-create icon-back">
-                            <h2>Редактирование данных</h2>
-                            <button class="button-none" type="button" onclick="window.history.back()">
-                                <img src="/images/back.svg" alt="Аккаунт" width="25" height="25">
-                            </button>
-                        </div>
-                        <div class="main">
-                            <form action="/program/create" method="post">
-                                <div class="input-block">
-                                    <h5>Программа</h5> <input type="text" name="name" placeholder="Введите программу"/><br>
-                                </div>
-                                <div class="input-block">
-                                    <h5>Кол-во часов</h5><input type="text" name="hours" placeholder="Введите кол-во часов"/><br>
-                                </div>
-                                <div class="input-block">
-                                    <h5>Сложность</h5><input type="text" name="complexity" placeholder="Введите сложность"/><br>
-                                </div>
-                                <div class="input-block">
-                                     <h5>Курсы</h5>
-                                     <div class="select-block">
-                                         <select name="courseId" multiple>
-                                             <option value="" disabled selected>Выберите курсы</option>
-                                             <#list courses as course>
-                                                 <option value="${course.courseId}">${course.name}</option>
-                                             </#list>
-                                         </select><br>
-                                     </div>
-                                </div>
-                                <div class="input-block">
-                                     <h5>Группы</h5>
-                                     <div class="select-block">
-                                         <select name="groupId" multiple>
-                                             <option value="" disabled selected>Выберите группы</option>
-                                             <#list groups as group>
-                                                 <option value="${group.groupId}">${group.name}</option>
-                                             </#list>
-                                         </select><br>
-                                     </div>
-                                </div>
-                                <div class="footer">
-                                    <div class="footer-buttons-container">
-                                        <button type="submit" class="footer-button" onclick="window.location.href='/programs'">
-                                            <h4>Сохранить</h4>
-                                        </button>
-                                        <button class="footer-button" type="button" onclick="window.history.back()"><h4>Назад</h4></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="menu-buttons-container-bottom">
+                        <button class="menu-button icon" onclick="window.location.href='/settings'">
+                            <img src="/images/setting.svg" alt="Аккаунт" width="25" height="25">
+                            <h4>Настройки</h4>
+                        </button>
                     </div>
                 </div>
-            </selection>
-        </body>
+                <div></div>
+                <div class="body">
+                    <div class="header-create icon-back">
+                        <h2>Редактирование данных о программах</h2>
+                        <button class="button-none" type="button" onclick="window.history.back()">
+                            <img src="/images/back.svg" alt="Аккаунт" width="25" height="25">
+                        </button>
+                    </div>
+                    <div class="main">
+                        <form action="/teacher/create" method="post">
+                                <div class="input-block">
+                                    <h5>Программа</h5>
+                                        <input type="text" name="name" placeholder="Введите программу" required
+                                               value="<#if program?? && program.name??>${program.name}</#if>">
+                                </div>
+
+                                <div class="spacer-bottom"></div>
+                                <div class="input-block">
+                                    <h5>Кол-во часов в неделю</h5>
+                                        <input type="text" name="hours" placeholder="Введите кол-во часов" required
+                                               value="<#if program?? && program.hours??>${program.hours}</#if>">
+                                </div>
+
+                                <div class="spacer-bottom"></div>
+                                <div class="input-block">
+                                    <h5>Сложность</h5>
+                                        <input type="text" name="complexity" placeholder="Введите сложность" required
+                                               value="<#if program?? && program.complexity??>${program.complexity}</#if>">
+                                </div>
+
+                                 //селекторы
+                                <div class="input-block">
+                                    <h5>Предметы</h5>
+                                    <div class="custom-multiselect" id="courses-multiselect">
+                                        <div class="selected-options">Выберите предметы</div>
+                                        <div class="options-list">
+                                            <#list courses as course>
+                                                <div class="option" data-value="${course.courseId}">${course.name}</div>
+                                            </#list>
+                                        </div>
+                                        <input type="hidden" name="courseId" id="courses-hidden-input">
+                                    </div>
+                                </div>
+                                <div class="spacer-bottom"></div>
+                                <div class="input-block">
+                                    <h5>Группы</h5>
+                                    <div class="custom-multiselect" id="groups-multiselect">
+                                        <div class="selected-options">Выберите группы</div>
+                                        <div class="options-list">
+                                            <#list groups as group>
+                                                <div class="option" data-value="${group.groupId}">${group.name}</div>
+                                            </#list>
+                                        </div>
+                                        <input type="hidden" name="groupId" id="groups-hidden-input">
+                                    </div>
+                                </div>
+
+
+
+
+
+                            <div class="footer">
+                            <div class="footer-buttons-container">
+
+                                <button class="footer-button" type="button" onclick="window.history.back()">
+                                    <h4>Назад</h4>
+                                </button>
+                              <div class="footer-right">
+                                    <button type="submit" class="footer-button save-button">
+                                        <h4>Сохранить</h4>
+                                    </button>
+                              </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </selection>
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".custom-select-data select").forEach((originalSelect) => {
+                const customSelect = document.createElement("div");
+                customSelect.classList.add("custom-multiselect");
+
+                const selectedItems = document.createElement("div");
+                selectedItems.classList.add("selected-items");
+                customSelect.appendChild(selectedItems);
+
+                const optionsList = document.createElement("div");
+                optionsList.classList.add("options-list");
+
+                Array.from(originalSelect.options).forEach((option, index) => {
+                    if (option.disabled) return;
+                    const optionItem = document.createElement("div");
+                    optionItem.textContent = option.text;
+                    optionItem.dataset.value = option.value;
+
+                    optionItem.addEventListener("click", () => {
+                        option.selected = !option.selected;
+                        optionItem.classList.toggle("selected");
+
+                        updateSelectedItems();
+                    });
+
+                    optionsList.appendChild(optionItem);
+                });
+
+                function updateSelectedItems() {
+                    selectedItems.innerHTML = "";
+
+                    Array.from(originalSelect.selectedOptions).forEach((option) => {
+                        const item = document.createElement("span");
+                        item.textContent = option.text;
+                        selectedItems.appendChild(item);
+                    });
+                }
+
+                updateSelectedItems();
+
+                selectedItems.addEventListener("click", () => {
+                    optionsList.classList.toggle("show");
+                });
+
+                customSelect.appendChild(optionsList);
+
+                originalSelect.style.display = "none";
+                originalSelect.parentNode.insertBefore(customSelect, originalSelect);
+            });
+
+            // Закрытие всех списков по клику вне
+            document.addEventListener("click", (e) => {
+                document.querySelectorAll(".custom-multiselect .options-list").forEach((list) => {
+                    if (!list.parentNode.contains(e.target)) {
+                        list.classList.remove("show");
+                    }
+                });
+            });
+        });
+        </script>
+    </body>
 </html>

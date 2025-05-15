@@ -50,63 +50,112 @@
                     <div class="main">
                         <form action="/teacher/create" method="post">
                             <div class="input-block">
-                                 <h5>Студенты</h5>
-                                 <div class="select-block custom-select-data">
-                                     <select name="studentId" multiple>
-                                         <option value="" disabled selected>Выберите студентов</option>
-                                         <#list students as student>
-                                             <option value="${student.studentId}">${student.name}</option>
-                                         </#list>
-                                     </select>
-                                 </div>
-                             </div>
-                             <div class="spacer-bottom"></div>
-                            <div class="input-block">
-                                 <h5>Программы</h5>
-                                 <div class="select-block custom-select-data">
-                                     <select name="programId" multiple>
-                                         <option value="" disabled selected>Выберите программы</option>
-                                         <#list programs as program>
-                                             <option value="${program.programId}">${program.name}</option>
-                                         </#list>
-                                     </select>
-                                 </div>
-                             </div>
-                             <div class="spacer-bottom"></div>
-                            <div class="input-block">
-                                 <h5>Дополнительные предметы</h5>
-                                 <div class="select-block custom-select-data">
-                                     <select name="courseId" multiple>
-                                         <option value="" disabled selected>Выберите предметы</option>
-                                         <#list courses as course>
-                                             <option value="${course.courseId}">${course.name}</option>
-                                         </#list>
-                                     </select>
-                                 </div>
-                             </div>
-                             <div class="spacer-bottom"></div>
-                            <div class="input-block">
-                                <h5>Кол-во часов</h5><input type="text" name="hours" placeholder="Введите кол-во часов"/>
+                                <h5>Студенты</h5>
+                                <div class="custom-multiselect" id="student-multiselect">
+                                    <div class="selected-options">Выберите студентов</div>
+                                    <div class="options-list">
+                                        <#list students as student>
+                                            <div class="option" data-value="${student.studentId}">${student.name}</div>
+                                        </#list>
+                                    </div>
+                                    <input type="hidden" name="studentId" id="student-hidden-input">
+                                </div>
                             </div>
+                            <div class="spacer-bottom"></div>
+
+
+                            <div class="input-block">
+                                <h5>Дополнительные предметы</h5>
+                                <div class="custom-multiselect" id="course-multiselect">
+                                    <div class="selected-options">Выберите предметы</div>
+                                    <div class="options-list">
+                                        <#list courses as course>
+                                            <div class="option" data-value="${course.courseId}">${course.name}</div>
+                                        </#list>
+                                    </div>
+                                    <input type="hidden" name="courseId" id="course-hidden-input">
+                                </div>
+                            </div>
+                            <div class="spacer-bottom"></div>
 
 
                             <div class="footer">
-                            <div class="footer-buttons-container">
-
-                                <button class="footer-button" type="button" onclick="window.history.back()">
-                                    <h4>Назад</h4>
-                                </button>
-                              <div class="footer-right">
-                                    <button type="submit" class="footer-button save-button">
-                                        <h4>Сохранить</h4>
+                                <div class="footer-buttons-container">
+                                    <button class="footer-button" type="button" onclick="window.history.back()">
+                                        <h4>Назад</h4>
                                     </button>
-                              </div>
+                                    <div class="footer-right">
+                                        <button type="submit" class="footer-button save-button">
+                                            <h4>Сохранить</h4>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </form>
                     </div>
                 </div>
             </div>
         </selection>
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".custom-select-data select").forEach((originalSelect) => {
+                const customSelect = document.createElement("div");
+                customSelect.classList.add("custom-multiselect");
+
+                const selectedItems = document.createElement("div");
+                selectedItems.classList.add("selected-items");
+                customSelect.appendChild(selectedItems);
+
+                const optionsList = document.createElement("div");
+                optionsList.classList.add("options-list");
+
+                Array.from(originalSelect.options).forEach((option) => {
+                    if (option.disabled) return;
+                    const optionItem = document.createElement("div");
+                    optionItem.textContent = option.text;
+                    optionItem.dataset.value = option.value;
+
+                    optionItem.addEventListener("click", () => {
+                        option.selected = !option.selected;
+                        optionItem.classList.toggle("selected");
+
+                        updateSelectedItems();
+                    });
+
+                    optionsList.appendChild(optionItem);
+                });
+
+                function updateSelectedItems() {
+                    selectedItems.innerHTML = "";
+
+                    Array.from(originalSelect.selectedOptions).forEach((option) => {
+                        const item = document.createElement("span");
+                        item.textContent = option.text;
+                        selectedItems.appendChild(item);
+                    });
+                }
+
+                updateSelectedItems();
+
+                selectedItems.addEventListener("click", () => {
+                    optionsList.classList.toggle("show");
+                });
+
+                customSelect.appendChild(optionsList);
+
+                originalSelect.style.display = "none";
+                originalSelect.parentNode.insertBefore(customSelect, originalSelect);
+            });
+
+            // Закрытие всех списков по клику вне
+            document.addEventListener("click", (e) => {
+                document.querySelectorAll(".custom-multiselect .options-list").forEach((list) => {
+                    if (!list.parentNode.contains(e.target)) {
+                        list.classList.remove("show");
+                    }
+                });
+            });
+        });
+        </script>
     </body>
 </html>

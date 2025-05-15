@@ -76,7 +76,7 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                <tr>
+                            <tr>
                                     <th>Программа</th>
                                     <th>Группы</th>
                                     <th>Курсы</th>
@@ -85,13 +85,15 @@
                                 </tr>
 
                                 <#list programs as program>
-                                    <tr>
+                                     <tr onclick="window.location.href='/program/edit/${program.programId}'" style="cursor: pointer;">
+
+
                                         <td>${program.name}</td>
-                                        <td><#list groups as group>
+                                        <td><#list program.groups as group>
                                               ${group.name},
                                              </#list>
                                         </td>
-                                        <td><#list courses as course>
+                                        <td><#list program.courses as course>
                                                ${course.name},
                                             </#list>
                                          </td>
