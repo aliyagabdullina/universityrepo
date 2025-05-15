@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.CsvParser;
+import org.example.data.GroupData;
 import org.example.data.ProgramData;
 import org.example.repositories.CoursesRepository;
 import org.example.repositories.GroupsRepository;
@@ -86,5 +87,11 @@ public class ProgramsController {
     public String deleteProgram(@PathVariable int id) {
         programsService.deleteProgram(id);
         return "redirect:/programs";
+    }
+    @GetMapping("/program/edit/{id}")
+    public String editProgram(@PathVariable int id, Model model) {
+        ProgramData group = programsService.getProgramById(id);
+        model.addAttribute("program", program);
+        return "program-create";  // возвращаем шаблон program-create.ftlh
     }
 }

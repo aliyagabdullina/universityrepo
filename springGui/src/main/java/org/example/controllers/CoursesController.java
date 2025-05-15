@@ -78,4 +78,12 @@ public class CoursesController {
         coursesService.deleteCourse(id);
         return "redirect:/courses";
     }
+    @GetMapping("/course/edit/{id}")
+    public String editCourse(@PathVariable int id, Model model) {
+
+            CourseData course = coursesService.getCourseById(id);
+            model.addAttribute("course", course);
+        return "course-create";
+    }
+
 }

@@ -80,7 +80,7 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                <tr>
+                            <tr onclick="window.location.href='/student/edit/${student.id}'" style="cursor: pointer;">
                                     <th>ФИО студента</th>
                                     <th>Почта</th>
                                     <th>Пароль</th>

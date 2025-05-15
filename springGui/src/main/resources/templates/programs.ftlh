@@ -76,7 +76,7 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                <tr>
+                                 <tr onclick="window.location.href='/program/edit/${program.programId}'" style="cursor: pointer;">
                                     <th>Программа</th>
                                     <th>Группы</th>
                                     <th>Курсы</th>

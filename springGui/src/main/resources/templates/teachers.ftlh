@@ -83,7 +83,7 @@
                                 <tr>
                                     <th>ФИО преподавателя</th>
                                     <th>Почта</th>
-                                    <th>Пароль</th>
+
                                     <th>Предметы</th>
                                     <th>Кол-во пар в день</th>
                                     <th>Сетка пар</th>
@@ -91,13 +91,13 @@
                                 </tr>
 
                                 <#list teachers as teacher>
-                                    <tr>
+                                    <tr onclick="window.location.href='/teacher/edit/${teacher.teacherId}'" style="cursor: pointer;">
                                         <td>${teacher.name}</td>
                                         <td>${teacher.email}</td>
-                                        <td>${teacher.password}</td>
-                                        <td><#list teacher.courses as course>
-                                                   ${course.name}
-                                                 </#list>
+
+                                        <td><#list courses as course>
+                                                    ${course.name},
+                                              </#list>
                                          </td>
                                         <td>${teacher.maxNumberOfLessons}</td>
                                         <td><#if teacher.timeslotId??>${teacher.timeslotId}</#if></td>

@@ -37,3 +37,16 @@
 .button-tariff {
     border: 1px solid #ccc;
 }
+.styled-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Синий цвет */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+.styled-link:hover {
+    background-color: #0056b3;
+}
