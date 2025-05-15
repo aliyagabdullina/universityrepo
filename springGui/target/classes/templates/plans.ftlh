@@ -86,7 +86,8 @@
                                 </tr>
                                 <#list students as student>
                                      <tr onclick="window.location.href='/plan/edit/${student.studentId}'" style="cursor: pointer;">
-                                        <td>${student.name}</td>
+
+                                        ${student.name},
 
                                         <td><#list student.courses as course>
                                                   ${course.name},

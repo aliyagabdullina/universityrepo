@@ -21,17 +21,22 @@ public class GroupData {
     private int numOfStudents;
     @Column(name = "max_number_of_lessons")
     private int maxNumberOfLessons;
-
     @Column(name = "university_id")
     private Integer universityId;
 
+    @ManyToMany(mappedBy = "groups")
+    private List<ProgramData> programs;
 
     @ManyToMany
     @JoinTable(
-            name = "teachergroup",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_id")
+            name = "teachergroup", // имя связующей таблицы
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
     )
     private List<TeacherData> teachers;
 
+    @Override
+    public String toString() {
+        return "GroupData{id=" + groupId + ", name=" + name  + "}";
+    }
 }
