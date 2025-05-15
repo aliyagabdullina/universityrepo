@@ -63,19 +63,6 @@
                             </div>
                             <div class="spacer-bottom"></div>
 
-                            <div class="input-block">
-                                <h5>Программы</h5>
-                                <div class="custom-multiselect" id="program-multiselect">
-                                    <div class="selected-options">Выберите программы</div>
-                                    <div class="options-list">
-                                        <#list programs as program>
-                                            <div class="option" data-value="${program.programId}">${program.name}</div>
-                                        </#list>
-                                    </div>
-                                    <input type="hidden" name="programId" id="program-hidden-input">
-                                </div>
-                            </div>
-                            <div class="spacer-bottom"></div>
 
                             <div class="input-block">
                                 <h5>Дополнительные предметы</h5>
@@ -90,13 +77,6 @@
                                 </div>
                             </div>
                             <div class="spacer-bottom"></div>
-
-
-                            <div class="input-block">
-                                <h5>Кол-во часов</h5>
-                                    <input type="text" name="hours" placeholder="Введите кол-во часов" required
-                                           value="<#if plan?? && plan.hours??>${plan.hours}</#if>">
-                            </div>
 
 
                             <div class="footer">

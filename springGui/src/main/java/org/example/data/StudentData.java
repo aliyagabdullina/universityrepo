@@ -3,6 +3,7 @@ package org.example.data;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Students")
@@ -26,5 +27,18 @@ public class StudentData {
 
     @Column(name = "university_id")
     private Integer universityId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "coursestudent", // имя связующей таблицы
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<CourseData> courses;
+
+    @Override
+    public String toString() {
+        return "StudentData{id=" + studentId + ", name=" + name + "}";
+    }
 
 }

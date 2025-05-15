@@ -35,5 +35,14 @@ public class TeacherData {
     )
     private List<CourseData> courses;
 
+    @ManyToMany(mappedBy = "teachers")
+    private List<GroupData> groups;
+
+    @Override
+    public String toString() {
+        return "TeacherData{id=" + teacherId + ", name=" + name + ", email=" + email + "}";
+    }
+
+
 
 }

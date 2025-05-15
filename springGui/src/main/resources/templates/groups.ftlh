@@ -80,7 +80,7 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                 <tr onclick="window.location.href='/group/edit/${group.groupId}'" style="cursor: pointer;">
+                            <tr>
                                     <th>Название группы</th>
                                     <th>Cтуденты</th>
                                     <th>Макс. пар в день</th>
@@ -88,14 +88,17 @@
                                     <th>Временной слот</th>
                                 </tr>
                                 <#list groups as group>
-                                    <tr>
+                                <tr onclick="window.location.href='/group/edit/${group.groupId}'" style="cursor: pointer;">
+
+
                                         <td>${group.name}</td>
                                         <td>${group.numOfStudents}</td>
-                                        <td><#list teachers as teacher>
+                                        <td>${group.maxNumberOfLessons}</td>
+                                        <td><#list group.teachers as teacher>
                                                   ${teacher.name},
                                             </#list>
                                         </td>
-                                        <td>${group.maxNumberOfLessons}</td>
+
                                         <td><#if group.timeslotId??>${group.timeslotId}</#if></td>
                                     </tr>
                                 </#list>

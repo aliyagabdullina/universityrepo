@@ -40,4 +40,9 @@ public class ProgramData {
             inverseJoinColumns = @JoinColumn(name = "program_id")
     )
     private List<GroupData> groups;
+
+    @Override
+    public String toString() {
+        return "ProgramData{id=" + programId + ", name=" + name +  "}";
+    }
 }

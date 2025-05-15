@@ -80,27 +80,18 @@
                         <div class="spacer-bottom"></div>
                         <div class="table-style">
                             <table>
-                                 <tr onclick="window.location.href='/plan/edit/${plan.planId}'" style="cursor: pointer;">
+                            <tr>
                                     <th>Cтудент</th>
-                                    <th>Программа</th>
                                     <th>Доп. предметы</th>
-                                    <th>Кол-во часов</th>
                                 </tr>
-                                <#list groups as group>
-                                    <tr>
-                                        <td><#list students as student>
-                                                  ${student.name},
-                                            </#list>
-                                        </td>
-                                        <td><#list programs as program>
-                                                  ${program.name},
-                                            </#list>
-                                        </td>
-                                        <td><#list courses as course>
+                                <#list students as student>
+                                     <tr onclick="window.location.href='/plan/edit/${student.studentId}'" style="cursor: pointer;">
+                                        <td>${student.name}</td>
+
+                                        <td><#list student.courses as course>
                                                   ${course.name},
                                             </#list>
                                         </td>
-                                        <td>${group.hours}</td>
 
                                     </tr>
                                 </#list>
