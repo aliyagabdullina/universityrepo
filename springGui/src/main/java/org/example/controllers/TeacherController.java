@@ -3,11 +3,10 @@ package org.example.controllers;
 import course.Course;
 import lombok.RequiredArgsConstructor;
 import org.example.CsvParser;
-import org.example.data.CourseData;
+import org.example.data.PlaceData;
 import org.example.data.TeacherData;
 import org.example.repositories.CoursesRepository;
 import org.example.repositories.PlacesRepository;
-import org.example.repositories.TeacherRepository;
 import org.example.services.CoursesService;
 import org.example.services.TeacherService;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import person.Teacher;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,17 +28,14 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final PlacesRepository placeRepository;
     private final CoursesRepository courseRepository;
-    private final TeacherRepository teacherRepository;
     private final CoursesService coursesService;
-
-    int universityId = 1;
 
 
     @GetMapping("/teachers")
     public String teachers(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("teachers", teacherService.listTeachersByUniversity(universityId));
+        model.addAttribute("teachers", teacherService.listTeachers(name));
         //model.addAttribute("places", placeRepository.findAll());
-
+        model.addAttribute("courses", courseRepository.findAll());
         return "teachers";
     }
 
@@ -50,8 +47,7 @@ public class TeacherController {
 
     @GetMapping("/teacher/create")
     public String showCreateTeacherForm(Model model) {
-        List<TeacherData> teachers = teacherService.listTeachersByUniversity(universityId);
-        model.addAttribute("teachers", teachers);
+        model.addAttribute("teacher");
         model.addAttribute("places", placeRepository.findAll());
         model.addAttribute("courses", courseRepository.findAll());
         return "teacher-create";
@@ -89,11 +85,10 @@ public class TeacherController {
     @GetMapping("/teacher/edit/{id}")
     public String editTeacher(@PathVariable int id, Model model) {
         TeacherData teacher = teacherService.getTeacherById(id);
-        List<CourseData> courses = coursesService.listCoursesByUniversity(universityId);
+        List<Course> courses = coursesService.listCourses();
         model.addAttribute("teacher", teacher);
         model.addAttribute("courses", courses);
         return "teacher-create";  // возвращаем шаблон teacher-create.ftlh
-
     }
 
 }

@@ -32,10 +32,6 @@ public class ProgramsController {
         model.addAttribute("programs", programsService.listProgramsByUniversity(universityId));
         model.addAttribute("courses", courseRepository.findAll());
         model.addAttribute("groups", groupsRepository.findAll());
-        model.addAttribute("sender", "You");
-        model.addAttribute("message", "Hello!\n");
-        model.addAttribute("aiSender", "AI");
-        model.addAttribute("aiMessage", "How can I assist you?\n");
         return "programs";
     }
 
@@ -94,7 +90,7 @@ public class ProgramsController {
     }
     @GetMapping("/program/edit/{id}")
     public String editProgram(@PathVariable int id, Model model) {
-        ProgramData program = programsService.getProgramById(id);
+        ProgramData group = programsService.getProgramById(id);
         model.addAttribute("program", program);
         return "program-create";  // возвращаем шаблон program-create.ftlh
     }

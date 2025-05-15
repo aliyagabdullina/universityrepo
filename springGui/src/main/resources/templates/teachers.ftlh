@@ -95,7 +95,7 @@
                                         <td>${teacher.name}</td>
                                         <td>${teacher.email}</td>
 
-                                        <td><#list teacher.courses as course>
+                                        <td><#list courses as course>
                                                     ${course.name},
                                               </#list>
                                          </td>

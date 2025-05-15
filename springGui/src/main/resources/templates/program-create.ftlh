@@ -49,41 +49,57 @@
                     </div>
                     <div class="main">
                         <form action="/teacher/create" method="post">
-                            <div class="input-block">
-                                    <h5>Программа</h5> <input type="text" name="name" placeholder="Введите программу"/>
+                                <div class="input-block">
+                                    <h5>Программа</h5>
+                                        <input type="text" name="name" placeholder="Введите программу" required
+                                               value="<#if program?? && program.name??>${program.name}</#if>">
+                                </div>
+
+                                <div class="spacer-bottom"></div>
+                                <div class="input-block">
+                                    <h5>Кол-во часов в неделю</h5>
+                                        <input type="text" name="hours" placeholder="Введите кол-во часов" required
+                                               value="<#if program?? && program.hours??>${program.hours}</#if>">
+                                </div>
+
+                                <div class="spacer-bottom"></div>
+                                <div class="input-block">
+                                    <h5>Сложность</h5>
+                                        <input type="text" name="complexity" placeholder="Введите сложность" required
+                                               value="<#if program?? && program.complexity??>${program.complexity}</#if>">
+                                </div>
+
+                                 //селекторы
+                                <div class="input-block">
+                                    <h5>Предметы</h5>
+                                    <div class="custom-multiselect" id="courses-multiselect">
+                                        <div class="selected-options">Выберите предметы</div>
+                                        <div class="options-list">
+                                            <#list courses as course>
+                                                <div class="option" data-value="${course.courseId}">${course.name}</div>
+                                            </#list>
+                                        </div>
+                                        <input type="hidden" name="courseId" id="courses-hidden-input">
+                                    </div>
                                 </div>
                                 <div class="spacer-bottom"></div>
                                 <div class="input-block">
-                                    <h5>Кол-во часов в неделю</h5><input type="text" name="hours" placeholder="Введите кол-во часов"/>
+                                    <h5>Группы</h5>
+                                    <div class="custom-multiselect" id="groups-multiselect">
+                                        <div class="selected-options">Выберите группы</div>
+                                        <div class="options-list">
+                                            <#list groups as group>
+                                                <div class="option" data-value="${group.groupId}">${group.name}</div>
+                                            </#list>
+                                        </div>
+                                        <input type="hidden" name="groupId" id="groups-hidden-input">
+                                    </div>
                                 </div>
-                                <div class="spacer-bottom"></div>
-                                <div class="input-block">
-                                    <h5>Сложность</h5><input type="text" name="complexity" placeholder="Введите сложность"/>
-                                </div>
-                                <div class="spacer-bottom"></div>
-                                <div class="input-block">
-                                     <h5>Предметы</h5>
-                                     <div class="select-block custom-select-data">
-                                         <select name="courseId" multiple>
-                                             <option value="" disabled selected>Выберите предметы</option>
-                                             <#list courses as course>
-                                                 <option value="${course.courseId}">${course.name}</option>
-                                             </#list>
-                                         </select><br>
-                                     </div>
-                                </div>
-                                <div class="spacer-bottom"></div>
-                                <div class="input-block">
-                                     <h5>Группы</h5>
-                                     <div class="select-block custom-select-data">
-                                         <select name="groupId" multiple>
-                                             <option value="" disabled selected>Выберите группы</option>
-                                             <#list groups as group>
-                                                 <option value="${group.groupId}">${group.name}</option>
-                                             </#list>
-                                         </select><br>
-                                     </div>
-                                </div>
+
+
+
+
+
                             <div class="footer">
                             <div class="footer-buttons-container">
 
@@ -102,5 +118,66 @@
                 </div>
             </div>
         </selection>
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".custom-select-data select").forEach((originalSelect) => {
+                const customSelect = document.createElement("div");
+                customSelect.classList.add("custom-multiselect");
+
+                const selectedItems = document.createElement("div");
+                selectedItems.classList.add("selected-items");
+                customSelect.appendChild(selectedItems);
+
+                const optionsList = document.createElement("div");
+                optionsList.classList.add("options-list");
+
+                Array.from(originalSelect.options).forEach((option, index) => {
+                    if (option.disabled) return;
+                    const optionItem = document.createElement("div");
+                    optionItem.textContent = option.text;
+                    optionItem.dataset.value = option.value;
+
+                    optionItem.addEventListener("click", () => {
+                        option.selected = !option.selected;
+                        optionItem.classList.toggle("selected");
+
+                        updateSelectedItems();
+                    });
+
+                    optionsList.appendChild(optionItem);
+                });
+
+                function updateSelectedItems() {
+                    selectedItems.innerHTML = "";
+
+                    Array.from(originalSelect.selectedOptions).forEach((option) => {
+                        const item = document.createElement("span");
+                        item.textContent = option.text;
+                        selectedItems.appendChild(item);
+                    });
+                }
+
+                updateSelectedItems();
+
+                selectedItems.addEventListener("click", () => {
+                    optionsList.classList.toggle("show");
+                });
+
+                customSelect.appendChild(optionsList);
+
+                originalSelect.style.display = "none";
+                originalSelect.parentNode.insertBefore(customSelect, originalSelect);
+            });
+
+            // Закрытие всех списков по клику вне
+            document.addEventListener("click", (e) => {
+                document.querySelectorAll(".custom-multiselect .options-list").forEach((list) => {
+                    if (!list.parentNode.contains(e.target)) {
+                        list.classList.remove("show");
+                    }
+                });
+            });
+        });
+        </script>
     </body>
 </html>

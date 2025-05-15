@@ -49,27 +49,17 @@
                     </div>
                     <div class="main">
                         <form action="/teacher/create" method="post">
-                                <div class="input-block">
-                                    <h5>Программа</h5>
-                                        <input type="text" name="name" placeholder="Введите программу" required
-                                               value="<#if program?? && program.name??>${program.name}</#if>">
+                            <div class="input-block">
+                                    <h5>Программа</h5> <input type="text" name="name" placeholder="Введите программу"/>
                                 </div>
-
                                 <div class="spacer-bottom"></div>
                                 <div class="input-block">
-                                    <h5>Кол-во часов в неделю</h5>
-                                        <input type="text" name="hours" placeholder="Введите кол-во часов" required
-                                               value="<#if program?? && program.hours??>${program.hours}</#if>">
+                                    <h5>Кол-во часов в неделю</h5><input type="text" name="hours" placeholder="Введите кол-во часов"/>
                                 </div>
-
                                 <div class="spacer-bottom"></div>
                                 <div class="input-block">
-                                    <h5>Сложность</h5>
-                                        <input type="text" name="complexity" placeholder="Введите сложность" required
-                                               value="<#if program?? && program.complexity??>${program.complexity}</#if>">
+                                    <h5>Сложность</h5><input type="text" name="complexity" placeholder="Введите сложность"/>
                                 </div>
-
-                                 //селекторы
                                 <div class="input-block">
                                     <h5>Предметы</h5>
                                     <div class="custom-multiselect" id="courses-multiselect">
@@ -95,11 +85,6 @@
                                         <input type="hidden" name="groupId" id="groups-hidden-input">
                                     </div>
                                 </div>
-
-
-
-
-
                             <div class="footer">
                             <div class="footer-buttons-container">
 
