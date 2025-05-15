@@ -19,4 +19,8 @@ public class ScheduleImpl implements Schedule {
     public Stream<Lesson> getAllLessons() {
         return _lessonList.stream();
     }
+    @Override
+    public double evaluate() {
+        return 0;
+    }
 }
