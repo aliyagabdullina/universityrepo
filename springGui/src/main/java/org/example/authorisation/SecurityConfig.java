@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/styles/**", "/images/**", "/js/**").permitAll()
                 .antMatchers("/**").authenticated() // Только аутентифицированные пользователи могут получать доступ
                 .anyRequest().permitAll()
                 .and()
