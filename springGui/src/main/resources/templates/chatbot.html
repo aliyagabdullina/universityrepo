@@ -1,0 +1,21 @@
+<div id="floatingButton" class="floating-button">
+    <img src="/images/robot-icon.png" alt="Chatbot" id="chatBotButton"/>
+</div>
+
+<div id="chatWindow" class="chat-window" style="display: none;">
+    <div class="chat-close-button">
+        <button id="closeChat">✕</button>
+    </div>
+
+    <div id="chatHistory" class="chat-history"></div>
+
+    <div class="chat-input-new">
+        <textarea id="chatInput" placeholder="Введите сообщение..."></textarea>
+
+        <div class="chat-actions-row">
+            <button id="sendMessage">Отправить</button>
+            <label for="fileInput" class="file-label" title="Прикрепить файл">📎</label>
+            <input type="file" id="fileInput" class="hidden-file-input" />
+        </div>
+    </div>
+</div>

@@ -8,5 +8,7 @@ import java.util.List;
 public interface TeacherRepository extends JpaRepository<TeacherData, Integer> {
 
     List<TeacherData> findByName(String name);
+    List<TeacherData> findByUniversityId(int universityId);
+
 
 }

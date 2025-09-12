@@ -3,6 +3,7 @@ package org.example.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.data.ProgramData;
+import org.example.data.TeacherData;
 import org.example.repositories.ProgramsRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class ProgramsService {
             programsRepository.findByName(name);
         }
         return programsRepository.findAll();
+    }
+
+    public List<ProgramData> listProgramsByUniversity(int universityId) {
+        return programsRepository.findByUniversityId(universityId);
     }
 
     public void saveProgram(ProgramData program) {

@@ -11,6 +11,7 @@
         <module name="myLogger" />
         <module name="communications" />
         <module name="milp" />
+        <module name="ai_module" />
         <module name="utils_uni" />
         <module name="springGui" />
         <module name="util_base" />

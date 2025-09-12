@@ -1,0 +1,171 @@
+.table-style {
+  font-size: 1.1vw;
+  color: black;
+  background-color: rgba(242, 242, 242, 1);
+  border-radius: 3.75vw; /* 60px ~ 3.75vw */
+  padding: 1.875vw 1.25vw; /* 30px 20px */
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+  max-height: 90vh;
+  box-sizing: border-box;
+}
+
+.table-style table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.5vw; /* 8px */
+  table-layout: fixed;
+  border-radius: 0.625vw; /* 10px */
+  overflow: hidden;
+}
+
+.table-style th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  font-size: 0.9vw; /* 1rem примерно */
+  padding: 0.75vw 0.5vw; /* пример */
+}
+
+.table-style td {
+  border: none;
+  border-radius: 0.75vw; /* 12px */
+  padding: 0.75vw; /* 12px */
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9vw; /* 1rem */
+  word-wrap: break-word;
+  word-break: break-word;
+  box-shadow: 0 0.125vw 0.3125vw rgba(0, 0, 0, 0.08); /* 0 2px 5px */
+  min-height: 3.75vw; /* 60px */
+  height: auto;
+  background-color: #ffffff;
+  color: #000000;
+  overflow: visible;
+  transition: background-color 0.3s ease;
+}
+
+.table-style td:hover {
+  background-color: #f0f4ff;
+}
+
+.table-style tr:nth-child(even) td {
+  /* если хочешь цвет чередующихся строк — раскомментируй */
+  /* background-color: #f9f9f9; */
+}
+
+.table-style th:first-child,
+.table-style td:first-child {
+  width: 2vw;
+  min-width: 1.875vw; /* 30px */
+  text-align: center;
+}
+
+.search-results {
+  z-index: 1000;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0.25vw 0.75vw rgba(0, 0, 0, 0.1); /* 0 4px 12px */
+  border-radius: 1.25vw; /* 20px */
+  margin-top: 0.3125vh; /* 0.5vh */
+  overflow-y: auto;
+  max-height: 30vh;
+  width: 100%;
+  pointer-events: auto;
+}
+
+/* Обёртка для таблицы, чтобы скролл был по горизонтали */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table-wrapper table {
+  min-width: 43.75vw; /* 700px */
+  border-collapse: separate;
+  border-spacing: 0.5vw;
+  table-layout: fixed;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  min-width: 9.375vw; /* 150px */
+  height: 5vw;        /* 80px */
+  padding: 1.25vw;    /* 20px */
+  text-align: center;
+  vertical-align: middle;
+  background-color: #fff;
+  border-radius: 0.75vw; /* 12px */
+  word-wrap: break-word;
+  word-break: break-word;
+  box-shadow: 0 0.125vw 0.3125vw rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease;
+}
+
+.table-wrapper td:hover {
+  background-color: #f0f4ff;
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    justify-content: space-between;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: calc(69vw);
+    margin-top: auto;
+}
+
+.footer-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.footer-buttons-container {
+  display: flex;
+}
+
+.footer-button {
+    margin-left: 10px;
+    padding: 15px 25px;
+    background-color: rgba(242, 242, 242, 1);
+    color: black;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.save-button {
+    background-color: rgba(18, 32, 100, 1);
+    color: rgba(242, 242, 242, 1);
+}
+
+.footer-button:hover {
+    background-color: rgba(242, 242, 242, 0.8);
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.save-button:hover {
+  background-color: rgba(18, 32, 100, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+#exportBtn:disabled {
+  background-color: #ccc;  /* светло-серый фон */
+  color: #666;             /* тёмно-серый текст */
+  cursor: not-allowed;     /* курсор "запрещено" */
+  opacity: 0.6;            /* чуть прозрачнее */
+  pointer-events: none;    /* запретить все события */
+}

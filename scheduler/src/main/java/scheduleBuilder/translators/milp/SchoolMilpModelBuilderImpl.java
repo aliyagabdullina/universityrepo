@@ -734,6 +734,9 @@ public class SchoolMilpModelBuilderImpl implements SchoolMilpModelBuilder {
     @Override
     public Stream<Lesson> createLessonsStream(Stream<Pair<String, Double>> varValues) {
         String filterPrefix = SchedulingVarNamesVocabulary.getLessonRequestOccupationIdPlaceTimeSlotPrefix();
+        if(filterPrefix == null)   {
+            return Stream.empty();
+        }
         return varValues
                 .filter(pair -> Double.compare(pair.getValue(), 0.0) != 0)
                 .filter(pair -> _nameSpace.ifLabeledBy(pair.getKey(), filterPrefix))
@@ -749,6 +752,11 @@ public class SchoolMilpModelBuilderImpl implements SchoolMilpModelBuilder {
         Group group = lessonRequest.getGroup();
 
         String occupationId = indices.get(1);
+
+        LessonRequestOccupation occup = lessonRequest.getOccupation(occupationId);
+        if(occup == null){
+            return Stream.empty();
+        }
 
         Course course = lessonRequest.getOccupation(occupationId).getCourse();
         Stream<Teacher> teachers = lessonRequest.getOccupation(occupationId)

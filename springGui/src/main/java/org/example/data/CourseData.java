@@ -2,7 +2,9 @@ package org.example.data;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Courses")
@@ -23,5 +25,21 @@ public class CourseData {
     private int maxLessonsPerDay;
     @Column(name = "complexity")
     private String complexity;
+
+    @ManyToMany(mappedBy = "courses")
+    private List<TeacherData> teachers;
+    @ManyToMany(mappedBy = "courses")
+    private List<StudentData> students;
+    @ManyToMany(mappedBy = "courses")
+    private List<ProgramData> programs;
+
+    @Column(name = "university_id")
+    private Integer universityId;
+
+    @Override
+    public String toString() {
+        return "CourseData{id=" + courseId + ", name=" + name + "}";
+    }
+
 
 }

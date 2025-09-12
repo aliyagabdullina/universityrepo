@@ -1,38 +1,55 @@
+/* Шрифты и обнуление */
 * {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Стили для текста */
+html, body, .main {
+    height: 80vh;
+}
+
+body {
+    height: 100%;
+    margin: 10vh 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+/* Скрытие файлового инпута */
+#fileInput {
+    display: none;
+}
+
+/* Заголовки */
 h1 {
-  font-size: 3vw;
-  font-weight: 900;
-  letter-spacing: -3%;
-  white-space: nowrap;
+    font-size: 3vw;
+    font-weight: 900;
+    letter-spacing: -3%;
+    white-space: nowrap;
 }
 
 h2 {
-  font-size: 2vw;
-  font-weight: bolder;
-  letter-spacing: -3%;
-  white-space: nowrap;
-  padding: 0;
-  margin: 0;
+    font-size: 2vw;
+    font-weight: bolder;
+    letter-spacing: -3%;
+    white-space: nowrap;
+    padding: 0;
+}
+
+h3, h4 {
+    font-size: 1.1vw;
+    letter-spacing: -3%;
+    padding: 0;
+    margin: 0;
 }
 
 h3 {
-    font-size: 1.1vw;
     font-weight: bolder;
-    letter-spacing: -3%;
-    padding: 0;
-    margin: 0;
 }
 
 h4 {
-    font-size: 1.1vw;
     font-weight: lighter;
-    letter-spacing: -3%;
-    padding: 0;
-    margin: 0;
 }
 
 h5 {
@@ -43,42 +60,77 @@ h5 {
     padding-bottom: 0.3vw;
     margin: 0;
 }
-/* Стили для текста */
 
 /* Цвета */
 .white {
-  color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .light-grey {
-  color: rgba(242, 242, 242, 1);
+    color: rgba(242, 242, 242, 1);
 }
 
 .grey {
-  color: rgba(183, 183, 183, 1);
+    color: rgba(183, 183, 183, 1);
 }
 
 .dark-grey {
-  color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .black {
-  color: rgba(0, 0, 0, 1);
-}
-/* Цвета */
-
-body {
-    height: 80vh;
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
+    color: rgba(0, 0, 0, 1);
 }
 
+.light-blue {
+    color: rgba(212, 218, 247, 1);
+}
+
+.blue {
+    color: rgba(18, 32, 100, 1);
+}
+
+/* Контейнер */
+.container {
+    display: grid;
+    grid-template-columns: 4fr 4% 14fr;
+    min-height: 100%;
+    position: relative;
+}
+
+/* Заголовок */
+.university {
+    color: #0E2ECC;
+    font-size: 1.5vw;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* Иконка назад */
+.icon-back img {
+    height: 1.5vw;
+    width: auto;
+    margin-left: 15px;
+}
+
+/* Отступы */
+.spacer {
+    margin-left: 3%;
+}
+
+.spacer-button {
+    margin-left: 10px;
+}
+
+.spacer {
+    margin-bottom: 5vh;
+}
+
+.space {
+    margin-bottom: 1vh;
+}
+
+/* Основной блок */
 .main {
     padding: 3%;
     display: flex;
@@ -86,31 +138,52 @@ body {
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-radius: 60px;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    width: 20vw;
+    border-radius: 60px;
+    width: 70vw;
 }
 
-.main > * {
-    width: 100%;
+/* Строка */
+.line {
+    display: flex;
+    justify-content: space-between;
 }
 
+/* Сортировка */
+.sorting-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sorter-button {
+    padding: 15px 25px;
+    background-color: rgba(242, 242, 242, 1);
+    color: black;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.item {
+    margin-left: 10px;
+}
+
+/* Инпуты */
 input {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     background-color: rgba(242, 242, 242, 1);
+    color: black;
     border: none;
     border-radius: 60px;
     padding: 2vh 2vw;
+    width: 30vw;
     font-size: 1.1vw;
 }
-.input-max{
-    width: 16vw;
-}
 
-.blue {
-    color: rgba(67, 110, 111, 1);
-    text-align: center;
+.input-slot {
+    width: 10vw;
+    height: 2vh;
 }
 
 label {
@@ -119,13 +192,84 @@ label {
     font-weight: lighter;
 }
 
-placeholder {
-    color: rgba(183, 183, 183, 1);
+/* Блоки выбора */
+.select-block, .custom-select select {
+    background-color: rgba(242, 242, 242, 1);
+    border: none;
+    border-radius: 60px;
+    padding: 2vh 2vw;
+    font-size: 1.1vw;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
-button {
+.select-block {
+    display: flex;
+    align-items: center;
+    color: black;
+    width: 34vw;
+}
+
+.select-block select {
+    all: initial;
+    background-color: transparent;
+    border: none;
+    height: 2vh;
+    max-height: 4vh;
+    overflow-y: auto;
+}
+
+.select-block-schedule {
+    padding: 2vh 2vw;
+    width: 9vw;
+}
+
+.custom-select {
+    position: relative;
+    width: 34vw;
+}
+
+.custom-select select {
     display: block;
     width: 100%;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 4vw;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.custom-select select:valid {
+    color: black;
+}
+
+.custom-select select.has-value {
+    color: black;
+}
+
+.custom-select select option {
+    color: black;
+    background-color: white;
+}
+
+.custom-select select option[value=""][disabled] {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.custom-select::after {
+    content: "▼";
+    position: absolute;
+    right: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 1vw;
+}
+
+/* Кнопки */
+button {
+    display: block;
+    width: 34vw;
     align-items: center;
     border: none;
     border-radius: 60px;
@@ -137,32 +281,54 @@ button {
 
 .login-button {
     color: white;
-    background-color: rgba(67, 110, 111, 1);
+    background-color: rgba(18, 32, 100, 1);
 }
 
-.reg-button {
-    color: rgba(67, 110, 111, 1);
-    background-color: white;
-    border: 1px solid rgba(67, 110, 111, 1);
+/* Текст */
+.placeholder {
+    color: #666;
 }
 
-.space {
-    margin-bottom: 1vh;
+.centre-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .error {
     text-align: center;
     font-size: 0.8vw;
-    color: rgba(197, 9, 9, 0.1);
+    color: rgba(197, 9, 9, 1);
+    display: none;
 }
 
-.remember label {
-   display: flex;
-   align-items: center;
-   justify-content: flex-start;
+/* Дополнительно: стили для кастомного селектора данных */
+.custom-select-data {
+    width: 30vw;
+    background-color: rgba(18, 32, 100, 1);
+    color: white;
+    text-align: left;
 }
 
-.remember input[type="checkbox"] {
-    margin-right: 5px;
-    vertical-align: middle; /* Выравнивание по вертикали */
+.remember-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2vh;
+    font-size: 0.9vw;
+    margin-left: 2vw; /* сдвиг вправо */
+}
+
+
+.remember-checkbox {
+    width: 1vw;
+    height: 1vw;
+    accent-color: rgba(18, 32, 100, 1); /* цвет галочки */
+    margin: 0;
+    padding: 0;
+}
+
+.remember-label {
+    font-weight: lighter;
+    color: black;
 }

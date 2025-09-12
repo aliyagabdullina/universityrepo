@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import place.Place;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,10 +21,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlacesController {
     private final PlacesService placeService;
+    private int universityId= 1;
 
     @GetMapping("/places")
     public String places(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("places", placeService.listPlaces(name));
+        model.addAttribute("places", placeService.listPlacesByUniversity(universityId));
         return "places";
     }
     @PostMapping("/places")
@@ -70,4 +72,11 @@ public class PlacesController {
         placeService.deletePlace(id);
         return "redirect:/places";
     }
+    @GetMapping("/place/edit/{id}")
+    public String editPlace(@PathVariable int id, Model model) {
+        PlaceData place = placeService.getPlaceById(id);
+        model.addAttribute("place", place);
+        return "place-create";  // возвращаем шаблон place-create.ftlh
+    }
+
 }

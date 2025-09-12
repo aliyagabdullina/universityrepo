@@ -41,6 +41,14 @@ public class CoursesController {
     @GetMapping("/courses")
     public String courses(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("courses", coursesService.listCourses(name));
+        model.addAttribute("sender", "You");
+        model.addAttribute("message", "Hello!\n");
+        model.addAttribute("aiSender", "AI");
+        model.addAttribute("aiMessage", "How can I assist you?\n");
+        model.addAttribute("sender2", "You");
+        model.addAttribute("message2", "Add new Teacher - Valentina\n");
+        model.addAttribute("aiSender2", "AI");
+        model.addAttribute("aiMessage2", "Done!\n");
         model.addAttribute("places", placeRepository.findAll());
         return "courses";
     }
@@ -69,4 +77,12 @@ public class CoursesController {
         coursesService.deleteCourse(id);
         return "redirect:/courses";
     }
+    @GetMapping("/course/edit/{id}")
+    public String editCourse(@PathVariable int id, Model model) {
+
+            CourseData course = coursesService.getCourseById(id);
+            model.addAttribute("course", course);
+        return "course-create";
+    }
+
 }

@@ -13,8 +13,7 @@ import scheduleBuilder.data.ScheduleConstraintsAccumulator;
 import scheduleBuilder.data.ScheduleObjectiveAccumulator;
 import scheduleBuilder.engines.milp.orTools.*;
 import scheduleBuilder.engines.settings.DtoScheduleBuilderSettings;
-import scheduleBuilder.translators.milp.MilpTranslatorV2;
-import scheduleBuilder.translators.milp.SchedulingInputToMilp_Model_4;
+import scheduleBuilder.translators.milp.*;
 import solution.MilpSolution;
 import time.WeeklyTimeSlot;
 
@@ -68,9 +67,8 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
 
         //SchedulingInput schedulingInput = createSchedulingInput();
         SchedulingInputV2 schedulingInputV2 = createSchedulingInputV2();
-        //MilpTranslator milpTranslator = new SchedulingInputToMilp_Model1();
-       // MilpTranslator milpTranslator = new SchedulingInputToMilp_Model();
-        //MilpTranslator milpTranslator = new SchedulingInputToMilp_Model_2();
+        //MilpTranslator milpTranslatorV2 = new SchedulingInputToMilp_Model();
+        //MilpTranslator milpTranslatorV2 = new SchedulingInputToMilp_Model_2();
         MilpTranslatorV2 milpTranslatorV2 = new SchedulingInputToMilp_Model_4();
 
 
@@ -85,6 +83,7 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
         //return milpTranslator.createSchedule(solution);
         return milpTranslatorV2.createSchedule(solution);
     }
+
 
 
     private SchedulingInput createSchedulingInput() {

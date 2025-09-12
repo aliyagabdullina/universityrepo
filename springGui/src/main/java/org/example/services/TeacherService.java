@@ -15,6 +15,11 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
 
+    public List<TeacherData> listTeachersByUniversity(int universityId) {
+        return teacherRepository.findByUniversityId(universityId);
+    }
+
+
     public List<TeacherData> listTeachers(String name) {
         List<TeacherData> teachers = teacherRepository.findAll();
         if (teachers != null) {

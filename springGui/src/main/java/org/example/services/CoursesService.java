@@ -3,6 +3,7 @@ package org.example.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.data.CourseData;
+import org.example.data.TeacherData;
 import org.example.repositories.CoursesRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class CoursesService {
             coursesRepository.findByName(name);
         }
         return coursesRepository.findAll();
+    }
+
+    public List<CourseData> listCoursesByUniversity(int universityId) {
+        return coursesRepository.findByUniversityId(universityId);
     }
 
     public void saveCourse(CourseData course) {

@@ -65,7 +65,7 @@ public class LessonRequestImpl implements LessonRequest {
                 .stream()
                 .filter(occupation -> occupation.getId() == i)
                 .findAny()
-                //.orElse(null);
-                .orElseThrow(() -> new IllegalStateException("Occupation not presented in lesson request"));
+                .orElse(null);
+                //.orElseThrow(() -> new IllegalStateException("Occupation not presented in lesson request"));
     }
 }

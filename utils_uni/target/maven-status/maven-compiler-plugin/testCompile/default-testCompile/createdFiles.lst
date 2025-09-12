@@ -1,0 +1,8 @@
+course/TestCourseImpl.class
+objectFactories/TestSchoolDtoFactoryImpl.class
+person/TestStudentImpl.class
+person/TestTeacherImpl.class
+place/TestBuildingImpl.class
+place/TestPlaceImpl.class
+group/TestGroupImpl.class
+place/TestAddressImpl.class

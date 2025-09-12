@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 @Entity
 @Table(name = "Places")
 @Data
@@ -21,5 +20,8 @@ public class PlaceData {
     private int capacity;
     @Column(name = "description")
     private String description;
+
+    @Column(name = "university_id")
+    private Integer universityId;
 
 }

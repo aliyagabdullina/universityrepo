@@ -3,6 +3,7 @@ package org.example.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.CsvParser;
 import org.example.data.GroupData;
+import org.example.data.PlaceData;
 import org.example.repositories.PlacesRepository;
 import org.example.repositories.TeacherRepository;
 import org.example.services.GroupsService;
@@ -24,12 +25,17 @@ public class GroupsController {
     private final GroupsService groupsService;
     private final PlacesRepository placeRepository;
     private final TeacherRepository teacherRepository;
+    private int universityId= 1;
 
     @GetMapping("/groups")
     public String groups(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("groups", groupsService.listGroups(name));
+        model.addAttribute("groups", groupsService.listGroupsByUniversity(universityId));
         model.addAttribute("places", placeRepository.findAll());
         model.addAttribute("teachers", teacherRepository.findAll());
+        model.addAttribute("sender", "You");
+        model.addAttribute("message", "Hello!\n");
+        model.addAttribute("aiSender", "AI");
+        model.addAttribute("aiMessage", "How can I assist you?\n");
         return "groups";
     }
 
@@ -73,5 +79,11 @@ public class GroupsController {
     public String deleteGroup(@PathVariable int id) {
         groupsService.deleteGroup(id);
         return "redirect:/groups";
+    }
+    @GetMapping("/group/edit/{id}")
+    public String editGroup(@PathVariable int id, Model model) {
+        GroupData group = groupsService.getGroupById(id);
+        model.addAttribute("group", group);
+        return "group-create";  // возвращаем шаблон group-create.ftlh
     }
 }
